@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>TransitCenter Equity Dashboard</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'map/css/style.css' %}">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+  <!-- <link rel="stylesheet" href="{% static 'map/css/materialize.min.css' %}"> -->
+</head>
+
+<body class="min-h-screen bg-slate-50 dark:bg-black dark:text-white bg-repeat">
+  <header class="text-black bg-transparent sticky top-0 z-20 h-0">
+    <nav class="max-w-full mx-auto p-4 flex text-3xl">
+      <a class="absolute left-0 pl-4" href="http://transitcenter.org"><b class="text-purple-tc">TransitCenter</b> Equity
+        Dashboard</a>
+      <ul class="absolute right-0 flex text-xl font-bold">
+        <li class="mr-6"><a href="#" class="text-slate-600 hover:text-slate-900">How it Works</a></li>
+        <li class="mr-6"><a href="#" class="text-slate-600 hover:text-slate-900">Active</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="min-w-full min-h-screen absolute top-0 bottom-0 z-10" id="map"></div>
+  <main class="max-w-7xl mx-auto grid justify-items-center gap-12">
+
+
+  </main>
+
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoid2tsdW1wZW4iLCJhIjoiY2tibWVieXVrMDZrMTJybzZybHlsNHcyaSJ9.4lNjcWenF95KDkvH7trKqg';
+    const map = new mapboxgl.Map({
+      container: 'map', // container ID
+      // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+      style: 'mapbox://styles/mapbox/light-v11', // style URL
+      center: [-100.13, 38.26], // starting position [lng, lat]
+      zoom: 4 // starting zoom
+    });
+
+    map.on('load', () => {
+      map.addSource('places', {
+        // This GeoJSON contains features that include an "icon"
+        // property. The value of the "icon" property corresponds
+        // to an image in the Mapbox Streets style's sprite.
+        'type': 'geojson',
+        'data': {
+          'type': 'FeatureCollection',
+          'features': [
+            {
+              'type': 'Feature',
+              'properties': {
+                'description':
+                  '<strong>Make it Mount Pleasant</strong><p><a href="http://www.mtpleasantdc.com/makeitmtpleasant" target="_blank" title="Opens in a new window">Make it Mount Pleasant</a> is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>',
+                'icon': 'theatre'
+              },
+              'geometry': {
+                'type': 'Point',
+                'coordinates': [-122.4644258, 37.7746271]
+              }
+            },
+            {
+              'type': 'Feature',
+              'properties': {
+                'description':
+                  '<div class="px-6 py-4"><div class="font-bold text-base mb-2">The Coldest Sunset</div><p class="text-gray-700 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p><div class="px-6 pt-4 pb-2"> </div></div>',
+                'icon': 'theatre'
+              },
+              'geometry': {
+                'type': 'Point',
+                'coordinates': [-87.654269, 41.8734782]
+              }
+            },
+            {
+              'type': 'Feature',
+              'properties': {
+                'description':
+                  '<div class="font-bold text-sm mb-2">The Coldest Sunset</div><p class="text-gray-700 text-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p></div>',
+                'icon': 'theatre'
+              },
+              'geometry': {
+                'type': 'Point',
+                'coordinates': [-77.0661433, 38.8963785]
+              }
+            }
+          ]
+        }
+      });
+
+      map.addLayer({
+        'id': 'places',
+        'type': 'circle',
+        'source': 'places',
+        'paint': {
+          'circle-color': "#f58426",
+          'circle-radius': 10,
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#000000'
+        }
+      });
+
+      // When a click event occurs on a feature in the places layer, open a popup at the
+      // location of the feature, with description HTML from its properties.
+      map.on('click', 'places', (e) => {
+        // Copy coordinates array.
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const description = e.features[0].properties.description;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(description)
+          .addTo(map);
+      });
+
+      // Change the cursor to a pointer when the mouse is over the places layer.
+      map.on('mouseenter', 'places', () => {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+
+      // Change it back to a pointer when it leaves.
+      map.on('mouseleave', 'places', () => {
+        map.getCanvas().style.cursor = '';
+      });
+    });
+  </script>
+
+</body>

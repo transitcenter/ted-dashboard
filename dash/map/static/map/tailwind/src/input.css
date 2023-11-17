@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.text-purple-tc {
+    --tw-text-opacity: 1;
+    color: rgb(72 31 137 / var(--tw-text-opacity));
+}
