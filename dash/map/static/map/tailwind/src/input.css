@@ -6,3 +6,8 @@
     --tw-text-opacity: 1;
     color: rgb(72 31 137 / var(--tw-text-opacity));
 }
+
+.text-orange-kc {
+    --tw-text-opacity: 1;
+    color: rgb(245 132 38 / var(--tw-text-opacity));
+}
