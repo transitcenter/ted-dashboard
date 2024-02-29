@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>{% block title %} {% endblock %} - TED</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'map/css/style.css' %}">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+</head>
+
+<body class="bg-slate-50 text-gray-600 dark:bg-black dark:text-white bg-repeat">
+    <header class="text-gray-600 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+                href="https://transitcenter.org/">
+                <img class="h-6 mr-3 sm:h-9" src="{% static 'map/img/tc-logo.png' %}" alt="TransitCenter Logo">
+            </a>
+            <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center cursor-pointer">
+                <a class="mr-5 hover:text-gray-900" href="/">Map</a>
+                <a class="mr-5 hover:text-gray-900">Charts</a>
+                <a class="mr-5 hover:text-gray-900">About</a>
+                <a class="mr-5 hover:text-gray-900">What's New?</a>
+            </nav>
+        </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+</body>

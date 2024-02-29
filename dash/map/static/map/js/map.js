@@ -1,7 +1,10 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoid2tsdW1wZW4iLCJhIjoiY2tibWVieXVrMDZrMTJybzZybHlsNHcyaSJ9.4lNjcWenF95KDkvH7trKqg';
 const R = 6378
-const minStartContextZoom = 9
+const minStartContextZoom = 8
 let currentLayer
+
+var legendMargin = {top: 5, right: 10, bottom: 10, left: 10}
+
 // Initialize basemap
 const map = new mapboxgl.Map({
     container: 'map', // container ID
@@ -9,12 +12,13 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/light-v11', // style URL
     center: [-72.1095703, 38.3426943], // starting position [lng, lat]
     zoom: 3.54, // starting zoom
+    maxzoom: 10, //maximum zoom
     attributionControl: false
 });
 
 // Add custom attribution controls
 map.addControl(new mapboxgl.AttributionControl({
-    customAttribution: "Proudly built by <a class='text-orange-kc' href='http://klumpentown.com'>klumpentown</a> | v2.0"
+    customAttribution: "Proudly built by <a class='text-orange-kc' href='http://klumpentown.com'>klumpentown</a> | <a href='/changelog'>v2.0</a>"
 }))
 
 // Create a popup, but don't add it to the map yet.
@@ -23,7 +27,18 @@ const popup = new mapboxgl.Popup({
     closeOnClick: false
 });
 
+var legendBoxHeight = 50
+var legendBoxWidth = d3.select("#legend").node().getBoundingClientRect().width
+
+let legendSvg = d3.select("#legend")
+    .append('svg')
+    .attr("width", legendBoxWidth)
+    .attr("height", legendBoxHeight)
+    .append('g')
+    .attr("transform", "translate(" + legendMargin.left + "," + legendMargin.top + ")");
+
 map.on('load', () => {
+
     map.addSource('places', {
         // This GeoJSON contains features that include an "icon"
         // property. The value of the "icon" property corresponds
@@ -31,37 +46,6 @@ map.on('load', () => {
         'type': 'geojson',
         'data': regions
     });
-
-    map.addSource('scoreSource', {
-        type: 'vector',
-        url: 'mapbox://wklumpen.1jsst2v3'
-    });
-
-    styles = mapStyles["tsi"]
-    map.addLayer(
-        {
-            'id': 'scoreLayer',
-            'type': 'fill',
-            'source': 'scoreSource',
-            'minzoom': 1,
-            'source-layer': 'nyc_was_test-6rqz5h',
-            "paint": {
-                "fill-color": [
-                    'step',
-                    ['get', 'WEDAM'],
-                    styles["colors"][0],
-                    styles["breaks"][0],
-                    styles["colors"][1],
-                    styles["breaks"][1],
-                    styles["colors"][2],
-                    styles["breaks"][2],
-                    styles["colors"][3],
-                ],
-                "fill-opacity": 0.8,
-            }
-        },
-        'road-label-simple' // Add layer below labels
-    );
 
     // Add the places dot layer.
     map.addLayer({
@@ -77,6 +61,32 @@ map.on('load', () => {
         }
     });
 
+    regionKeys.forEach(function (region, idx) {
+        map.addSource(region + '-transit', {
+            // This GeoJSON contains features that include an "icon"
+            // property. The value of the "icon" property corresponds
+            // to an image in the Mapbox Streets style's sprite.
+            'type': 'geojson',
+            'data': 'mapbox://wklumpen.2t8nsu0h'
+        });
+
+        map.addLayer({
+            'id': region + 'transit',
+            'type': 'line',
+            'source': region + '-transit',
+            'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            'paint': {
+                'line-color': '#888',
+                'line-width': 8
+            }
+        });
+    });
+
+    changeDataSource("20230925", "WEDAM")
+
     let currentTextElement = document.getElementById("start-text")
 
     // When a click event occurs on a feature in the places layer, open a popup at the
@@ -85,7 +95,7 @@ map.on('load', () => {
         // Copy coordinates array.
         var coords = e.features[0].geometry.coordinates
         coords[0] = coords[0] + 0.15
-        map.flyTo({center: coords, zoom: minStartContextZoom})
+        map.flyTo({center: coords, zoom: minStartContextZoom + 1})
         setRegionalContext(e.features[0].properties.tag)
     });
 
@@ -116,16 +126,17 @@ map.on('load', () => {
     // Zoom event to control context-dependent information
     map.on('moveend', () => {
         if ((map.getZoom() < minStartContextZoom) & (currentTextElement.id != "start-text")) {
+            // Move back to the regional context setting
             setRegionalContext("start")
-            console.log("Moved to broad context")
         }
-        else if (map.getZoom() >= 10) {
+        else if (map.getZoom() >= minStartContextZoom) {
             // Find out where we are
             var mapCenter = map.getCenter();
             // Get the points layer
             var places = map.getSource('places')._data.features
             let currentDist = 1000;
             let closeToPlace = null;
+            // Compute which city we are closest to
             places.forEach((place, i) => {
                 var coords = place.geometry.coordinates
                 var dlon = (Math.PI / 180) * (mapCenter.lng - coords[0])
@@ -148,7 +159,7 @@ map.on('load', () => {
                 setRegionalContext("start")
             }
         }
-    })
+    });
 
     function setRegionalContext(region) {
         currentTextElement.style.display = "none";
@@ -163,49 +174,7 @@ map.on('load', () => {
             options.style.visibility = "hidden";
         }
     }
-
-
 });
 
-function dateChanged(selectedDate) {
-    var dateSelected = parseInt(selectedDate.value)
-    console.log(dateSelected)
-    newTilesetID = dateSource[dateSelected]["tilesetID"]
-    newSourceName = dateSource[dateSelected]["sourceName"]
 
-    map.removeLayer("scoreLayer")
-    map.removeSource("scoreSource")
-
-    styles = mapStyles["tsi"]
-
-    map.addSource('scoreSource', {
-        type: 'vector',
-        url: 'mapbox://' + newTilesetID
-    });
-
-    map.addLayer(
-        {
-            'id': 'scoreLayer',
-            'type': 'fill',
-            'source': 'scoreSource',
-            'minzoom': 1,
-            'source-layer': newSourceName,
-            "paint": {
-                "fill-color": [
-                    'step',
-                    ['get', 'WEDAM'],
-                    styles["colors"][0],
-                    styles["breaks"][0],
-                    styles["colors"][1],
-                    styles["breaks"][1],
-                    styles["colors"][2],
-                    styles["breaks"][2],
-                    styles["colors"][3],
-                ],
-                "fill-opacity": 0.8,
-            }
-        },
-        'road-label-simple' // Add layer below labels
-    );
-}
 

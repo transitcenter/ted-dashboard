@@ -20,421 +20,490 @@
 </head>
 
 <body class="min-h-screen bg-slate-50 dark:bg-black dark:text-white bg-repeat">
-  <!-- <header class="text-black bg-transparent sticky top-0 z-20 h-0">
-    <nav class="max-w-full mx-auto p-4 flex text-3xl">
-      <ul class="absolute right-0 flex text-xl font-bold">
-        <li class="mr-6"><a href="#" class="text-slate-600 hover:text-slate-900">How it Works</a></li>
-        <li class="mr-6"><a href="#" class="text-slate-600 hover:text-slate-900">Active</a></li>
-      </ul>
-    </nav>
-  </header> -->
-  <div class="absolute right-0 bottom-5 z-50">
-    <a href="http://transitcenter.org"><img src="{% static 'map/img/tc-logo.png' %}" width="150px"></a>
-  </div>
-  <div id="options" class="w-1/4 max-w-screen-md absolute left-0 ml-3 mt-3 bg-white rounded-xl border-2 text-sm z-30"
-    style="visibility: hidden;">
-    <div class="p-3 pl-4 grid grid-cols-2 gap-2 gap-y-3">
-      <div>
-        <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-        <select id="date" , onchange="dateChanged(this)"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option selected value="20230925">September 25, 2023</option>
-          <option value="20230327">March 27, 2023</option>
-        </select>
-      </div>
-      <div>
-        <label for="period" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Period</label>
-        <select id="period"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option selected>Weekday Morning</option>
-          <option value="20230327">Weekday Night</option>
-          <option value="20230327">Saturday Morning</option>
-        </select>
-      </div>
-      <div>
-        <label for="period" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opportunity</label>
-        <select id="period"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option value="C000" selected>Jobs</option>
-          <option value="acres">Park Space</option>g
-          <option value="urgent_care">Urgent Care Facilities</option>
-        </select>
-      </div>
-      <div>
-        <label for="period" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Options</label>
-        <select id="period"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option value="45" selected>45 minutes</option>
-          <option value="60">60 minutes</option>g
-          <option value="90">90 minutes</option>
-        </select>
-      </div>
-      <div>
-        <label class="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" value="" class="sr-only peer">
-          <div
-            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
-          </div>
-          <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Affordable Trips Only</span>
-        </label>
-      </div>
-      <div>
-        <label class="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" value="" class="sr-only peer">
-          <div
-            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
-          </div>
-          <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Compare to Auto</span>
-        </label>
-      </div>
-      <div>
-        <label for="period" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Demographics</label>
-        <select id="period"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option selected>No Demographic</option>
-          <option value="poverty">1 dot = 50 people in poverty</option>g
-          <option value="black">1 dot = 20 Black people</option>
-        </select>
-      </div>
-      <div>
-        <label class="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" value="" class="sr-only peer">
-          <div
-            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
-          </div>
-          <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show Transit Lines</span>
-        </label>
+  <main>
+    <div class="absolute right-0 bottom-5 z-50">
+      <div class="p-2">
+        <a href="http://transitcenter.org"><img src="{% static 'map/img/tc-logo.png' %}" width="150px"></a>
       </div>
     </div>
-  </div>
-  <div
-    class="w-1/3 max-w-screen-lg absolute right-0 max-h-[90%] mb-20 mr-3 mt-3 z-30 overflow-auto bg-white rounded-xl border-2 text-sm">
-    <div id="main-text" class="p-6 pl-8">
+    <div id="options" class="w-1/6 max-w-screen-md absolute left-0 ml-3 mt-3 bg-white rounded-xl border-2 text-sm z-30"
+      style="visibility: hidden;">
+      <div class="p-3 grid gap-y-3">
+        <div class="max-w-screen-md">
+          <label for="date" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+          <select id="date" , onchange="dateChanged(this)"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected value="20230925">September 25, 2023</option>
+            <option value="20230327">March 27, 2023</option>
+          </select>
+        </div>
+        <div>
+          <label for="period" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Opportunity</label>
+          <select id="opportunity" onchange="opportunityChanged(this)"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="C000" selected>Jobs</option>
+            <option value="acres">Park Space</option>
+            <option value="hospitals">Hospitals</option>
+            <option value="urgent_care_facilities">Urgent Care Facilities</option>
+            <option value="pharmacies">Pharmacies</option>
+            <option value="education">Colleges & Universities</option>
+            <option value="grocery">Supermarkets</option>
+            <option value="early_voting">Early Voting Locations</option>
+            <option value="tsi">Transit Service Intensity</option>
+          </select>
+        </div>
+        <div>
+          <label for="period" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Time Period</label>
+          <select id="period" onchange="periodChanged(this)"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="WEDAM" selected>Weekday Morning</option>
+            <option value="WEDPM">Weekday Night</option>
+            <option value="SATAM">Saturday Morning</option>
+          </select>
+        </div>
+        <div>
+          <label for="tripOptions" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Trip
+            Options</label>
+          <select id="tripOptions" onchange="tripOptionChanged(this)"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="c30">30 minutes</option>
+            <option value="c45" selected>45 minutes</option>
+            <option value="c60">60 minutes</option>
+            <option value="c90">90 minutes</option>
+          </select>
+        </div>
+        <div>
+          <label for="affordableTrips" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Affordable
+            Trips</label>
+          <select id="affordableTrips" onchange="affordableTripsChanged(this)"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="all">All Trips</option>
+            <option value="2020">Affordable (2020)</option>
+            <option value="2023">Affordable (2023 where available)</option>
+          </select>
+        </div>
+        <div>
+          <label for="auto" class="relative inline-flex items-center cursor-pointer">
+            <input id="auto" type="checkbox" value="" class="sr-only peer" onchange="autoCompareChanged(this)">
+            <div
+              class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+            </div>
+            <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Compare to Auto</span>
+          </label>
+        </div>
+        <div>
+          <label for="period" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Demographics</label>
+          <select id="period"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>No Demographic</option>
+            <option value="poverty">1 dot = 50 people in poverty</option>g
+            <option value="black">1 dot = 20 Black people</option>
+          </select>
+        </div>
+        <div>
+          <label class="relative inline-flex cursor-pointer">
+            <input type="checkbox" value="" class="sr-only peer" onchange="showTransitLinesChanged(this)">
+            <div
+              class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+            </div>
+            <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300 ">Show Transit Lines</span>
+          </label>
+        </div>
+        <div class="pt-3 border-t border-t-dashed grid-cols-1 justify-center text-center">
+          <div class="w-full justify-center"><b id="legendTitle">Access to Jobs</b></div>
+          <div id="legend" class="flex w-full justify-center items-center"></div>
 
-      <div id="start-text"><a class="text-2xl" href="http://transitcenter.org"><b
-            class="text-purple-tc">TransitCenter</b> Equity Dashboard</a>
-
-        <p class="py-3">Public transportation can offer a "ladder of opportunity",
-          providing affordable and convenient connections to jobs, goods and
-          services, medical care, and other essentials of daily life. But pervasive
-          racism and discrimination in land use, transportation, and transit
-          planning have created wide gaps in transit access across race, income, and
-          other characteristics, exacerbating social inequity.</p>
-
-        <p class="pb-3">This dashboard measures how well transit networks in seven
-          U.S. cities connect people who've been marginalized within those metro
-          areas to the jobs, services, and amenities they need to thrive. We look at
-          metrics like the number of jobs people can reach within a limited
-          timeframe or budget, travel times to hospitals and grocery stores, and
-          service frequency, and tracks how these measures have changed in each
-          region since Feburary of 2020.
-        </p>
-
-        <p>Choose one of the regions from the map to zoom in and learn more, or read about <a class='text-purple-tc'
-            href="/methodology">how it works</a>.</p>
+        </div>
       </div>
-
-      <div id="BOS-text" style="display: none" ;>
-
-        <b class="text-2xl">Boston, Massachusetts</b>
-
-        <ul class="list-disc py-3">
-          <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.</li>
-          <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
-          <li>Expensive fares put opportunity out of reach for some riders.</li>
-        </ul>
-
-        <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
-          workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start of
-          the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel to
-          and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of white
-          workers living in the Washington region worked remotely.</p>
-
-        <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
-            class='text-purple-tc' href="/methodology">how it works</a>.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-      </div>
-
-      <div id="CHI-text" style="display: none" ;>
-
-        <b class="text-2xl">Chicago, Illinois</b>
-
-        <ul class="list-disc py-3">
-          <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.</li>
-          <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
-          <li>Expensive fares put opportunity out of reach for some riders.</li>
-        </ul>
-
-        <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
-          workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start of
-          the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel to
-          and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of white
-          workers living in the Washington region worked remotely.</p>
-
-        <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
-            class='text-purple-tc' href="/methodology">how it works</a>.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-      </div>
-
-      <div id="LA-text" style="display: none" ;>
-
-        <b class="text-2xl">Los Angeles, California</b>
-
-        <ul class="list-disc py-3">
-          <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.</li>
-          <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
-          <li>Expensive fares put opportunity out of reach for some riders.</li>
-        </ul>
-
-        <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
-          workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start of
-          the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel to
-          and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of white
-          workers living in the Washington region worked remotely.</p>
-
-        <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
-            class='text-purple-tc' href="/methodology">how it works</a>.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-      </div>
-
-      <div id="NYC-text" style="display: none" ;>
-
-        <b class="text-2xl">New York, New York</b>
-
-        <ul class="list-disc py-3">
-          <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.</li>
-          <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
-          <li>Expensive fares put opportunity out of reach for some riders.</li>
-        </ul>
-
-        <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
-          workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start of
-          the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel to
-          and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of white
-          workers living in the Washington region worked remotely.</p>
-
-        <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
-            class='text-purple-tc' href="/methodology">how it works</a>.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-      </div>
-
-      <div id="PHL-text" style="display: none" ;>
-
-        <b class="text-2xl">Philadelphia, Pennsylvania</b>
-
-        <ul class="list-disc py-3">
-          <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.</li>
-          <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
-          <li>Expensive fares put opportunity out of reach for some riders.</li>
-        </ul>
-
-        <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
-          workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start of
-          the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel to
-          and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of white
-          workers living in the Washington region worked remotely.</p>
-
-        <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
-            class='text-purple-tc' href="/methodology">how it works</a>.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-      </div>
-
-      <div id="SFO-text" style="display: none" ;>
-
-        <b class="text-2xl">San Francisco - Oakland, California</b>
-
-        <ul class="list-disc py-3">
-          <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.</li>
-          <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
-          <li>Expensive fares put opportunity out of reach for some riders.</li>
-        </ul>
-
-        <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
-          workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start of
-          the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel to
-          and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of white
-          workers living in the Washington region worked remotely.</p>
-
-        <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
-            class='text-purple-tc' href="/methodology">how it works</a>.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-      </div>
-
-      <div id="WAS-text" style="display: none" ;>
-
-        <b class="text-2xl">Washington, D.C.</b>
-
-        <ul class="list-disc py-3">
-          <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.</li>
-          <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
-          <li>Expensive fares put opportunity out of reach for some riders.</li>
-        </ul>
-
-        <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
-          workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start of
-          the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel to
-          and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of white
-          workers living in the Washington region worked remotely.</p>
-
-        <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
-            class='text-purple-tc' href="/methodology">how it works</a>.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-
-        <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable transit
-          access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
-          transit have the best access to fast, frequent, reliable, affordable service close to home? This page
-          summarizes disparities in transit access between different groups of people, and shows how those outcomes have
-          shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
-          services provided by all transit agencies in the Washington D.C. region.</p>
-      </div>
-
-
-
-
-
     </div>
+    <div
+      class="w-1/3 max-w-screen-lg absolute right-0 max-h-[90%] mb-20 mr-3 mt-3 z-30 overflow-auto bg-white rounded-xl border-2 text-sm transition-transform"
+      aria-labelledby="drawer-label">
+      <div id="main-text" class="p-6 pl-8">
 
+        <div id="start-text"><a class="text-2xl" href="http://transitcenter.org"><b
+              class="text-purple-tc">TransitCenter</b> Equity Dashboard</a>
 
+          <p class="py-3">Public transportation can offer a "ladder of opportunity",
+            providing affordable and convenient connections to jobs, goods and
+            services, medical care, and other essentials of daily life. But pervasive
+            racism and discrimination in land use, transportation, and transit
+            planning have created wide gaps in transit access across race, income, and
+            other characteristics, exacerbating social inequity.</p>
 
-  </div>
-  <div class="min-h-screen absolute top-0 left-0 right-0 bottom-0 z-10" id="map"></div>
-  <main class="max-w-7xl mx-auto grid justify-items-center gap-12">
+          <p class="pb-3">This dashboard measures how well transit networks in seven
+            U.S. cities connect people who've been marginalized within those metro
+            areas to the jobs, services, and amenities they need to thrive. We look at
+            metrics like the number of jobs people can reach within a limited
+            timeframe or budget, travel times to hospitals and grocery stores, and
+            service frequency, and tracks how these measures have changed in each
+            region since Feburary of 2020.
+          </p>
+
+          <p>Choose one of the regions from the map to zoom in and learn more, or read about <a class='text-purple-tc'
+              href="/methodology">how it works</a>.</p>
+        </div>
+
+        <div id="BOS-text" style="display: none" ;>
+
+          <b class="text-2xl">Boston, Massachusetts</b>
+
+          <ul class="list-disc py-3">
+            <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.
+            </li>
+            <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
+            <li>Expensive fares put opportunity out of reach for some riders.</li>
+          </ul>
+
+          <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
+            workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start
+            of
+            the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel
+            to
+            and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of
+            white
+            workers living in the Washington region worked remotely.</p>
+
+          <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
+              class='text-purple-tc' href="/methodology">how it works</a>.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+        </div>
+
+        <div id="CHI-text" style="display: none" ;>
+
+          <b class="text-2xl">Chicago, Illinois</b>
+
+          <ul class="list-disc py-3">
+            <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.
+            </li>
+            <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
+            <li>Expensive fares put opportunity out of reach for some riders.</li>
+          </ul>
+
+          <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
+            workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start
+            of
+            the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel
+            to
+            and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of
+            white
+            workers living in the Washington region worked remotely.</p>
+
+          <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
+              class='text-purple-tc' href="/methodology">how it works</a>.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+        </div>
+
+        <div id="LA-text" style="display: none" ;>
+
+          <b class="text-2xl">Los Angeles, California</b>
+
+          <ul class="list-disc py-3">
+            <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.
+            </li>
+            <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
+            <li>Expensive fares put opportunity out of reach for some riders.</li>
+          </ul>
+
+          <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
+            workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start
+            of
+            the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel
+            to
+            and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of
+            white
+            workers living in the Washington region worked remotely.</p>
+
+          <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
+              class='text-purple-tc' href="/methodology">how it works</a>.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+        </div>
+
+        <div id="NYC-text" style="display: none" ;>
+
+          <b class="text-2xl">New York, New York</b>
+
+          <ul class="list-disc py-3">
+            <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.
+            </li>
+            <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
+            <li>Expensive fares put opportunity out of reach for some riders.</li>
+          </ul>
+
+          <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
+            workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start
+            of
+            the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel
+            to
+            and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of
+            white
+            workers living in the Washington region worked remotely.</p>
+
+          <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
+              class='text-purple-tc' href="/methodology">how it works</a>.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+        </div>
+
+        <div id="PHL-text" style="display: none" ;>
+
+          <b class="text-2xl">Philadelphia, Pennsylvania</b>
+
+          <ul class="list-disc py-3">
+            <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.
+            </li>
+            <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
+            <li>Expensive fares put opportunity out of reach for some riders.</li>
+          </ul>
+
+          <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
+            workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start
+            of
+            the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel
+            to
+            and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of
+            white
+            workers living in the Washington region worked remotely.</p>
+
+          <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
+              class='text-purple-tc' href="/methodology">how it works</a>.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+        </div>
+
+        <div id="SFO-text" style="display: none" ;>
+
+          <b class="text-2xl">San Francisco - Oakland, California</b>
+
+          <ul class="list-disc py-3">
+            <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.
+            </li>
+            <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
+            <li>Expensive fares put opportunity out of reach for some riders.</li>
+          </ul>
+
+          <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
+            workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start
+            of
+            the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel
+            to
+            and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of
+            white
+            workers living in the Washington region worked remotely.</p>
+
+          <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
+              class='text-purple-tc' href="/methodology">how it works</a>.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+        </div>
+
+        <div id="WAS-text" style="display: none" ;>
+
+          <b class="text-2xl">Washington, D.C.</b>
+
+          <!-- <ul class="list-disc py-3">
+            <li>Transit provides less access to opportunities for Black and Latinx residents than other residents.</li>
+            <li>Transportation and development patterns create longer transit trips to healthcare and food.</li>
+            <li>Expensive fares put opportunity out of reach for some riders.</li>
+          </ul>
+
+          <p class="pb-3">In the Washington metropolitan statistical area in 2021, 7% of Black workers, 6% of Latinx
+            workers, and 3% of Asian workers - compared to 2% of white workers - took transit to work. Since the start
+            of
+            the COVID-19 pandemic, people of color have been far more likely than white people to continue to travel to
+            and from work. In 2021, 29% of Black workers, 19% of Latinx workers, 40% of Asian workers, and 38% of white
+            workers living in the Washington region worked remotely.</p>
+
+          <p class="pb-3">Choose one of the regions from the map to zoom in and learn more, or read about <a
+              class='text-purple-tc' href="/methodology">how it works</a>.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p>
+
+          <p class="pb-3">We evaluated the extent to which residents of the Washington D.C. region have equitable
+            transit
+            access to jobs, stores, hospitals, and other important destinations. Do people with the greatest need for
+            transit have the best access to fast, frequent, reliable, affordable service close to home? This page
+            summarizes disparities in transit access between different groups of people, and shows how those outcomes
+            have
+            shifted (or not) as a result of service changes since February 2020. Evaluations are based on the combined
+            services provided by all transit agencies in the Washington D.C. region.</p> -->
+        </div>
+      </div>
+    </div>
+    <div class="min-h-screen absolute top-0 left-0 right-0 bottom-0 z-10" id="map"></div>
   </main>
 
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+  <script src="{% static 'map/js/d3.v7.min.js' %}"></script>
   <script src="{% static 'map/js/regions.js' %}"></script>
   <script src="{% static 'map/js/styles.js' %}"></script>
   <script src="{% static 'map/js/control.js' %}"></script>
