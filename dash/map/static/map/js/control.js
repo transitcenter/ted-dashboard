@@ -1,4 +1,4 @@
-const regionKeys = ["WAS", "CHI"]
+const regionKeys = ["WAS", "CHI", "LA", "SFO", "NYC"]
 const cumulativeMeasures = ["C000", "acres", "tsi"]
 
 const opportunityNames = {

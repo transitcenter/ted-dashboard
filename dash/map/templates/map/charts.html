@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Chart Builder - TED</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'map/css/style.css' %}">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="flex h-screen overflow-hidden">
+        <aside
+            class="absolute left-0 top-0 z-50 flex h-full w-72 flex-col overflow-y-hidden bg-blue-50 duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 -translate-x-full">
+            <div class="flex flex-col items-center justify-between gap-2 px-6 py-5 lg:py-6">
+                <h2 class="text-2xl font-bold text-gray-600">Chart Builder</h2>
+                <p class="text-center text-sm">Choose what data you would like to plot and select 'update'</p>
+            </div>
+            <div class="flex flex-col justify-center gap-2 overflow-y-auto duration-300 ease-linear px-5">
+                <div>
+                    <label for="region"
+                        class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Region</label>
+                    <select id="region"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="BOS" disabled>Boston</option>
+                        <option value="CHI" selected>Chicago</option>
+                        <option value="LA">Los Angeles</option>
+                        <option value="NYC">New York City</option>
+                        <option value="PHL">Philadelphia</option>
+                        <option value="SFO">San Francisco-Oakland</option>
+                        <option value="WAS">Washington, D.C.</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="opportunity"
+                        class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Opportunity</label>
+                    <select id="opportunity"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="C000" selected>Jobs</option>
+                        <option value="acres">Park Space</option>
+                        <option value="hospitals">Hospitals</option>
+                        <option value="urgent_care_facilities">Urgent Care Facilities</option>
+                        <option value="pharmacies">Pharmacies</option>
+                        <option value="education">Colleges & Universities</option>
+                        <option value="grocery">Supermarkets</option>
+                        <option value="early_voting">Early Voting Locations</option>
+                        <option value="tsi">Transit Service Intensity</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="period" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Time
+                        Period</label>
+                    <select id="period"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="WEDAM" selected>Weekday Morning</option>
+                        <option value="WEDPM">Weekday Night</option>
+                        <option value="SATAM">Saturday Morning</option>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label for="tripOptions" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Trip
+                        Options</label>
+                    <select id="tripOptions"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="c30">30 minutes</option>
+                        <option value="c45" selected>45 minutes</option>
+                        <option value="c60">60 minutes</option>
+                        <option value="c90">90 minutes</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="affordableTrips" class="relative inline-flex items-center cursor-pointer">
+                        <input id="affordableTrips" type="checkbox" value="" class="sr-only peer">
+                        <div
+                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                        </div>
+                        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Affordable Trips</span>
+                    </label>
+                </div>
+                <div>
+                    <label for="auto" class="relative inline-flex items-center cursor-pointer">
+                        <input id="auto" type="checkbox" value="" class="sr-only peer">
+                        <div
+                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                        </div>
+                        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Compare to Auto</span>
+                    </label>
+                </div>
+                <div>
+                    <label for="demographics"
+                        class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Demographics to
+                        Include</label>
+                    <div class="flex items-center mb-2">
+                        <input id="B03002_001E-checkbox" type="checkbox" value="B03002_001E"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            checked>
+                        <label for="B03002_001E-checkbox"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Everyone</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input id="B03002_004E-checkbox" type="checkbox" value="B03002_004E"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            checked>
+                        <label for="B03002_004E-checkbox"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Black People</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input id="B03002_003E-checkbox" type="checkbox" value="B03002_003E"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            checked>
+                        <label for="B03002_003E-checkbox"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">White People</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input id="B03002_006E-checkbox" type="checkbox" value="B03002_006E"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            checked>
+                        <label for="B03002_006E-checkbox"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Asian American/Pacific
+                            Islander</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input id="B03002_012E-checkbox" type="checkbox" value="B03002_012E"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            checked>
+                        <label for="B03002_012E-checkbox"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Hispanic/Latino</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input id="B11003_016E-checkbox" type="checkbox" value="B11003_016E"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            checked>
+                        <label for="B11003_016E-checkbox"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Single Mothers</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input id="low_income-checkbox" type="checkbox" value="low_income"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            checked>
+                        <label for="low_income-checkbox"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Low Income</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input id="age_65p-checkbox" type="checkbox" value="age_65p"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            checked>
+                        <label for="age_65p-checkbox"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Age 65+</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input id="zero_car_hhld-checkbox" type="checkbox" value="zero_car_hhld"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            checked>
+                        <label for="zero_car_hhld-checkbox"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Zero-Car
+                            Households</label>
+                    </div>
+                    <!-- <select multiple size="9" id="demographics"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="B03002_001E" selected>Everyone</option>
+                        <option value="B03002_004">Black People</option>
+                        <option value="B03002_003" selected>White People</option>
+                        <option value="B03002_006">Asian-Amerian and Pacific Islander</option>
+                        <option value="B03002_012">Hispanic/Latino</option>
+                        <option value="B11003_016">Single Mothers</option>
+                        <option value="low_income">Low Income</option>
+                        <option value="age_65p">Age 65+</option>
+                        <option value="zero_car_hhld">Zero-Car Household</option>
+                    </select> -->
+                </div>
+                <div class="flex justify-center">
+                    <button onclick="updateChart()"
+                        class="mt-5 text-md inline-flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded text-md">Update</button>
+                </div>
+            </div>
+        </aside>
+        <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+            {% include 'nav.html' %}
+            <div id="chartContainer" class="w-full h-1/2">
+            </div>
+            <div id="barChartContainer" class="w-full h-1/2">
+            </div>
+        </div>
+    </div>
+</body>
+<script src="{% static 'map/js/d3.v7.min.js' %}"></script>
+<script src="{% static 'map/js/chart.js' %}"></script>

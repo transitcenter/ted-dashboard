@@ -1,0 +1,118 @@
+{% extends 'map/base.html' %}
+{% block title %} Home {% endblock %}
+{% load static %}
+{% block content %}
+<main>
+    <div class="mx-auto flex flex-col justify-center items-center">
+        <img class="w-full object-cover object-center rounded" alt="hero" src="{% static 'map/img/cta-banner.jpg' %}">
+    </div>
+    <section class="container mx-auto">
+        <div class="w-full flex flex-col mt-16 mb-16 items-center text-center">
+            <h1 class="title-font text-4xl mb-4 font-medium text-gray-900">
+                Tracking Transit Equity in US Cities</h1>
+            <p class="md:w-1/3 mb-8 leading-relaxed text-lg">We crunched the numbers on transit equity in seven major
+                urban areas in the United States. Here's what we found.</p>
+        </div>
+    </section>
+    <section class="container mx-auto mb-20">
+        <div class="grid gap-8 grid-cols-3">
+            <div
+                class="border-2 border-gray-200 bg-gray-100 rounded-lg items-center place-items-center justify-center flex flex-col p-10">
+                <div class="mt-6">
+                    <svg stroke="#481f89" fill="#481f89" class="w-24 h-24" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512">
+                        <path
+                            d="M302.8 312C334.9 271.9 408 174.6 408 120C408 53.7 354.3 0 288 0S168 53.7 168 120c0 54.6 73.1 151.9 105.2 192c7.7 9.6 22 9.6 29.6 0zM416 503l144.9-58c9.1-3.6 15.1-12.5 15.1-22.3V152c0-17-17.1-28.6-32.9-22.3l-116 46.4c-.5 1.2-1 2.5-1.5 3.7c-2.9 6.8-6.1 13.7-9.6 20.6V503zM15.1 187.3C6 191 0 199.8 0 209.6V480.4c0 17 17.1 28.6 32.9 22.3L160 451.8V200.4c-3.5-6.9-6.7-13.8-9.6-20.6c-5.6-13.2-10.4-27.4-12.8-41.5l-122.6 49zM384 255c-20.5 31.3-42.3 59.6-56.2 77c-20.5 25.6-59.1 25.6-79.6 0c-13.9-17.4-35.7-45.7-56.2-77V449.4l192 54.9V255z" />
+                    </svg>
+                </div>
+                <div class="text-center mx-10">
+                    <h2 class="font-medium text-3xl text-gray-900 mt-6 mb-4">Maps</h2>
+                    <p class="leading-relaxed">Explore access to opportunity and other transit data on a map.</p>
+                    <a href="/map"><button
+                            class="mt-10 text-md inline-flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded text-lg">Learn
+                            More</button>
+                    </a>
+                </div>
+            </div>
+            <div
+                class="border-2 border-gray-200 bg-gray-100 rounded-lg items-center place-items-center justify-center flex flex-col p-10">
+                <div class="mt-6">
+                    <svg stroke="#481f89" fill="#481f89" class="w-24 h-24" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path
+                            d="M160 80c0-26.5 21.5-48 48-48h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V80zM0 272c0-26.5 21.5-48 48-48H80c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V272zM368 96h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H368c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48z" />
+                    </svg>
+                </div>
+                <div class="text-center mx-10">
+                    <h2 class="font-medium text-3xl text-gray-900 mt-6 mb-4">Charts</h2>
+                    <p class="leading-relaxed">Explore and compare distributive equity with interactive charts.</p>
+                    <a href="/charts"><button
+                            class="mt-10 text-md inline-flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded text-lg">Learn
+                            More</button>
+                    </a>
+                </div>
+
+            </div>
+            <div
+                class="border-2 border-gray-200 bg-gray-100 rounded-lg items-center place-items-center justify-center flex flex-col p-10">
+                <div class="mt-6">
+                    <svg stroke="#481f89" fill="#481f89" class="w-24 h-24" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path
+                            d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />
+                    </svg>
+                </div>
+                <div class="text-center mx-10">
+                    <h2 class="font-medium text-3xl text-gray-900 mt-6 mb-4">Data</h2>
+                    <p class="leading-relaxed">Download our datasets and explore your own way.</p>
+                    <a href="/data"><button
+                            class="mt-10 text-md inline-flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded text-lg">Learn
+                            More</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="mx-auto flex flex-col justify-center items-center">
+        <img class="w-full object-cover object-center rounded" alt="hero" src="{% static 'map/img/cta-banner.jpg' %}">
+    </div>
+    <section class="container mx-auto mb-20">
+        <div class="w-full flex flex-col px-20 mt-16 mb-16">
+            <h2 class="title-font text-4xl mb-4 font-medium text-gray-900">
+                The State of Transit Equity</h1>
+                <p class="mb-8 leading-relaxed text-lg">Public transportation can offer a "ladder of opportunity",
+                    providing affordable and convenient connections to jobs, goods and services, medical care, and other
+                    essentials of daily life. But pervasive racism and discrimination in land use, transportation, and
+                    transit planning have created wide gaps in transit access across race, income, and other
+                    characteristics, exacerbating social inequity.</p>
+                <p class="mb-8 leading-relaxed text-lg">An equitable transit system attempts to correct these
+                    disparities by providing the highest quality service and the best access to opportunity to people
+                    who have been marginalized by prior planning decisions. But just how wide are gaps in access, and
+                    how do they manifest for different groups of transit riders? Until recently, generating such
+                    information had been computationally difficult -- beyond the means of a transit agency. Furthermore,
+                    federal equity evaluations do not require this level of scrutiny. But data advances have made
+                    quantifying this information feasible. We built this tool to promote this newly-possible best
+                    practice, demonstrate the nuance that access-to-opportunity analysis brings to equity evaluations,
+                    and to shed light on large gaps in access facing U.S. transit riders.</p>
+                <p class="mb-8 leading-relaxed text-lg">This dashboard measures how well transit networks in seven U.S.
+                    cities connect people who’ve been marginalized within those metro areas to the jobs, services, and
+                    amenities they need to thrive. Using February 2020 as a baseline, the dashboard looks at metrics
+                    like the number of jobs people can reach within a limited timeframe or budget, travel times to
+                    hospitals and grocery stores, and service frequency, and tracks how these measures have changed in
+                    each region.</p>
+                <p class="mb-8 leading-relaxed text-lg">The dashboard illuminates existing disparities and tracks
+                    progress toward equity by measuring transit outcomes for Black people, other people of color, people
+                    living in poverty, and single mothers.</p>
+
+                <p class="mb-8 leading-relaxed text-lg italic">Note: The dashboard is intended as a template for
+                    measuring
+                    transit access disparities, and does not include data for all communities of people who have been
+                    marginalized in the transportation system. It does not measure every aspect of equity — for example,
+                    how safe the transit system is for different groups of people or whether marginalized people are
+                    represented in decision making. Other TransitCenter research examines these and other elements of
+                    equitable transit.</p>
+
+        </div>
+    </section>
+</main>
+{% endblock %}

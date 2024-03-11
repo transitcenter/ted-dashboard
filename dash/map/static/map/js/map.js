@@ -1,6 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoid2tsdW1wZW4iLCJhIjoiY2tibWVieXVrMDZrMTJybzZybHlsNHcyaSJ9.4lNjcWenF95KDkvH7trKqg';
 const R = 6378
-const minStartContextZoom = 8
+const minStartContextZoom = 10
 let currentLayer
 
 var legendMargin = {top: 5, right: 10, bottom: 10, left: 10}

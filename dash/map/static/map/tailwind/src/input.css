@@ -7,6 +7,11 @@
     color: rgb(72 31 137 / var(--tw-text-opacity));
 }
 
+.bg-purple-tc {
+    --tw-bg-opacity: 1;
+    background-color: rgb(72 31 137 / var(--tw-bg-opacity));
+}
+
 .text-orange-kc {
     --tw-text-opacity: 1;
     color: rgb(245 132 38 / var(--tw-text-opacity));
