@@ -1,53 +1,7 @@
-var popStyle = {
-    'B03002_001E': {
-        'label': 'Everyone',
-        'sentence': 'everyone',
-        'color': "#bab0ac"
-    },
-    'B03002_006E': {
-        'label': "Asian",
-        'sentence': 'Asian people, Native Hawaiians, and Pacific Islanders',
-        'color': "#4c78a8"
-    },
-    'B03002_004E': {
-        'label': "Black",
-        'sentence': 'Black people',
-        'color': "#f58518"
-    },
-    'B03002_012E': {
-        'label': "Hisp/Latina",
-        'sentence': "Latinx people",
-        'color': "#e45756"
-    },
-    'B03002_003E': {
-        'label': "White",
-        'sentence': 'white people',
-        'color': "#72b7b2"
-    },
-    'low_income': {
-        'label': "In Poverty",
-        'sentence': 'people in poverty',
-        'color': '#54a24b'
-    },
-    'B11003_016': {
-        'label': 'Single Mother',
-        'sentence': 'single mothers',
-        'color': '#eeca3b'
-    },
-    'age_65p': {
-        'label': 'Age 65+',
-        'sentence': 'aged 65 and above',
-        'color': '#b279a2'
-    },
-    'zero_car_hhld': {
-        'label': 'Zero-Car Households',
-        'sentence': 'zero-car households',
-        'color': '#ff9da6'
-    }
-}
 
-let chartMargin = {top: 100, right: 10, bottom: 30, left: 100}
-let barChartMargin = {top: 20, right: 20, bottom: 30, left: 20}
+
+let chartMargin = {top: 80, right: 10, bottom: 50, left: 100}
+let barChartMargin = {top: 70, right: 20, bottom: 0, left: 20}
 
 let chartWidth = d3.select("#chartContainer").node().getBoundingClientRect().width
 let chartHeight = d3.select("#chartContainer").node().getBoundingClientRect().height
@@ -71,29 +25,63 @@ function updateChart() {
     var period = document.getElementById("period").value;
     var opportunity = document.getElementById("opportunity").value;
     var tripOption = document.getElementById("tripOptions").value;
+    var autoRatioCheck = document.getElementById("autoRatio").checked;
+    var affordableTripsCheck = document.getElementById("affordableTrips").checked;
+
+    if ('URLSearchParams' in window) {
+        var searchParams = new URLSearchParams(window.location.search)
+        searchParams.set("region", region);
+        searchParams.set("period", period);
+        searchParams.set("opportunity", opportunity);
+        searchParams.set("tripOption", tripOption);
+        searchParams.set("autoRatio", autoRatioCheck);
+        searchParams.set("affordableTrips", affordableTripsCheck);
+        var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+        history.pushState(null, '', newRelativePathQuery);
+    }
     // Let's load the proper CSV based on settings (just one right now)
     d3.csv("/static/map/data/summary_" + region + "_" + period + ".csv")
         .then(function (data) {
-            // console.log(data)
             //TODO: dynamic keys
-            var scoreKey = opportunity + "_" + tripOption
+            var scoreKey = null;
+
+            if (opportunity == "tsi") {
+                scoreKey = "tsi"
+            }
+            else {
+                scoreKey = opportunity + "_" + tripOption
+            }
+            var demoList = [];
+            for (var demo in popStyle) {
+                var demoCheck = document.getElementById(demo + "-checkbox")
+                if (demoCheck.checked == true) {
+                    demoList.push(demo)
+                }
+            }
             // TODO: Filter the dates and demographics
             var scores = []
             data.forEach(function (item, index) {
                 // TODO: Update to clean this up
                 if (item.demographic != "C17002_003E") {
-                    var obj = {};
-                    obj["demographic"] = item.demographic;
-                    obj["value"] = +item[scoreKey];
-                    obj["date"] = new Date(item.date);
-                    scores.push(obj);
+                    if (demoList.includes(item.demographic)) {
+                        var obj = {};
+                        obj["demographic"] = item.demographic;
+                        if (autoRatioCheck == true) {
+                            obj["value"] = (+item[scoreKey]) / ((+item[scoreKey + "_auto"]));
+                        }
+                        else {
+                            obj["value"] = (+item[scoreKey])
+                        }
+                        obj["date"] = new Date(item.date);
+                        scores.push(obj);
+                    }
                 }
             })
-            multilinePlot(scores);
+            multilinePlot(scores, region, period, opportunity, tripOption, autoRatioCheck);
         })
 }
 
-function multilinePlot(scores) {
+function multilinePlot(scores, region, period, opportunity, tripOption, autoRatio) {
 
     chartSVG.selectAll('*').remove();
 
@@ -103,8 +91,6 @@ function multilinePlot(scores) {
     let barDate = maxDate;
     var barScores = scores.filter(d => d['date'] == barDate);
     barScores = barScores.sort((a, b) => d3.ascending(a.value, b.value))
-    console.log(d3.extent(scores, d => d.date))
-    console.log(d3.extent(scores, d => d.value))
 
     var x = d3.scaleTime()
         .domain([Date.parse("2020-02-01"), maxDate])
@@ -113,8 +99,6 @@ function multilinePlot(scores) {
     var y = d3.scaleLinear()
         .domain([0, d3.max(scores, d => d.value)])
         .range([chartBoxHeight + chartMargin.top, chartMargin.top])
-
-    console.log(d3.max(scores, d => d.value))
 
     var line = d3.line()
         .x(d => x(d.date))
@@ -141,8 +125,6 @@ function multilinePlot(scores) {
     }
     dateList = dateList.filter(onlyUnique);
 
-    console.log(dateList);
-
     var sticks = chartSVG.selectAll("stick")
         .data(dateList)
         .enter()
@@ -164,39 +146,38 @@ function multilinePlot(scores) {
         .style('cursor', 'pointer')
         .style('stroke-width', '10px')
 
-    var stickTexts = chartSVG.selectAll("stickLabel")
-        .data(dateList)
-        .enter()
-        .append("text")
-        .attr("class", 'stickText')
-        // .attr("x", d => x(d))
-        // .attr('y', -18)
-        .attr("transform", d => "translate(" + (x(d) + 5) + "," + (chartMargin.top - 5) + ") rotate(45)")
-        // .attr("dy", "-.75em")
-        // .attr('dx')
-        .text(d => d.toLocaleDateString("en-US", {month: "short", day: "numeric", year: "2-digit"}))
-        .attr('text-anchor', 'end')
-        .attr("dy", ".35em")
-        .attr("font-size", "0.7em")
-        .style('cursor', 'pointer')
-        .style('font-weight', function (d) {
-            if (d == barDate) {
-                return 'bold'
-            }
-            else {
-                return 'normal'
-            }
-        })
+    // var stickTexts = chartSVG.selectAll("stickLabel")
+    //     .data(dateList)
+    //     .enter()
+    //     .append("text")
+    //     .attr("class", 'stickText')
+    //     // .attr("x", d => x(d))
+    //     // .attr('y', -18)
+    //     .attr("transform", d => "translate(" + (x(d) + 5) + "," + (chartMargin.top - 5) + ") rotate(45)")
+    //     // .attr("dy", "-.75em")
+    //     // .attr('dx')
+    //     .text(d => d.toLocaleDateString("en-US", {month: "short", day: "numeric", year: "2-digit"}))
+    //     .attr('text-anchor', 'end')
+    //     .attr("dy", ".35em")
+    //     .attr("font-size", "0.7em")
+    //     .style('cursor', 'pointer')
+    //     .style('font-weight', function (d) {
+    //         if (d == barDate) {
+    //             return 'bold'
+    //         }
+    //         else {
+    //             return 'normal'
+    //         }
+    //     })
 
-
-    // chartSVG.append('text')
-    //     .attr('class', 'barDateLabel')
-    //     .attr('x', chartWidth + 10)
-    //     .attr('y', 0)
-    //     // .attr("dy", "-1.55em")
-    //     .text("Week of " + barDate)
-    //     .attr('text-anchor', 'start')
-    //     .attr("font-size", "0.8em")
+    var stickText = chartSVG.append("text")
+        .attr("y", chartMargin.top)
+        .attr("x", x(barDate))
+        .attr("dy", "-0.5em")
+        .attr('class', 'text-sm')
+        .style("text-anchor", "middle")
+        .style("vertical-align", "top")
+        .text(barDate.toDateString());
 
     groups.forEach(function (key, index) {
         var toPlot = scores.filter(d => (d['demographic'] == key));
@@ -209,10 +190,10 @@ function multilinePlot(scores) {
             .style('stroke', item.color)
             .style('stroke-width', function () {
                 if (key == 'B03002_001E') {
-                    return 4;
+                    return 3;
                 }
                 else {
-                    return 3;
+                    return 2;
                 }
             })
             .style('opacity', function () {
@@ -220,7 +201,7 @@ function multilinePlot(scores) {
                     return 1.0;
                 }
                 else {
-                    return 0.7;
+                    return 0.9;
                 }
             })
 
@@ -229,19 +210,43 @@ function multilinePlot(scores) {
         })
     })
 
-    //     chartSVG.append("text")
-    //         .attr("transform", "rotate(-90)")
-    //         .attr("y", 0 - chartMargin.left)
-    //         .attr("x", 0 - (chartHeight / 2))
-    //         .attr("dy", "1em")
-    //         .style("text-anchor", "middle")
-    //         .text(ylabel);
+    var ylabel = opportunityDetails[opportunity]["ylabel"]
+    if (autoRatio == true) {
+        ylabel = ylabel + " (transt/auto)"
+    }
+    // Time series y-axis label
+    chartSVG.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 10)
+        .attr("x", 0 - chartMargin.top - (chartBoxHeight / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text(ylabel);
 
+    // Time series y-axis label
+    chartSVG.append("text")
+        .attr("y", 10)
+        .attr("x", chartWidth / 2)
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .attr("class", "text-md font-bold")
+        .text("Average " + opportunityDetails[opportunity]["title"] + " in " + regionDetails[region]["name"]);
+
+    chartSVG.append('text')
+        .attr('class', 'barDateSubtitle')
+        .attr('x', barChartWidth / 2)
+        .attr('y', 50)
+        // .attr("dy", "-1.55em")
+        .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period])
+        .attr('text-anchor', 'middle')
+        .attr("class", 'text-sm')
+
+    // Time series y-axis
     chartSVG.append("g")
         .attr("transform", "translate(" + chartMargin.left + ", 0)")
         .call(d3.axisLeft(y).ticks(5));
 
-
+    // Time series x-axis
     if (chartBoxWidth < 900) {
         chartSVG.append("g")
             .attr("transform", "translate(0," + (chartBoxHeight + chartMargin.top) + ")")
@@ -252,74 +257,22 @@ function multilinePlot(scores) {
             .attr("transform", "translate(0," + (chartBoxHeight + chartMargin.top) + ")")
             .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b %Y")));
     }
-    // });
-
-    // var barY = d3.scaleBand()
-    //     .domain(barScores.map(d => popStyle[d.description].label))
-    //     .range([chartHeight, 10])
-    //     .padding(0.1);
-
-    // var barX = d3.scaleLinear()
-    //     .domain([0, d3.max(barScores, d => d.value)])
-    //     .range([0, chartMargin.right - 20])
-
-    // var bars = chartSVG.selectAll('bars')
-    //     .data(barScores)
-    //     .enter()
-    //     .append('rect')
-    //     .attr('class', 'mpbar')
-    //     .attr("y", d => barY(popStyle[d.description].label))
-    //     .attr("x", d => chartWidth + 10)
-    //     .attr("height", barY.bandwidth())
-    //     .attr("width", d => barX(d.value))
-    //     .style("opacity", function (d) {
-    //         if (d.description == 'pop_total') {
-    //             return 1.0;
-    //         }
-    //         else {
-    //             return 0.5;
-    //         }
-    //     })
-    //     .attr("fill", d => popStyle[d.description].color)
-
-    // var barLabels = chartSVG.selectAll("barlabel")
-    //     .data(barScores)
-    //     .enter()
-    //     .append("text")
-    //     .attr('class', 'mpbarText')
-    //     .attr("x", d => chartWidth + 14)
-    //     .attr('y', d => barY(popStyle[d.description].label) + barY.bandwidth() / 2)
-    //     .text(d => popStyle[d.description].label + " (" + styleNumbers(d.value) + ")")
-    //     .attr('text-anchor', 'left')
-    //     .attr("dy", ".35em")
-    //     .attr("font-size", "0.8em")
-    //     .style('fill', function (d) {
-    //         if (d.description == 'pop_total') {
-    //             return 'white';
-    //         }
-    //         else {
-    //             return 'black';
-    //         }
-    //     })
-
-    // // Now some mouse effects
-    // stickTexts.on('click', function (d) {
-    //     updateBars(d)
-    // })
 
     sticks.on('click', function (e, d) {
-        console.log(d);
         updateBars(d);
+        // Make this stick bold now
+
     })
 
-    sticks.on('mouseover', function (d) {
+    sticks.on('mouseover', function (e, d) {
         d3.select(this)
             .transition()
             .attr('stroke', '#2D74ED')
             .attr('opacity', 0.5)
         // Highlight the connections
+        stickText.transition().attr("x", x(d)).text(d.toDateString());
     })
-        .on('mouseout', function (d) {
+        .on('mouseout', function (e, d) {
             if (d == barDate) {
                 d3.select(this).transition().attr('stroke', '#BEBEBE')
             }
@@ -328,6 +281,10 @@ function multilinePlot(scores) {
             }
 
         })
+
+    chartSVG.on('mouseleave', function (e, d) {
+        stickText.transition().attr("x", x(barDate)).text(barDate.toDateString())
+    })
 
     updateBars(barDate);
 
@@ -376,9 +333,73 @@ function multilinePlot(scores) {
                     return 1.0;
                 }
                 else {
-                    return 0.5;
+                    return 0.9;
                 }
             })
+            .on('mouseover', function (e, d) {
+                chartSVG.selectAll(".line")
+                    .transition()
+                    .attr("stroke-width", function (g, idx) {
+                        if (g[idx].demographic == d.demographic) {
+                            return 8;
+                        }
+                        else {
+                            return 6;
+                        }
+                    })
+            })
 
+        barChartSVG.selectAll("barLabels")
+            .data(barScores)
+            .enter()
+            .append("text")
+            .attr('class', 'text-sm')
+            .attr("x", d => barX(popStyle[d.demographic].label) + (barX.bandwidth() / 2))
+            .attr("y", d => barY(d.value))
+            .attr("dy", "-0.5em")
+            .text(d => styleNumbers(d.value))
+            .attr('text-anchor', 'middle')
+
+        barChartSVG.append('text')
+            .attr('class', 'barDateTitle')
+            .attr('x', barChartWidth / 2)
+            .attr('y', 30)
+            // .attr("dy", "-1.55em")
+            .text("Average " + opportunityDetails[opportunity]["title"] + " in " + regionDetails[region]["name"] + " for the Week of " + barDate.toDateString())
+            .attr('text-anchor', 'middle')
+            .attr("class", "text-md font-bold")
+
+        barChartSVG.append('text')
+            .attr('class', 'barDateSubtitle')
+            .attr('x', barChartWidth / 2)
+            .attr('y', 50)
+            // .attr("dy", "-1.55em")
+            .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period])
+            .attr('text-anchor', 'middle')
+            .attr("class", 'text-sm')
+
+
+
+        // chartSVG.selectAll(".stickText")
+        //     .transition()
+        //     .style('font-weight', function (d) {
+        //         if (d == barDate) {
+        //             return 'bold'
+        //         }
+        //         else {
+        //             return 'normal'
+        //         }
+        //     })
+
+        chartSVG.selectAll('.theStick')
+            .transition()
+            .attr("stroke", function (d) {
+                if (d == barDate) {
+                    return '#BEBEBE'
+                }
+                else {
+                    return "#F1F1F1"
+                }
+            })
     }
 }

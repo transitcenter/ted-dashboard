@@ -95,11 +95,11 @@ const regions = {
     ]
 }
 
-const regionDetails = {
-    "WAS": {
-        "fareYears": ["2020", "2023"],
-    }
-}
+// const regionDetails = {
+//     "WAS": {
+//         "fareYears": ["2020", "2023"],
+//     }
+// }
 
 const wasStory = `
     <b class="text-2xl">Washington, D.C.</b>

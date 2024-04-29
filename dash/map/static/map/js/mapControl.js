@@ -1,5 +1,6 @@
-const regionKeys = ["WAS", "CHI", "LA", "SFO", "NYC"]
-const cumulativeMeasures = ["C000", "acres", "tsi"]
+// const regionKeys = ["WAS", "CHI", "LA", "SFO", "NYC"]
+const regionKeys = ["NYC"]
+
 
 const opportunityNames = {
     "C000": {
@@ -29,117 +30,6 @@ const opportunityNames = {
     "tsi": {
         "legendTitle": "Nearby Hourly Trips"
     }
-}
-
-const measureParameters = {
-    "C000": [
-        {
-            "key": "c30",
-            "name": "30 minutes",
-            "default": false
-        },
-        {
-            "key": "c45",
-            "name": "45 minutes",
-            "default": true
-        },
-        {
-            "key": "c60",
-            "name": "60 minutes",
-            "default": false
-        },
-        {
-            "key": "c90",
-            "name": "90 minutes",
-            "default": false
-        },
-    ],
-    "acres": [
-        {
-            "key": "c15",
-            "name": "15 minutes",
-            "default": false
-        },
-        {
-            "key": "c30",
-            "name": "30 minutes",
-            "default": true
-        },
-    ],
-    "hospitals": [
-        {
-            "key": "t1",
-            "name": "Nearest",
-            "default": true
-        },
-        {
-            "key": "t3",
-            "name": "3rd Nearest",
-            "default": false
-        },
-    ],
-    "urgent_care_facilities": [
-        {
-            "key": "t1",
-            "name": "Nearest",
-            "default": true
-        },
-        {
-            "key": "t3",
-            "name": "3rd Nearest",
-            "default": false
-        },
-    ],
-    "pharmacies": [
-        {
-            "key": "t1",
-            "name": "Nearest",
-            "default": true
-        },
-        {
-            "key": "t3",
-            "name": "3rd Nearest",
-            "default": false
-        },
-    ],
-    "education": [
-        {
-            "key": "t1",
-            "name": "Nearest",
-            "default": true
-        },
-        {
-            "key": "t3",
-            "name": "3rd Nearest",
-            "default": false
-        },
-    ],
-    "grocery": [
-        {
-            "key": "t1",
-            "name": "Nearest",
-            "default": true
-        },
-        {
-            "key": "t3",
-            "name": "3rd Nearest",
-            "default": false
-        },
-    ],
-    "early_voting": [
-        {
-            "key": "t1",
-            "name": "Nearest",
-            "default": true
-        }
-    ],
-    "tsi": [
-        {
-            "key": "tsi",
-            "name": "Hourly Trips",
-            "default": true
-        }
-    ]
 }
 
 let controlState = {
@@ -208,7 +98,6 @@ function opportunityChanged(selectedOpportunity) {
     if (cumulativeMeasures.includes(controlState["opportunity"])) {
         // Enable the control 
         affordableTripsSelect.disabled = false;
-
     }
     else {
 
@@ -310,7 +199,8 @@ function changeDataSource(sourceDate, sourceTOD) {
                 'id': region + 'Layer',
                 'type': 'fill',
                 'source': region + 'Source',
-                'minzoom': 1,
+                'minzoom': 7,
+                // 'maxzoom': 10,
                 'source-layer': region + "-" + sourceDate + "-" + sourceTOD,
                 "paint": {
                     "fill-color": nullColor,

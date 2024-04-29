@@ -62,30 +62,30 @@ map.on('load', () => {
     });
 
     regionKeys.forEach(function (region, idx) {
-        map.addSource(region + '-transit', {
-            // This GeoJSON contains features that include an "icon"
-            // property. The value of the "icon" property corresponds
-            // to an image in the Mapbox Streets style's sprite.
-            'type': 'geojson',
-            'data': 'mapbox://wklumpen.2t8nsu0h'
-        });
+        // map.addSource(region + '-transit', {
+        //     // This GeoJSON contains features that include an "icon"
+        //     // property. The value of the "icon" property corresponds
+        //     // to an image in the Mapbox Streets style's sprite.
+        //     'type': 'geojson',
+        //     'data': 'mapbox://wklumpen.2t8nsu0h'
+        // });
 
-        map.addLayer({
-            'id': region + 'transit',
-            'type': 'line',
-            'source': region + '-transit',
-            'layout': {
-                'line-join': 'round',
-                'line-cap': 'round'
-            },
-            'paint': {
-                'line-color': '#888',
-                'line-width': 8
-            }
-        });
+        // map.addLayer({
+        //     'id': region + 'transit',
+        //     'type': 'line',
+        //     'source': region + '-transit',
+        //     'layout': {
+        //         'line-join': 'round',
+        //         'line-cap': 'round'
+        //     },
+        //     'paint': {
+        //         'line-color': '#888',
+        //         'line-width': 8
+        //     }
+        // });
     });
 
-    changeDataSource("20230925", "WEDAM")
+    changeDataSource("20210118", "SATAM")
 
     let currentTextElement = document.getElementById("start-text")
 
@@ -125,6 +125,7 @@ map.on('load', () => {
 
     // Zoom event to control context-dependent information
     map.on('moveend', () => {
+        console.log(map.getZoom())
         if ((map.getZoom() < minStartContextZoom) & (currentTextElement.id != "start-text")) {
             // Move back to the regional context setting
             setRegionalContext("start")

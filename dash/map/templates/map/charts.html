@@ -45,7 +45,7 @@
                 <div>
                     <label for="opportunity"
                         class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Opportunity</label>
-                    <select id="opportunity"
+                    <select id="opportunity" onchange="opportunityChanged(this)"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="C000" selected>Jobs</option>
                         <option value="acres">Park Space</option>
@@ -55,7 +55,7 @@
                         <option value="education">Colleges & Universities</option>
                         <option value="grocery">Supermarkets</option>
                         <option value="early_voting">Early Voting Locations</option>
-                        <option value="tsi">Transit Service Intensity</option>
+                        <!-- <option value="tsi">Transit Service Intensity</option> -->
                     </select>
                 </div>
                 <div>
@@ -85,16 +85,17 @@
                         <div
                             class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                         </div>
-                        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Affordable Trips</span>
+                        <span id="affordableTripsLabel" class="ms-3 text-sm font-medium text-gray-900">Affordable
+                            Trips</span>
                     </label>
                 </div>
                 <div>
-                    <label for="auto" class="relative inline-flex items-center cursor-pointer">
-                        <input id="auto" type="checkbox" value="" class="sr-only peer">
+                    <label for="autoRatio" class="relative inline-flex items-center cursor-pointer">
+                        <input id="autoRatio" type="checkbox" value="" class="sr-only peer">
                         <div
                             class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                         </div>
-                        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Compare to Auto</span>
+                        <span id="autoRatioLabel" class="ms-3 text-sm font-medium text-gray-900">Compare to Auto</span>
                     </label>
                 </div>
                 <div>
@@ -104,30 +105,30 @@
                     <div class="flex items-center mb-2">
                         <input id="B03002_001E-checkbox" type="checkbox" value="B03002_001E"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                            checked>
+                            checked disabled>
                         <label for="B03002_001E-checkbox"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Everyone</label>
+                            class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Everyone</label>
                     </div>
                     <div class="flex items-center mb-2">
                         <input id="B03002_004E-checkbox" type="checkbox" value="B03002_004E"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                             checked>
                         <label for="B03002_004E-checkbox"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Black People</label>
+                            class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Black People</label>
                     </div>
                     <div class="flex items-center mb-2">
                         <input id="B03002_003E-checkbox" type="checkbox" value="B03002_003E"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                             checked>
                         <label for="B03002_003E-checkbox"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">White People</label>
+                            class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">White People</label>
                     </div>
                     <div class="flex items-center mb-2">
                         <input id="B03002_006E-checkbox" type="checkbox" value="B03002_006E"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                             checked>
                         <label for="B03002_006E-checkbox"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Asian American/Pacific
+                            class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Asian American/Pacific
                             Islander</label>
                     </div>
                     <div class="flex items-center mb-2">
@@ -135,35 +136,35 @@
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                             checked>
                         <label for="B03002_012E-checkbox"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Hispanic/Latino</label>
+                            class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Hispanic/Latino</label>
                     </div>
                     <div class="flex items-center mb-2">
                         <input id="B11003_016E-checkbox" type="checkbox" value="B11003_016E"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                             checked>
                         <label for="B11003_016E-checkbox"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Single Mothers</label>
+                            class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Single Mothers</label>
                     </div>
                     <div class="flex items-center mb-2">
                         <input id="low_income-checkbox" type="checkbox" value="low_income"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                             checked>
                         <label for="low_income-checkbox"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Low Income</label>
+                            class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Low Income</label>
                     </div>
                     <div class="flex items-center mb-2">
                         <input id="age_65p-checkbox" type="checkbox" value="age_65p"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                             checked>
                         <label for="age_65p-checkbox"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Age 65+</label>
+                            class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Age 65+</label>
                     </div>
                     <div class="flex items-center mb-2">
                         <input id="zero_car_hhld-checkbox" type="checkbox" value="zero_car_hhld"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                             checked>
                         <label for="zero_car_hhld-checkbox"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Zero-Car
+                            class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Zero-Car
                             Households</label>
                     </div>
                     <!-- <select multiple size="9" id="demographics"
@@ -187,12 +188,14 @@
         </aside>
         <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
             {% include 'nav.html' %}
-            <div id="chartContainer" class="w-full h-1/2">
+            <div id="chartContainer" class="w-full h-1/2 border-b-2 border-gray-200">
             </div>
             <div id="barChartContainer" class="w-full h-1/2">
             </div>
         </div>
     </div>
 </body>
+<script src="{% static 'map/js/styles.js' %}"></script>
 <script src="{% static 'map/js/d3.v7.min.js' %}"></script>
+<script src="{% static 'map/js/chartControl.js' %}"></script>
 <script src="{% static 'map/js/chart.js' %}"></script>
