@@ -1,6 +1,39 @@
 // const regionKeys = ["WAS", "CHI", "LA", "SFO", "NYC"]
-const regionKeys = ["NYC"]
+const regionKeys = ["BOS", "CHI", "LA", "NYC", "PHL", "SFO", "WAS"]
 
+const defaultDate = "20240304"
+const defaultTOD = "WEDAM"
+
+const fares2023 = ["BOS", "SFO", "WAS"]
+
+const dateList = [
+    ['20240304', 'March 4, 2024'],
+    ['20230925', 'September 25, 2023'],
+    ['20230327', 'March 27, 2023'],
+    ['20220808', 'August 8, 2022'],
+    ['20220328', 'March 28, 2022'],
+    ['20210913', 'September 13, 2021'],
+    ['20210712', 'July 12, 2021'],
+    ['20210222', 'February 22, 2021'],
+    ['20210118', 'January 18, 2021'],
+    ['20201221', 'December 21, 2020'],
+    ['20201116', 'November 16, 2020'],
+    ['20201019', 'October 19, 2020'],
+    ['20200921', 'September 21, 2020'],
+    ['20200817', 'August 17, 2020'],
+    ['20200720', 'July 20, 2020'],
+    ['20200622', 'June 22, 2020'],
+    ['20200511', 'May 11, 2020'],
+    ['20200420', 'April 20, 2020'],
+    ['20200316', 'March 16, 2020'],
+    ['20200224', 'February 24, 2020'],
+]
+
+const affordableTripOptions = [
+    ["all", "All Trips"],
+    ["2020", "Affordable (2020)"],
+    ["2023", "Affordable (2023 if available)"]
+]
 
 const opportunityNames = {
     "C000": {
@@ -37,11 +70,13 @@ let controlState = {
     "tod": "WEDAM",
     "opportunity": "C000",
     "option": "c45",
-    "affordable": null,
+    "affordable": "all",
     "auto": false,
     "initalContextSet": false,
     "showTransitLines": false
 }
+
+var legendMargin = {top: 5, right: 10, bottom: 10, left: 10}
 
 function autoCompareChanged(autoCompareCheckbox) {
     console.log("New value:", autoCompareCheckbox.checked)
@@ -50,13 +85,7 @@ function autoCompareChanged(autoCompareCheckbox) {
 }
 
 function affordableTripsChanged(affordableTripsSelect) {
-    console.log("New value:", affordableTripsSelect.value)
-    if (affordableTripsSelect.value == "all") {
-        controlState["affordable"] = null;
-    }
-    else {
-        controlState["affordable"] = affordableTripsSelect.value
-    }
+    controlState["affordable"] = affordableTripsSelect.value
     restyleLayers()
 }
 
@@ -79,14 +108,14 @@ function opportunityChanged(selectedOpportunity) {
     }
     // Repopulate using the right opportunity
     measureParameters[selectedOpportunity.value].forEach(function (option, index) {
-        var opt = document.createElement("option")
-        opt.value = option["key"]
-        opt.text = option["name"]
-        opt.selected = option["default"]
+        var opt = document.createElement("option");
+        opt.value = option["key"];
+        opt.text = option["name"];
+        opt.selected = option["default"];
         if (option["default"] == true) {
-            controlState["option"] = option["key"]
+            controlState["option"] = option["key"];
         }
-        tripOptionSelect.add(opt)
+        tripOptionSelect.add(opt);
     })
 
     // Change Fare Options
@@ -98,6 +127,14 @@ function opportunityChanged(selectedOpportunity) {
     if (cumulativeMeasures.includes(controlState["opportunity"])) {
         // Enable the control 
         affordableTripsSelect.disabled = false;
+        affordableTripOptions.forEach(function (option, index) {
+            var opt = document.createElement("option")
+            opt.value = option[0];
+            opt.text = option[1];
+            affordableTripsSelect.add(opt);
+        })
+        affordableTripsSelect.selectedOption = "all";
+
     }
     else {
 
@@ -199,7 +236,7 @@ function changeDataSource(sourceDate, sourceTOD) {
                 'id': region + 'Layer',
                 'type': 'fill',
                 'source': region + 'Source',
-                'minzoom': 7,
+                'minzoom': 10,
                 // 'maxzoom': 10,
                 'source-layer': region + "-" + sourceDate + "-" + sourceTOD,
                 "paint": {
@@ -224,6 +261,15 @@ function restyleLayers() {
         if (controlState["opportunity"] == "tsi") {
             columnName = "tsi"
         }
+        else if (controlState["affordable"] != "all") {
+            if ((controlState["affordable"] == "2023") & fares2023.includes(region)) {
+                columnName = controlState["opportunity"] + "_" + controlState["option"] + "f_" + controlState["affordable"]
+            }
+            else {
+                columnName = controlState["opportunity"] + "_" + controlState["option"] + "f_" + "2020";
+            }
+
+        }
         else {
             columnName = controlState["opportunity"] + "_" + controlState["option"]
         }
@@ -239,7 +285,7 @@ function restyleLayers() {
                 getExpression = ["/", ["get", columnName], ["get", columnName + "_auto"]]
             }
             else {
-                styles = mapStyles[columnName]
+                styles = mapStyles[controlState["opportunity"] + "_" + controlState["option"]]
                 getExpression = ["get", columnName]
             }
         }

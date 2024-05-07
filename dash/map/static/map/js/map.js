@@ -3,14 +3,29 @@ const R = 6378
 const minStartContextZoom = 10
 let currentLayer
 
-var legendMargin = {top: 5, right: 10, bottom: 10, left: 10}
+// Populate date selector
+var dateSelect = document.getElementById("date")
+
+for (var i = 0; i < dateList.length; i++) {
+    var opt = dateList[i];
+    var el = document.createElement("option");
+    el.textContent = opt[1];
+    el.value = opt[0];
+    if (opt[0] == defaultDate) {
+        el.selected = true;
+    }
+    else {
+        el.selected = false;
+    }
+    dateSelect.appendChild(el)
+}
 
 // Initialize basemap
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/light-v11', // style URL
-    center: [-72.1095703, 38.3426943], // starting position [lng, lat]
+    center: [-109.4874429, 38.3426943], // starting position [lng, lat]
     zoom: 3.54, // starting zoom
     maxzoom: 10, //maximum zoom
     attributionControl: false
@@ -85,17 +100,15 @@ map.on('load', () => {
         // });
     });
 
-    changeDataSource("20210118", "SATAM")
-
-    let currentTextElement = document.getElementById("start-text")
+    changeDataSource(defaultDate, defaultTOD)
 
     // When a click event occurs on a feature in the places layer, open a popup at the
     // location of the feature, with description HTML from its properties.
     map.on('click', 'places', (e) => {
         // Copy coordinates array.
         var coords = e.features[0].geometry.coordinates
-        coords[0] = coords[0] + 0.15
-        map.flyTo({center: coords, zoom: minStartContextZoom + 1})
+        coords[0] = coords[0] - 0.10
+        map.flyTo({center: coords, zoom: minStartContextZoom})
         setRegionalContext(e.features[0].properties.tag)
     });
 
@@ -125,8 +138,7 @@ map.on('load', () => {
 
     // Zoom event to control context-dependent information
     map.on('moveend', () => {
-        console.log(map.getZoom())
-        if ((map.getZoom() < minStartContextZoom) & (currentTextElement.id != "start-text")) {
+        if ((map.getZoom() < minStartContextZoom)) {
             // Move back to the regional context setting
             setRegionalContext("start")
         }
@@ -163,17 +175,26 @@ map.on('load', () => {
     });
 
     function setRegionalContext(region) {
-        currentTextElement.style.display = "none";
-        currentTextElement = document.getElementById(region + "-text");
-        currentTextElement.style.display = "inline-block";
-
-        var options = document.getElementById("options")
-        if (region != "start") {
-            options.style.visibility = "visible";
+        var contextText = document.getElementById("context")
+        var optionsDiv = document.getElementById("options")
+        if (region == "start") {
+            contextText.innerHTML = "Choose a city marker or zoom into a city to see data."
         }
         else {
-            options.style.visibility = "hidden";
+            contextText.innerHTML = "Now viewing data for " + regionDetails[region]["name"] + "."
         }
+        // currentTextElement.style.display = "none";
+        // currentTextElement = document.getElementById(region + "-text");
+        //TODO: Fix this
+        // currentTextElement.style.display = "inline-block";
+
+        // var options = document.getElementById("options")
+        // if (region != "start") {
+        //     options.style.visibility = "visible";
+        // }
+        // else {
+        //     options.style.visibility = "hidden";
+        // }
     }
 });
 

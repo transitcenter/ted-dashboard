@@ -1,3 +1,6 @@
+# Data files
+dash/map/static/map/data
+
 # Django #
 *.log
 *.pot

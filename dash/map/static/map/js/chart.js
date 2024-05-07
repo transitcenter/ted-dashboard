@@ -1,5 +1,3 @@
-
-
 let chartMargin = {top: 80, right: 10, bottom: 50, left: 100}
 let barChartMargin = {top: 70, right: 20, bottom: 0, left: 20}
 
@@ -16,6 +14,69 @@ let barChartBoxWidth = barChartWidth - barChartMargin.left - barChartMargin.righ
 let chartSVG = d3.select("#chartContainer").append('svg').attr('width', chartWidth).attr('height', chartHeight)
 let barChartSVG = d3.select("#barChartContainer").append('svg').attr('width', barChartWidth).attr('height', barChartHeight)
 
+var searchParams = new URLSearchParams(window.location.search)
+
+if (searchParams.has("region") & regions.includes(searchParams.get("region"))) {
+    document.getElementById("region").value = searchParams.get("region");
+}
+if (searchParams.has("period") & periods.includes(searchParams.get("period"))) {
+    document.getElementById("period").value = searchParams.get("period");
+}
+if (searchParams.has("opportunity") & Object.keys(opportunityDetails).includes(searchParams.get("opportunity"))) {
+    var opp = searchParams.get("opportunity")
+    document.getElementById("opportunity").value = opp;
+
+    var affordableTripsCheck = document.getElementById("affordableTrips");
+    var affordableTripsLabel = document.getElementById("affordableTripsLabel");
+    var autoRatioCheck = document.getElementById("autoRatio");
+    var autoRatioLabel = document.getElementById("autoRatioLabel");
+
+    if (cumulativeMeasures.includes(opp)) {
+        autoRatioCheck.removeAttribute('disabled')
+        autoRatioLabel.classList.remove("text-gray-400");
+        autoRatioLabel.classList.add("text-gray-900");
+
+        affordableTripsCheck.removeAttribute('disabled')
+        affordableTripsLabel.classList.remove("text-gray-400");
+        affordableTripsLabel.classList.add("text-gray-900");
+    }
+    else {
+        affordableTripsCheck.disabled = true;
+        affordableTripsCheck.checked = false;
+        affordableTripsLabel.classList.remove("text-gray-900");
+        affordableTripsLabel.classList.add("text-gray-400");
+
+        autoRatioCheck.removeAttribute('disabled')
+        autoRatioLabel.classList.remove("text-gray-400");
+        autoRatioLabel.classList.add("text-gray-900");
+    }
+
+    if (opp == "tsi") {
+        affordableTripsCheck.disabled = true;
+        affordableTripsCheck.checked = false;
+        affordableTripsLabel.classList.remove("text-gray-900");
+        affordableTripsLabel.classList.add("text-gray-400");
+
+        autoRatioCheck.disabled = true;
+        autoRatioCheck.checked = false;
+        autoRatioLabel.classList.remove("text-gray-900");
+        autoRatioLabel.classList.add("text-gray-400");
+        document.getElementById("tripOptions").value = "tsi";
+    }
+
+}
+if (searchParams.has("tripOption")) {
+    document.getElementById("tripOptions").value = searchParams.get("tripOption");
+}
+
+if (searchParams.has("affordableTrips") & (searchParams.get("affordableTrips") == "true")) {
+    document.getElementById("affordableTrips").checked = true;
+}
+if (searchParams.has("autoRatio") & (searchParams.get("autoRatio") == "true")) {
+    document.getElementById("autoRatio").checked = true;
+}
+
+opportunityChanged(document.getElementById("opportunity"))
 updateChart()
 
 function updateChart() {
@@ -40,7 +101,7 @@ function updateChart() {
         history.pushState(null, '', newRelativePathQuery);
     }
     // Let's load the proper CSV based on settings (just one right now)
-    d3.csv("/static/map/data/summary_" + region + "_" + period + ".csv")
+    d3.csv("/static/map/data/summary/summary_" + region + "_" + period + ".csv")
         .then(function (data) {
             //TODO: dynamic keys
             var scoreKey = null;
@@ -51,6 +112,10 @@ function updateChart() {
             else {
                 scoreKey = opportunity + "_" + tripOption
             }
+            if (affordableTripsCheck == true) {
+                scoreKey = scoreKey + fareYears[region]
+            }
+
             var demoList = [];
             for (var demo in popStyle) {
                 var demoCheck = document.getElementById(demo + "-checkbox")
@@ -62,26 +127,24 @@ function updateChart() {
             var scores = []
             data.forEach(function (item, index) {
                 // TODO: Update to clean this up
-                if (item.demographic != "C17002_003E") {
-                    if (demoList.includes(item.demographic)) {
-                        var obj = {};
-                        obj["demographic"] = item.demographic;
-                        if (autoRatioCheck == true) {
-                            obj["value"] = (+item[scoreKey]) / ((+item[scoreKey + "_auto"]));
-                        }
-                        else {
-                            obj["value"] = (+item[scoreKey])
-                        }
-                        obj["date"] = new Date(item.date);
-                        scores.push(obj);
+                if (demoList.includes(item.demographic)) {
+                    var obj = {};
+                    obj["demographic"] = item.demographic;
+                    if (autoRatioCheck == true) {
+                        obj["value"] = (+item[scoreKey]) / ((+item[scoreKey + "_auto"]));
                     }
+                    else {
+                        obj["value"] = (+item[scoreKey])
+                    }
+                    obj["date"] = new Date(item.date);
+                    scores.push(obj);
                 }
             })
-            multilinePlot(scores, region, period, opportunity, tripOption, autoRatioCheck);
+            multilinePlot(scores, region, period, opportunity, tripOption, autoRatioCheck, affordableTripsCheck);
         })
 }
 
-function multilinePlot(scores, region, period, opportunity, tripOption, autoRatio) {
+function multilinePlot(scores, region, period, opportunity, tripOption, autoRatio, affordable) {
 
     chartSVG.selectAll('*').remove();
 
@@ -211,8 +274,19 @@ function multilinePlot(scores, region, period, opportunity, tripOption, autoRati
     })
 
     var ylabel = opportunityDetails[opportunity]["ylabel"]
+    if (affordable == true) {
+        ylabel += " (affordable)"
+    }
     if (autoRatio == true) {
         ylabel = ylabel + " (transt/auto)"
+    }
+
+    var dataNote = null;
+    if (cumulativeMeasures.includes(opportunity) | (opportunity == "tsi")) {
+        dataNote = "Higher values are better"
+    }
+    else {
+        dataNote = "Lower values are better"
     }
     // Time series y-axis label
     chartSVG.append("text")
@@ -237,7 +311,7 @@ function multilinePlot(scores, region, period, opportunity, tripOption, autoRati
         .attr('x', barChartWidth / 2)
         .attr('y', 50)
         // .attr("dy", "-1.55em")
-        .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period])
+        .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period] + " | " + dataNote)
         .attr('text-anchor', 'middle')
         .attr("class", 'text-sm')
 
@@ -374,7 +448,7 @@ function multilinePlot(scores, region, period, opportunity, tripOption, autoRati
             .attr('x', barChartWidth / 2)
             .attr('y', 50)
             // .attr("dy", "-1.55em")
-            .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period])
+            .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period] + " | " + dataNote)
             .attr('text-anchor', 'middle')
             .attr("class", 'text-sm')
 

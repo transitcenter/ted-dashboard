@@ -1,6 +1,6 @@
 const orangePurple = ["#67009e", "#d36d64", "#e89c4f", "#eef91a"]
 const purpleRed = ["#ce9ecc", "#da6bb2", "#e23189", "#c61159"]
-const viridis = ["#7ad151", "#22a884", "#2a788e", "#414487"]
+const viridis = ["#7ad151", "#22a884", "#2a788e", "#414487"].reverse()
 const magma = ["#3b0f70", "#8c2981", "#de4968", "#fe9f6d"]
 const nullColor = "#aaaaaa"
 
@@ -94,28 +94,36 @@ const mapStyles = {
         "colors": purpleRed
     },
     "C000_c30": {
-        "breaks": [1000, 4000, 215000],
-        "colors": orangePurple
+        "breaks": [1000, 75000, 200000],
+        "colors": viridis
     },
     "C000_c45": {
         "breaks": [4000, 28000, 150000],
-        "colors": orangePurple
+        "colors": viridis
+    },
+    "C000_c45f_2023": {
+        "breaks": [4000, 28000, 150000],
+        "colors": viridis
+    },
+    "C000_c45f_2020": {
+        "breaks": [4000, 28000, 150000],
+        "colors": viridis
     },
     "C000_c60": {
         "breaks": [15000, 125000, 680000],
-        "colors": orangePurple
+        "colors": viridis
     },
     "C000_c90": {
-        "breaks": [136000, 1000000, 1350000],
-        "colors": orangePurple
+        "breaks": [136000, 1000000, 1250000],
+        "colors": viridis
     },
     "acres_c15": {
-        "breaks": [15, 40, 100],
-        "colors": orangePurple
+        "breaks": [15, 30, 100],
+        "colors": viridis
     },
     "acres_c30": {
-        "breaks": [30, 75, 100],
-        "colors": orangePurple
+        "breaks": [50, 100, 150],
+        "colors": viridis
     }
 }
 
@@ -237,7 +245,8 @@ const tripOptionNames = {
     "c60": "60 minutes",
     "c90": "90 minutes",
     "t1": "Nearest",
-    "t3": "3rd Nearest"
+    "t3": "3rd Nearest",
+    "tsi": "Hourly Trips",
 }
 
 const todNames = {
@@ -296,7 +305,7 @@ const popStyle = {
 
 const travelTimeStyle = {
     "breaks": [15, 30, 45],
-    "colors": viridis
+    "colors": orangePurple
 }
 
 const autoRatioStyle = {
@@ -306,9 +315,9 @@ const autoRatioStyle = {
 
 function styleNumbers(val) {
     if (Math.abs(val) >= 1000000) {
-        val = Math.round(val / 1000000) * 1000000
+        // val = Math.round(val / 1000000) * 1000000
         val = val / 1000000
-        return val.toFixed(0).toString() + "m";
+        return val.toFixed(2).toString() + "m";
     }
     else if (Math.abs(val) >= 1000) {
         val = Math.round(val / 1000) * 1000
