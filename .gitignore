@@ -1,6 +1,9 @@
 # Data files
 dash/map/static/map/data
 
+# Configurations and settings
+dash/dash/settings/__init__.py
+
 # Django #
 *.log
 *.pot
@@ -8,6 +11,7 @@ dash/map/static/map/data
 __pycache__
 db.sqlite3
 media
+.env
 
 # Backup files # 
 *.bak 
