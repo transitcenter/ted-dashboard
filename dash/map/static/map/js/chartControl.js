@@ -8,7 +8,7 @@ const fareYears = {
     "WAS": "f_2023"
 }
 
-const regions = ["BOS", "CHI", "LA", "NYC", "SFO", "WAS"]
+const regions = ["BOS", "CHI", "LA", "PHL", "NYC", "SFO", "WAS"]
 const periods = ["WEDAM", "WEDPM", "SATAM"]
 
 function opportunityChanged(opportunitySelect) {
