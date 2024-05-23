@@ -1,5 +1,6 @@
 # Data files
 dash/map/static/map/data
+dash/map/migrations
 
 # Configurations and settings
 dash/dash/settings/__init__.py
