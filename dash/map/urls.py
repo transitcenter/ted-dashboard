@@ -8,4 +8,5 @@ urlpatterns = [
     path("map", views.map, name="map"),
     path("changelog", views.changelog, name="changelog"),
     path("about", views.about, name="about"),
+    path("references", views.references, name="references"),
 ]

@@ -19,3 +19,7 @@ def landing(request):
 
 def map(request):
     return render(request, "map/map.html")
+
+
+def references(request):
+    return render(request, "map/references.html")

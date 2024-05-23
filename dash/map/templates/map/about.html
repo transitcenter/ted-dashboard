@@ -5,33 +5,30 @@
 <main class="py-5">
     <section>
         <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
-            <div class="lg:w-1/2 md:w-1/3 md:pr-16 lg:pr-0 pr-0">
+            <div class="w-full md:pr-16 lg:pr-0 pr-0">
                 <h2 class="title-font font-medium text-3xl text-gray-900">What does the TransitCenter Equity Dashboard
                     Do?</h2>
-                <p class="leading-relaxed mt-4">The TransitCenter Equity Dashboard tracks how well public transit
-                    systems in seven US regions serve their riders, and how changes to transit service affect riders
-                    over time. The dashboard measures access to opportunity on transit, transit service intensity and
-                    transit affordability for people of color, people living in poverty, essential workers, and other
-                    people who rely on transit to meet their daily needs. The dashboard also includes metrics of transit
-                    reliability and how travel times to key destinations on transit compare to travel times by car. The
-                    dashboard shows these data with a series of charts, interactive maps, and downloadable data sets.
-                    Data begin in February 2020 and are included for Boston, Chicago, Los Angeles, New York City,
-                    Philadelphia, San Francisco-Oakland, and Washington D.C.</p>
-                <p class="leading-relaxed mt-4">You can learn more about how to use the Equity Dashboard with this demo
-                    video</p>
-            </div>
-            <div class="lg:w-1/2 md:w-2/3 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
-                <div id="how-to-video">
-                    <iframe src="https://player.vimeo.com/video/575112771?h=6547c44f36" width="640" height="400"
-                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                <p class="leading-relaxed mt-4">The Transportation Equity Dashboard tracks how well public transit
+                    systems in seven US regions serve their riders, and how changes to transit service schedules affect
+                    transit riders over time. The dashboard measures access to key destinations by public transit,
+                    service coverage and frequency, and service affordability for people of different demographic and
+                    socioeconomic identities. The dashboard also compares accessibility to key destinations by public
+                    transit versus by car. </p>
+                <p class="leading-relaxed mt-4">The data are calculated with scheduled transit service. They reflect the
+                    intended service delivery of transit agencies but do not account for the impact of disruptions in
+                    service delivery like canceled trips, which have been significant at some times in some regions.
+                </p>
+                <p class="leading-relaxed mt-4">These data are available to explore in maps, charts, and downloadable
+                    data sets. Data begin in February 2020 for Boston, Chicago, Los Angeles, New York City,
+                    Philadelphia, San Francisco-Oakland, and Washington D.C.
+                </p>
             </div>
             <div class="w-full mt-16">
                 <h2 class="title-font font-medium text-3xl text-gray-900 ">Who made the dashboard?</h2>
                 <p class="leading-relaxed mt-4">All versions of the of the TransitCenter Equity Dashboard were funded by
                     TransitCenter. Version 1.0 of the dashboard was completed in May 2021 by <a class="text-blue-500"
                         href="http://www.sustainablesystemsresearch.net/">Sustainable Systems
-                        Research, LLC</a>, SF2Enterprises Inc, <a class="text-blue-500"
+                        Research, LLC</a>, SF2 Enterprises Inc, <a class="text-blue-500"
                         href="https://www.uvm.edu/cems/trc">University of Vermont</a>, and <a class="text-blue-500"
                         href="https://www.klumpentown.com/">Klumpentown Consulting</a>. The project team included <a
                         class="text-blue-500" href="http://jamaps.github.io/">Jeff Allen</a>, Steven Farber, Alex
@@ -45,12 +42,10 @@
                     TransitCenter. Community partners in the seven US regions provided feedback and guidance on the
                     dashboard.
                 </p>
-                <p class="leading-relaxed mt-4">Version 2.0 was completed in May
+                <p class="leading-relaxed mt-4">Version 2.0 was completed in
                     2024 and was built by <a class="text-blue-500" href="https://www.klumpentown.com/">Klumpentown
-                        Consulting</a>.
-                    The project team included Willem Klumpenhouwer, Emily Janz, and
-                    Kai Herrero, in collaboration with Mary Buchanan at
-                    TransitCenter</p>
+                        Consulting</a>. The project team included Willem Klumpenhouwer, Emily Janz, and Kai Herrero, in
+                    collaboration with Mary Buchanan at TransitCenter.</p>
             </div>
             <div class="w-full mt-16">
                 <h2 class="title-font font-medium text-3xl text-gray-900 ">How do I cite this dashboard?</h2>
@@ -64,14 +59,891 @@
             </div>
 
             <div class="w-full mt-16">
-                <h2 class="title-font font-medium text-3xl text-gray-900 ">How do I cite this dashboard?</h2>
-                <p class='leading-relaxed mt-4'>Please reference the following paper: Klumpenhouwer, W., Allen, J., Li,
-                    L.,
-                    Liu, R., Robinson, M., Da Silva, D. L.,
-                    Farber, S.,
-                    Karner, A., Rowangould, D., Shalaby, A., Buchanan, M., & Higashide, S. (2021). <a
-                        href='https://findingspress.org/article/25224-a-comprehensive-transit-accessibility-and-equity-dashboard'>A
-                        Comprehensive Transit Accessibility and Equity Dashboard.</a><i>Findings</i>, July.
+                <h2 class="title-font font-medium text-3xl text-gray-900 ">How is the information shown on the dashboard
+                    calculated?</h2>
+                <p class='leading-relaxed mt-4'>Below we provide a brief description of the methods used to create the
+                    dashboard. A more detailed methodology is available here(PDF). Please contact
+                    dashboard at transitcenter.org for more information.</p>
+                <p class="leading-relaxed mt-4">
+                    <b>Accessibility</b> represents the ease with which people can reach the places they want and need
+                    to go. Accessibility is a function of transportation and land use (where essential destinations are
+                    located). Access to opportunities measures, which represent the ease of reaching a specific type of
+                    destination, are a commonly used measure of accessibility. The dashboard evaluates access to
+                    opportunity on public transit with several measures, including number of jobs, low-wage jobs, or
+                    amount of park space accessible in a set amount of time. The dashboard also shows access to
+                    opportunity in terms of the travel times to nearby grocery stores, hospitals, urgent care
+                    facilities, pharmacies, and colleges or universities.
+                </p>
+                <p class="leading-relaxed mt-4">Measures of public transit accessibility can capture many
+                    characteristics of transit systems that affect people's ability to reach their destinations,
+                    including the location of stops and routes, what kinds of destinations can be reached on those
+                    routes, the speed or directness of routes, the frequency of service, fares, and time spent walking
+                    to and from a transit stop or transferring between routes. We estimate transit and car accessibility
+                    by calculating transit and car travel times to the locations of destinations across each region. For
+                    some measures, we also estimate accessibility using a fare constraint to represent lower-cost
+                    transit travel.</p>
+                <p class="leading-relaxed mt-4">Transit travel times between all Census block groups in each region are
+                    estimated using the r5py tool powered by Conveyal's R5 routing engine. Underlying walking access
+                    data is provided by OpenStreet Map, and transit schedules are represented by
+                    General Transit Feed Specification (GTFS) data for transit operators in each region. These GTFS data
+                    are obtained from TransitLand (historical data) and from a repository provided by MobilityData.
+                    Transit travel times are capped at 120 minutes and include all parts of a door-to-door trip,
+                    including time walking to and from a transit stop, time spent waiting for a transit vehicle, time
+                    spent traveling in vehicle(s), and time spent transferring between transit vehicles. Areas where no
+                    destination can be reached within 120 minutes are displayed on maps in the "least access" quantile.
+                    Auto travel times are estimated using ArcGIS Network Analyst (ArcGIS Pro 2.7) and the ESRI Streetmap
+                    Premium network based on HERE data to represent typical road traffic conditions. </p>
+
+                <p class="leading-relaxed mt-4">Transit fares are estimated using a simplified heuristic. We created a
+                    fare calculator that uses OTP to generate detailed transit itineraries for the shortest trip between
+                    all Census tracts in each region. The fare calculator estimates the cost of each itinerary based on
+                    a database of manually calibrated rules representing fare information from each transit operator's
+                    website. These fare rules include the cost of transfers within and between agencies. In a small
+                    number of cases these rules are simplified. We assume that transit travelers pay for a one-way ride
+                    with an intermediate purchase choice that is less expensive than cash, such as a ticket or card
+                    where available. We assume cash fares where no intermediate choice is available. We do not include
+                    discounted fares like student or senior fares or options that require a large up-front purchase like
+                    monthly or weekly passes. The fare constraints used in each region are determined based on the cost
+                    of living and base transit fares. They are set at $4 for a one-way trip in Chicago, Los Angeles, and
+                    Philadelphia and $5 in Boston, the District of Columbia, New York City, and San Francisco-Oakland.
+                    The fastest transit time between each pair of tracts in the region and its accompanying fare is then
+                    estimated for two different transit networks: one that includes only low-cost modes (local bus plus
+                    comparable-cost modes) and the other including all modes (all available public transit options).
+                    When determining the travel time between two locations, we select the shortest of the two travel
+                    times that meets the fare constraint (if applicable). A full list of transit agencies and premium
+                    modes (which are excluded from the low-cost travel network) is included <a
+                        href="#agenciesRoutes">below</a>.</p>
+
+                <p class="leading relaxed mt-4">Some regions' fares have been updated using 2023 fare data,
+                    including Boston, San Francisco - Oakland, and Washington.</p>
+                <h3 class="title-font text-2xl mt-4 text-gray-900 ">Destination Types</h3>
+                <p class="leading-relaxed mt-4">We consider six categories of destinations, including:
+                <ul class="list-disc list-inside mt-4">
+                    <li class="mt-3">Jobs from the <a href="https://lehd.ces.census.gov/data/">US Census LEHD</a>,</li>
+                    <li class="mt-3">Supermarkets based on a database of <a
+                            href="https://github.com/jshannon75/snap_retailers">SNAP
+                            retailers,</a></li>
+                    <li class="mt-3">Healthcare facilities including <a
+                            href="https://hifld-geoplatform.opendata.arcgis.com/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0?geometry=91.417%2C-16.829%2C-122.333%2C72.120">hospitals</a>,
+                        <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/urgent-care-facilities">urgent
+                            care facilities</a>, and <a href="https://rxopen.org/">pharmacies</a>, and
+                    </li>
+                    <li class="mt-3"><a
+                            href="https://www.google.com/url?q=https://drive.google.com/file/d/1MrlN-atPw4h8NyP1HoI8V1XAYbBmybud/view?usp%3Dsharing&sa=D&source=docs&ust=1716312826135627&usg=AOvVaw3eEwzPGlPYcLqhwkddXS6t">Early
+                            voting locations</a></li>
+                </ul>
+                </p>
+                <p class="leading-relaxed mt-4">We combine travel times (fare-constrained transit, unconstrained
+                    transit, and car) and the location of these destinations to estimate how many destinations
+                    can be reached in a certain amount of time, e.g. jobs reachable within 30 minutes. These types of
+                    accessibility measures are estimated for destination types that are widely available,
+                    including jobs, low-wage jobs, and parks and greenspace.</p>
+
+                <p class="leading-relaxed mt-4">We also estimate travel times reach a certain number of
+                    opportunities, e.g. travel time in minutes to one hospital or to three hospitals. The travel time to
+                    one hospital reflects the minimum possible time to reach a hospital. The travel time to three
+                    hospitals
+                    measures travel time to the third-closest hospital, capturing people's need for options, where the
+                    closest hospital may not match someone's needs in terms of the cost or type of care provided. These
+                    types of measures are used for healthcare facilities, grocery stores and supermarkets, and higher
+                    education.
+                </p>
+
+                <h3 class="title-font text-2xl mt-4 text-gray-900 ">Additional Measures</h3>
+
+                <p class="leading-relaxed mt-4"><b>Transit service intensity</b>
+                    represents how often an area is served by transit. Using transit
+                    schedules from GTFS feeds we estimate the total number of unique
+                    transit trips that visit stops within 200 meters of a block
+                    group, and estimate the average number of unique trips per hour
+                    over a 24-hour period. </p>
+
+                <p class="leading-relaxed mt-4"><b>Equity indicators</b> shown
+                    on the charts pages summarize population-weighted access and
+                    transit service intensity for groups of people, weighting these
+                    outcomes based on where group members live across the entire
+                    region (including areas in the MSA, economic region, urban core,
+                    and equity neighborhoods). Data on race and ethnicity, income
+                    level, and parent-child status are obtained from the 2018
+                    five-year American Community Survey data from the US Census.
+                    Essential workers are defined based on residential location of
+                    workers listed in the US Census LEHD data. The residential
+                    locations of each of these populations is also available as a
+                    demographic overlay in the map pages. The Story page also
+                    evaluates outcomes for people with specific travel constraints,
+                    including people traveling with limited fares or people
+                    traveling on weeknights.</p>
+
+                <p class="leading-relaxed mt-4">For each region, accessibility and transit service intensity scores are
+                    computed for the entire urban area and also summarized for the urban centre (e.g. Chicago proper).
+                </p>
+
+                <p class="leading-relaxed mt-4">We also evaluate transit accessibility measures relative to car access
+                    to provide an indication of equity of access for different mode users.</p>
+            </div>
+
+            <div class="w-full mt-16">
+                <h2 class="title-font font-medium text-3xl text-gray-900 ">Where can I find the data and source code?
+                </h2>
+                <p class='leading-relaxed mt-4'>Access scores and summaries along with supplemental data can be found on
+                    the <a href="data">data portal.</a></p>
+                <p class="leading-relaxed mt-4">Code for computing travel times and other data analysis can be found at
+                    <a href="https://github.com/transitcenter/ted-data">https://github.com/transitcenter/ted-data</a>
+                </p>
+                <p class="leading-relaxed mt-4">Code for this website can be found at
+                    <a
+                        href="https://github.com/transitcenter/ted-data">https://github.com/transitcenter/ted-dashboard</a>
+                </p>
+            </div>
+
+            <div id="glossary" class="w-full mt-16">
+                <h2 class="title-font font-medium text-3xl text-gray-900 ">Glossary</h2>
+                <p class='leading-relaxed mt-4'>
+                <ul class="list-disc list-inside mt-4">
+                    <li class="mt-3"><b>Transportation equity</b> is equal and just transportation access to opportunity
+                        - regardless
+                        of race, gender, identity, culture, income, or ability - which can only be achieved by
+                        recognizing and repairing past transportation access gaps.</li>
+                    <li class="mt-3">We defined a <b>low-cost transit trip</b> as a one-way trip with total fares less
+                        than $5 (in
+                        New York City, Boston, Washington DC, and San Francisco) or less than $4 (in Philadelphia,
+                        Chicago, and Los Angeles). If the fastest trip to access a job is more than the budget, then the
+                        analysis automatically removes all high-fare, “premium” transit service to see if the job could
+                        be accessed in 45 minutes, for less than the budget taking inexpensive transit modes. See
+                        Transit agencies and routes used section for list of “premium” transit service definition.
+                        Chicago, Los Angeles, New York City, and Philadelphia data are based on fare policies from
+                        February 2020. Boston, San Francisco-Oakland, and Washington DC data are based on fare policies
+                        from 2019 for dates through August 2022, and 2023 for dates from March 2023 onward.</li>
+                    <li class="mt-3"><b>Single mothers</b> are female householders with children at home and no spouse
+                        or partner
+                        present, according to the 2021 five-year U.S. Census American Community Survey. Research
+                        suggests that single mothers have higher reliance on public transit for travel than other
+                        parents.
+                    </li>
+                    <li class="mt-3"><b>Job</b> locations are from the U.S. Census Longitudinal Employer-Household
+                        Dynamics (most
+                        recent year available by state). Access to jobs signifies someone's ability to reach potential
+                        economic opportunities. Also, access to jobs can be a useful proxy for access to other
+                        destinations, since many jobs represent retail and service outlets that are important in
+                        people's everyday lives.</li>
+                    <li class="mt-3">We include travel times to the <b>3rd-nearest location</b> of some destination
+                        types because
+                        people should have access to a variety of service options that offer different combinations of
+                        value, quality, and variety. </li>
+                    <li class="mt-3"><b>Supermarkets</b> include food retailers who belong to the Supplemental Nutrition
+                        Assistance
+                        Program (SNAP, also known as Food Stamps) and are defined as “supermarkets” or “superstores” by
+                        the USDA.</li>
+                    <li class="mt-3"><b>Hospitals</b> include healthcare facilities recognized as hospitals by the
+                        Department of
+                        Homeland Security. Hospital facilities for care of children, military personnel, and other
+                        specialty groups are included, but the data doesn’t include nursing homes or health centers.
+                    </li>
+                    <li class="mt-3"><b>Urgent care facilities</b> provide walk-in emergency medical care, surgery, or
+                        recuperative
+                        care outside of a hospital or emergency room setting.</li>
+                    <li class="mt-3"><b>Parks</b> include municipal, state, and national parks and other green space
+                        like cemeteries
+                        and school yards, etc. </li>
+                    <li class="mt-3"><b>Pharmacies</b> include pharmacy businesses and facilities in the RxOpen network.
+                    </li>
+                    <li class="mt-3"><b>Colleges or universities</b> include campuses of educational institutions that
+                        offer classes
+                        and degree programs, from the associate to the doctoral level.</li>
+                    <li class="mt-3"><b>Early voting locations</b> are designated by state and local governments as
+                        locations where
+                        voters can cast their ballots in person before Election Day. Early voting availability varies by
+                        state. Location data was collected by TransitCenter from state and local sources in Fall 2023.
+                    </li>
+                    <li class="mt-3"><b>Transit service intensity</b> is the number of transit trips scheduled to serve
+                        a location
+                        per hour, on average. It is a function of how many routes serve a location (service density) and
+                        how often those routes run (service frequency).</li>
+                    <li class="mt-3">The <b>urban area region</b> is defined by the U.S. Census Bureau as a continuously
+                        built-up
+                        area with a population of 50,000 or more that comprises one or more central place(s) and the
+                        adjacent densely settled surrounding area. </li>
+                </ul>
+                </p>
+            </div>
+
+            <div class="w-full mt-16">
+                <h2 class="title-font font-medium text-3xl text-gray-900 ">Data Dictionary</h2>
+                <p class='leading-relaxed mt-4'></p>
+                <table class="table-auto w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-gray-700 bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="p-3" rowspan="2">Opportunity</th>
+                            <th class="p-3" rowspan="2">Measure Type</th>
+                            <th class="p-3" rowspan="2">Unit</th>
+                            <th class="p-3" rowspan="2">Code</th>
+                            <th class="p-3" colspan="2">Parameter 1</th>
+                            <th class="p-3" colspan="2">Parameter 2</th>
+                            <th class="p-3" colspan="2">Parameter 3</th>
+                            <th class="p-3" colspan="2">Auto Ratio</th>
+                            <th class="p-3" colspan="2">Fare Capped</th>
+                        </tr>
+                        <tr>
+                            <td class="p-3"><i>Description</i></td>
+                            <td class="p-3"><i>Code</i></td>
+                            <td class="p-3"><i>Description</i></td>
+                            <td class="p-3"><i>Code</i></td>
+                            <td class="p-3"><i>Description</i></td>
+                            <td class="p-3"><i>Code</i></td>
+                            <td class="p-3"><i>Yes</i></td>
+                            <td class="p-3"><i>No</i></td>
+                            <td class="p-3"><i>Yes</i></td>
+                            <td class="p-3"><i>No</i></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="p-3">Jobs</td>
+                            <td class="p-3">Cumulative</td>
+                            <td class="p-3">Jobs</td>
+                            <td class="p-3"><code>C000_P</code></td>
+                            <td class="p-3">30 min</td>
+                            <td class="p-3"><code>c30</code></td>
+                            <td class="p-3">45 minutes</td>
+                            <td class="p-3"><code>c45</code></td>
+                            <td class="p-3">60 minutes</td>
+                            <td class="p-3"><code>c60</code></td>
+                            <td class="p-3"><code>autoY</code></td>
+                            <td class="p-3"><code>autoN</code></td>
+                            <td class="p-3"><code>fareY</code></td>
+                            <td class="p-3"><code>fareN</code></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Low-Income Jobs</td>
+                            <td class="p-3">Cumulative</td>
+                            <td class="p-3">Jobs</td>
+                            <td class="p-3"><code>CE01_P</code></td>
+                            <td class="p-3">30 min</td>
+                            <td class="p-3"><code>c30</code></td>
+                            <td class="p-3">45 minutes</td>
+                            <td class="p-3"><code>c45</code></td>
+                            <td class="p-3">60 minutes</td>
+                            <td class="p-3"><code>c60</code></td>
+                            <td class="p-3"><code>autoY</code></td>
+                            <td class="p-3"><code>autoN</code></td>
+                            <td class="p-3"><code>fareY</code></td>
+                            <td class="p-3"><code>fareN</code></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Groceries</td>
+                            <td class="p-3">Travel Time</td>
+                            <td class="p-3">Minutes</td>
+                            <td class="p-3"><code>snap_M</code></td>
+                            <td class="p-3">Closest</td>
+                            <td class="p-3"><code>t1</code></td>
+                            <td class="p-3">3rd Closest</td>
+                            <td class="p-3"><code>t3</code></td>
+                            <td class="p-3">-</td>
+                            <td class="p-3"></td>
+                            <td class="p-3"><code>autoY</code></td>
+                            <td class="p-3"><code>autoN</code></td>
+                            <td class="p-3">-</td>
+                            <td class="p-3"><code>fareN</code></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Hospitals</td>
+                            <td class="p-3">Travel Time</td>
+                            <td class="p-3">Minutes</td>
+                            <td class="p-3"><code>hospitals_M</code></td>
+                            <td class="p-3">Closest</td>
+                            <td class="p-3"><code>t1</code></td>
+                            <td class="p-3">3rd Closest</td>
+                            <td class="p-3"><code>t3</code></td>
+                            <td class="p-3">-</td>
+                            <td class="p-3"></td>
+                            <td class="p-3"><code>autoY</code></td>
+                            <td class="p-3"><code>autoN</code></td>
+                            <td class="p-3">-</td>
+                            <td class="p-3"><code>fareN</code></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Urgent Care</td>
+                            <td class="p-3">Travel Time</td>
+                            <td class="p-3">Minutes</td>
+                            <td class="p-3"><code>urgentcare_M</code></td>
+                            <td class="p-3">Closest</td>
+                            <td class="p-3"><code>t1</code></td>
+                            <td class="p-3">3rd Closest</td>
+                            <td class="p-3"><code>t3</code></td>
+                            <td class="p-3">-</td>
+                            <td class="p-3"></td>
+                            <td class="p-3"><code>autoY</code></td>
+                            <td class="p-3"><code>autoN</code></td>
+                            <td class="p-3">-</td>
+                            <td class="p-3"><code>fareN</code></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Pharmacies</td>
+                            <td class="p-3">Travel Time</td>
+                            <td class="p-3">Minutes</td>
+                            <td class="p-3"><code>pharmacies_M</code></td>
+                            <td class="p-3">Closest</td>
+                            <td class="p-3"><code>t1</code></td>
+                            <td class="p-3">3rd Closest</td>
+                            <td class="p-3"><code>t3</code></td>
+                            <td class="p-3">-</td>
+                            <td class="p-3"></td>
+                            <td class="p-3"><code>autoY</code></td>
+                            <td class="p-3"><code>autoN</code></td>
+                            <td class="p-3">-</td>
+                            <td class="p-3"><code>fareN</code></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Parks</td>
+                            <td class="p-3">Cumulative</td>
+                            <td class="p-3">Acres</td>
+                            <td class="p-3"><code>parks_P</code></td>
+                            <td class="p-3">15 minutes</td>
+                            <td class="p-3"><code>c15</code></td>
+                            <td class="p-3">30 minutes</td>
+                            <td class="p-3"><code>c30</code></td>
+                            <td class="p-3">-</td>
+                            <td class="p-3"></td>
+                            <td class="p-3"><code>autoY</code></td>
+                            <td class="p-3"><code>autoN</code></td>
+                            <td class="p-3"><code>fareY</code></td>
+                            <td class="p-3"><code>fareN</code></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Post-Secondary Institutions</td>
+                            <td class="p-3">Travel Time</td>
+                            <td class="p-3">Minutes</td>
+                            <td class="p-3"><code>schools_M</code></td>
+                            <td class="p-3">Closest</td>
+                            <td class="p-3"><code>t1</code></td>
+                            <td class="p-3">3rd Closest</td>
+                            <td class="p-3"><code>t3</code></td>
+                            <td class="p-3">-</td>
+                            <td class="p-3"></td>
+                            <td class="p-3"><code>autoY</code></td>
+                            <td class="p-3"><code>autoN</code></td>
+                            <td class="p-3">-</td>
+                            <td class="p-3"><code>fareN</code></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Transit Service Intensity</td>
+                            <td class="p-3">Average Hourly Trips</td>
+                            <td class="p-3">Trips</td>
+                            <td class="p-3">los_trips</td>
+                            <td colspan="10">Options are WEDAM, WEDPM, and SATAM for weekday morning, nights, and
+                                Saturday morning respectively.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="agenciesRoutes" class="w-full mt-16">
+                <h2 class="title-font font-medium text-3xl text-gray-900 ">Transit Agencies and Routes Used</h2>
+                <p class="leading-relaxed mt-4 italic">Note: Premium routes listed here are based on 2020 route naming
+                    conventions. 2023 fare values were updated using similar route names or modes.</p>
+                <h3 class="title-font text-2xl mt-4 text-gray-900 ">Boston</h3>
+                <table class="mt-4 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-gray-700 bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="px-3 py-2">Agency</th>
+                            <th class="px-3 py-2">Premium Routes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-3 py-2">Brockton Area Transit Authority (BAT)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Greater Attleboro Taunton Regional Transit Authority (GATRA)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Lowell Regional Transit Authority (LRTA)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Massachusetts Bay Transportation Authority (MBTA)</td>
+                            <td class="px-3 py-2">Bus Routes: 170, 325, 326, 351, 352, 354, 426, 428, 434, 450, 501,
+                                502, 503,
+                                504, 505, 553, 554, 556, 558, 741, 742, 743</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Massport</td>
+                            <td class="px-3 py-2">Bus Routes: 11704. 11705, 11706, 11707</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Merrimack Valley Regional Transit Authority (MRVTA)</td>
+                            <td class="px-3 py-2">Bus Routes: 10735, 10736, 70738</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">MetroWest Regional Transit Authority (MWRTA)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Montachusett Regional Transit Authority (MART)</td>
+                            <td class="px-3 py-2">Bus Routes: 3510, 4729</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Plymouth and Brockton Street Railway Co.
+                            </td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Southeastern Regional Transit Authority (SRTA)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Worcester Regional Transit Authority (WRTA)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Rhode Island Public Transit Authority</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Yankee Line</td>
+                            <td class="px-3 py-2">Bus Routes: All</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="title-font text-2xl mt-4 text-gray-900 ">Chicago</h3>
+                <table class="mt-4 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-gray-700 bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="px-3 py-2">Agency</th>
+                            <th class="px-3 py-2">Premium Routes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-3 py-2">Chicago Transit Authority (CTA)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Metra</td>
+                            <td class="px-3 py-2">All Rail</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Pace Bus</td>
+                            <td class="px-3 py-2">Bus Routes: 755-317, 850-317, 851-317, 855-317</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">South Shore Line</td>
+                            <td class="px-3 py-2">All Rail</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Valparaiso Transit</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="title-font text-2xl mt-4 text-gray-900 ">Los Angeles</h3>
+                <table class="mt-4 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-gray-700 bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="px-3 py-2">Agency</th>
+                            <th class="px-3 py-2">Premium Routes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-3 py-2">Anaheim Resort Transportation (ART)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Beach Cities Transit</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Bell Gardens Trolley</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Bellflower Bus</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Big Blue Bus</td>
+                            <td class="px-3 py-2">Bus Routes: 3265</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Commerce Municipal Bus Lines</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Compton Renaissance</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Culver City Bus</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">DowneyLINK</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">El Monte Transit</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Foothill Transit</td>
+                            <td class="px-3 py-2">Bus Routes: 490-155, 493-155, 495-155, 498-155, 499-155, 699-155,
+                                707-155</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Get Around Town Express</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Glendale Beeline</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Glendora Transportation Division</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">GTrans</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Huntington Park Express</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">LA Metro Rail</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Lawndale Beat</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Long Beach Transit (LBT)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Los Angeles County Metropolitan Transportation Authority</td>
+                            <td class="px-3 py-2">Bus Routes: 442-13135, 460-13135, 487-13135, 489-13135, 501-13135,
+                                550-13135, 577-13135, 910-13135</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Los Angeles Department of Transportation (LADOT, DASH, Commuter
+                                Express)</td>
+                            <td class="px-3 py-2">Bus Routes: 626, 627, 628, 629, 630, 631, 633, 634, 635, 636, 637,
+                                638, 640</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Lynwood Trolley/Breeze</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Metrolink</td>
+                            <td class="px-3 py-2">All Rail</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Norwalk Transit System (NTS)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">OmniTrans</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Orange County Transportation Authority (OCTA)</td>
+                            <td class="px-3 py-2">Bus Routes: 206, 211, 213, 701, 721, 794, 53x, 57x, 64x</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Palos Verdes Peninsula Transit Authority (PVPTA)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Pasadena Transit</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Rosmead Explorer</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Spirit Bus</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Torrance Transit</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="title-font text-2xl mt-4 text-gray-900 ">New York City</h3>
+                <table class="mt-4 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-gray-700 bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="px-3 py-2">Agency</th>
+                            <th class="px-3 py-2">Premium Routes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-3 py-2">City of Long Beach Transportation</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Downtown Alliance</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Leprechaun Lines</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Lower Hudson Valley Transit</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">MTA New York City Transit</td>
+                            <td class="px-3 py-2">Bus Routes: BM1, BM2, BM3, BM4, BM5, BXM1, BXM10, BXM11, BXM18, BXM2,
+                                BXM3, BXM4, BXM6, BXM7, BXM8, BXM9, QM1, QM10, QM11, QM12, QM15, QM16, QM17, QM18, QM2,
+                                QM20, QM21, QM24, QM25, QM3, QM31, QM32, QM34, QM35, QM36, QM4, QM40, QM42, QM44, QM5,
+                                QM6, QM7, QM8, SIM1, SIM10, SIM11, SIM15, SIM1C, SIM2, SIM22, SIM23, SIM24, SIM25,
+                                SIM26, SIM3, SIM30, SIM31, SIM32, SIM33, SIM33C, SIM34, SIM35, SIM3C, SIM4, SIM4C,
+                                SIM4X, SIM5, SIM6, SIM7, SIM8, SIM8X, SIM9, X27, X28, X37, X38, X63, X64, X68
+                                <br>
+                                Long Island Railroad: All Rail
+                                <br>
+                                Metro North Railroad/Shore Line East/Hudson Rai Link: All Rail
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Nassau Inter-County Express (NICE Bus)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">New Jersey Transit</td>
+                            <td class="px-3 py-2">All Rail; Bus Routes: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15, 16</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">NYC Ferry</td>
+                            <td class="px-3 py-2">All Ferries</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Port Authority JFK Airtrain</td>
+                            <td class="px-3 py-2">All Rail</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Port Authority Trans-Hudson (PATH)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Roosevelt Island Operating Corporation Tramway (RIOC Tramway)</td>
+                            <td class="px-3 py-2">Bus Routes: 490-155, 493-155, 495-155, 498-155, 499-155, 699-155,
+                                707-155</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Westchester County Bee-Line System (WCDOT)</td>
+                            <td class="px-3 py-2">Bus Routes: 18013</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="title-font text-2xl mt-4 text-gray-900 ">Philadelphia</h3>
+                <table class="mt-4 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-gray-700 bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="px-3 py-2">Agency</th>
+                            <th class="px-3 py-2">Premium Routes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-3 py-2">Southeastern Pennsylvania Transportation Authority (SEPTA)</td>
+                            <td class="px-3 py-2">All Rail</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">PATCO Speedline</td>
+                            <td class="px-3 py-2">All Rail</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">New Jersey Transit</td>
+                            <td class="px-3 py-2">All Rail</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Delaware Transit Corporation (DART First State)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="title-font text-2xl mt-4 text-gray-900 ">San Francisco-Oakland</h3>
+                <table class="mt-4 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-gray-700 bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="px-3 py-2">Agency</th>
+                            <th class="px-3 py-2">Premium Routes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-3 py-2">Alameda-Contra Costa Transit District (AC Transit)</td>
+                            <td class="px-3 py-2">Bus Routes: F, G, J, L, LA, NL, NX, NX1, NX2, O</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Altamont Corridor Express</td>
+                            <td class="px-3 py-2">All Rail</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Bay Area Rapid Transit (BART)</td>
+                            <td class="px-3 py-2">All Rail</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Blue & Gold Fleet</td>
+                            <td class="px-3 py-2">All Ferries</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Caltrain</td>
+                            <td class="px-3 py-2">All Rail</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Emery Go-Round</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Marin Transit</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Mission Bay Transportation Management Association (TMA)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Mountain View Transportation Management Association (MVgo)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">San Francisco Bay Ferry</td>
+                            <td class="px-3 py-2">All Ferries</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">San Francisco Municpal Transportation Agency (SFMTA, Muni)</td>
+                            <td class="px-3 py-2">Cable Tram Routes: California Street Cable Car, Powell-Hyde Cable Car,
+                                Powell-Mason Cable Car</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">San Mateo County Shuttles</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">San Mateo County Transit District (samTrans)</td>
+                            <td class="px-3 py-2">Bus Routes: FCX-184</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Santa Clara Valley Transportation Authority (VTA)</td>
+                            <td class="px-3 py-2">Tram Routes: All; Bus Routes: 101, 102, 103, 104, 121, 168</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Sonoma-Marin Area Rail Transit (SMART)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Stanford Margeurite Shuttle (SMS)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Union City Transit</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">WestCAT</td>
+                            <td class="px-3 py-2">Bus Routes: 2676</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="title-font text-2xl mt-4 text-gray-900 ">Washington D.C.</h3>
+                <table class="mt-4 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-gray-700 bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="px-3 py-2">Agency</th>
+                            <th class="px-3 py-2">Premium Routes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-3 py-2">Alexandria Transit Company (DASH)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Arlington Transit</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">DC Circulator</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">DC Streetcar</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Fairfax Connector</td>
+                            <td class="px-3 py-2">Bus Routes: 393, 394, 395, 396, 599, 698, 699</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Fairfax CUE Bus</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Fredericksburg Regional Transit</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Loudoun County Transit</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Maryland Transit Administration</td>
+                            <td class="px-3 py-2">Rail: All MARC Routes</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Montgomery County Department of Transportation (Ride On)</td>
+                            <td class="px-3 py-2">Bus Routes: 6461</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Potomac and Rappahannock Transportation Commision (PRTC) Omniride</td>
+                            <td class="px-3 py-2">Bus Routes: 3335, 3336, 3337, 3338, 3339, 3340, 3341, 3346, 3348,
+                                3349, 3350, 3351, 3354, 3355, 3356, 3357, 3358, 3360, 3361, 3365</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Prince George's County (The Bus)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Regional Transportation Agency of Central Maryland (RTA)</td>
+                            <td class="px-3 py-2">None</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Virginia Railway Express (VRE)</td>
+                            <td class="px-3 py-2">All Rail</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">Washington Metropolitan Area Transit Authority (WMATA)</td>
+                            <td class="px-3 py-2">Bus Routes: 11Y, 17B, 17G, 17H, 17K, 17L, 17M, 18G, 18H, 18P, 29W, 5A,
+                                B30</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="w-full mt-16">
+                <h2 class="title-font font-medium text-3xl text-gray-900 ">Photo Credits</h2>
+                <p class='leading-relaxed mt-4'></p>
             </div>
         </div>
     </section>
