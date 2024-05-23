@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from map.models import AcademicReference, MediaReference, IndustryReference, DataStory
 
 
 def about(request):
@@ -22,4 +23,15 @@ def map(request):
 
 
 def references(request):
-    return render(request, "map/references.html")
+    academic_references = AcademicReference.objects.all().order_by("-year")
+    industry_references = IndustryReference.objects.all().order_by("-date")
+    media_references = MediaReference.objects.all().order_by("-date")
+    data_stories = DataStory.objects.all().order_by("-date")
+
+    context = {
+        "academic_references": academic_references,
+        "data_stories": data_stories,
+        "media_references": media_references,
+        "industry_references": industry_references,
+    }
+    return render(request, "map/references.html", context)

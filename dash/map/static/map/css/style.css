@@ -727,6 +727,10 @@ a {
   margin-top: 0.5rem;
 }
 
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
 .block {
   display: block;
 }
@@ -872,6 +876,10 @@ a {
   place-items: center;
 }
 
+.items-start {
+  align-items: flex-start;
+}
+
 .items-center {
   align-items: center;
 }
@@ -882,6 +890,10 @@ a {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-items-start {
+  justify-items: start;
 }
 
 .gap-2 {
@@ -1047,6 +1059,10 @@ a {
   padding: 0.75rem;
 }
 
+.p-5 {
+  padding: 1.25rem;
+}
+
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -1107,6 +1123,11 @@ a {
   padding-right: 0.75rem;
 }
 
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .pb-10 {
   padding-bottom: 2.5rem;
 }
@@ -1125,6 +1146,18 @@ a {
 
 .pt-6 {
   padding-top: 1.5rem;
+}
+
+.pl-5 {
+  padding-left: 1.25rem;
+}
+
+.pl-10 {
+  padding-left: 2.5rem;
+}
+
+.pb-5 {
+  padding-bottom: 1.25rem;
 }
 
 .text-left {
@@ -1163,6 +1196,11 @@ a {
 .text-sm {
   font-size: 14px;
   line-height: 22px;
+}
+
+.text-xl {
+  font-size: 24px;
+  line-height: 32px;
 }
 
 .font-bold {
@@ -1555,6 +1593,10 @@ a {
     width: 50%;
   }
 
+  .md\:w-1 {
+    width: 0.25rem;
+  }
+
   .md\:border-b-0 {
     border-bottom-width: 0px;
   }
@@ -1580,6 +1622,11 @@ a {
     font-size: 36px;
     line-height: 40px;
   }
+
+  .md\:text-2xl {
+    font-size: 26px;
+    line-height: 34px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -1589,6 +1636,14 @@ a {
 
   .lg\:w-3\/5 {
     width: 60%;
+  }
+
+  .lg\:w-4\/5 {
+    width: 80%;
+  }
+
+  .lg\:w-3\/4 {
+    width: 75%;
   }
 
   .lg\:translate-x-0 {
