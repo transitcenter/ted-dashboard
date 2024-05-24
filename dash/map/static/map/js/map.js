@@ -53,7 +53,6 @@ let legendSvg = d3.select("#legend")
     .attr("transform", "translate(" + legendMargin.left + "," + legendMargin.top + ")");
 
 map.on('load', () => {
-
     map.addSource('places', {
         // This GeoJSON contains features that include an "icon"
         // property. The value of the "icon" property corresponds
@@ -174,29 +173,26 @@ map.on('load', () => {
         }
     });
 
-    function setRegionalContext(region) {
-        var contextText = document.getElementById("context")
-        var optionsDiv = document.getElementById("options")
-        if (region == "start") {
-            contextText.innerHTML = "Choose a city marker or zoom into a city to see data."
-        }
-        else {
-            contextText.innerHTML = "Now viewing data for " + regionDetails[region]["name"] + "."
-        }
-        // currentTextElement.style.display = "none";
-        // currentTextElement = document.getElementById(region + "-text");
-        //TODO: Fix this
-        // currentTextElement.style.display = "inline-block";
 
-        // var options = document.getElementById("options")
-        // if (region != "start") {
-        //     options.style.visibility = "visible";
-        // }
-        // else {
-        //     options.style.visibility = "hidden";
-        // }
-    }
 });
 
+function flyToClicked(button) {
+    var regionID = button.id
+    var thisRegionFeature = regions["features"].filter((feature) => feature.properties.tag == regionID)[0]
 
+    var coords = thisRegionFeature.geometry.coordinates
+    coords[0] = coords[0] - 0.10
+    map.flyTo({center: coords, zoom: minStartContextZoom})
+    setRegionalContext(thisRegionFeature.properties.tag)
+}
 
+function setRegionalContext(region) {
+    var contextText = document.getElementById("context")
+    var optionsDiv = document.getElementById("options")
+    if (region == "start") {
+        contextText.innerHTML = "Choose a city marker or zoom into a city to see data."
+    }
+    else {
+        contextText.innerHTML = "Now viewing data for " + regionDetails[region]["name"] + "."
+    }
+}

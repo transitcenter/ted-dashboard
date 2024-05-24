@@ -357,7 +357,7 @@ function styleNumbers(val) {
         val = val / 1000
         return val.toFixed(0).toString() + "k";
     }
-    else if (Math.abs(val) > 10) {
+    else if (Math.abs(val) >= 10) {
         return val.toFixed(0)
     }
     else if (val == 0.0) {

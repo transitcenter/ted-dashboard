@@ -53,7 +53,6 @@ let controlState = {
 var legendMargin = {top: 5, right: 10, bottom: 10, left: 10}
 
 function autoCompareChanged(autoCompareCheckbox) {
-    console.log("New value:", autoCompareCheckbox.checked)
     controlState["auto"] = autoCompareCheckbox.checked
     restyleLayers()
 }
@@ -72,7 +71,6 @@ function dateChanged(selectedDate) {
 }
 
 function opportunityChanged(selectedOpportunity) {
-    console.log("Opportunity Seleciton Changed: ", selectedOpportunity.value)
     controlState["opportunity"] = selectedOpportunity.value
     // Repopulate the options
     tripOptionSelect = document.getElementById("tripOptions")
@@ -119,13 +117,11 @@ function opportunityChanged(selectedOpportunity) {
 }
 
 function periodChanged(selectedPeriod) {
-    console.log("Time Period Selection Changed: ", selectedPeriod.value)
     changeDataSource(controlState["date"], selectedPeriod.value)
 }
 
 function restyleLegend(styles) {
     clearLegend();
-    console.log(styles)
     var legendBuffer = 10
     var boxWidth = (legendBoxWidth - (2 * legendBuffer) - (5 * (styles.colors.length - 1))) / styles.colors.length
 
@@ -159,7 +155,6 @@ function restyleLegend(styles) {
 }
 
 function showTransitLinesChanged(checkedOption) {
-    console.log("Show transit lines changed: ", checkedOption.checked)
     controlState["showTransitLines"] = checkedOption.checked
     if (checkedOption.checked == true) {
         // Hide all
@@ -180,7 +175,6 @@ function showTransitLinesChanged(checkedOption) {
 }
 
 function tripOptionChanged(selectedOption) {
-    console.log("Parameter Option Changed: ", selectedOption.value)
     controlState["option"] = selectedOption.value
     restyleLayers()
 }
@@ -194,12 +188,11 @@ function tripOptionChanged(selectedOption) {
 function changeDataSource(sourceDate, sourceTOD) {
     // Drop the existing data sources for each one
     regionKeys.forEach(function (region, idx) {
-        console.log(region)
+
         if (controlState["initalContextSet"] == true) {
             map.removeLayer(region + "Layer")
             map.removeSource(region + "Source")
         }
-        console.log('mapbox://wklumpen.' + region + "-" + sourceDate + "-" + sourceTOD + "-tiles")
         map.addSource(region + 'Source', {
             type: 'vector',
             url: 'mapbox://wklumpen.' + region + "-" + sourceDate + "-" + sourceTOD + "-tiles"
@@ -228,7 +221,6 @@ function changeDataSource(sourceDate, sourceTOD) {
 }
 
 function restyleLayers() {
-    console.log(controlState)
     regionKeys.forEach(function (region, idx) {
         // Let's start with a simple style guide
         var columnName = null;
