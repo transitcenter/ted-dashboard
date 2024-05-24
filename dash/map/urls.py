@@ -9,4 +9,5 @@ urlpatterns = [
     path("changelog", views.changelog, name="changelog"),
     path("about", views.about, name="about"),
     path("references", views.references, name="references"),
+    path("data", views.data, name="data"),
 ]

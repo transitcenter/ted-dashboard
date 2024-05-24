@@ -1,0 +1,191 @@
+{% extends 'map/base.html' %}
+{% block title %} How it Works {% endblock %}
+{% load static %}
+{% block content %}
+<main class="py-5">
+    <div class="container flex flex-wrap px-5 py-5 mx-auto items-center">
+        <div class="md:w-9/12 md:pr-12 md:py-8 md:border-b-0 mb-10 md:mb-0 pb-10 border-b border-gray-200">
+            <h1 class="text-2xl md:text-4xl font-medium title-font mb-2 text-gray-900">Data Downloads
+            </h1>
+            <p class="leading-relaxed text-base">All of the scores computed in this dashboard are open source, and you
+                are free to download them and use them as you would like. Note that the data provided here is done so
+                <i>as is</i>.
+            </p>
+            <p class="leading-relaxed text-base mt-2">There are three types of
+                data sets you can download for each region: Scores, summaries, and
+                supplemental data. Scores data contains the specific score values
+                for each block group in the entire urban area. Summary data contains
+                population-weighted averages for both the urban area and the city
+                core definitions themselves. Supplemental data consists of
+                geospatial data, transit lines, and other data that might be useful
+                when examining the results.
+            </p>
+            <p class="leading-relaxed text-base mt-2">To retrieve the appropriate data, please select both a region and
+                a date.
+            </p>
+        </div>
+        <div class="mt-3 grid grid-cols-2 gap-x-6 gap-y-8">
+            <div class="sm:col-span-4">
+                <label for="region" class="block text-sm font-medium leading-6 text-gray-900">Region</label>
+                <div class="mt-2">
+                    <div
+                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                        <select id="region"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onchange="regionChanged(this)">
+                            <option value="BOS" selected>Boston</option>
+                            <option value="CHI">Chicago</option>
+                            <option value="LA">Los Angeles</option>
+                            <option value="NYC">New York City</option>
+                            <option value="PHL">Philadelphia</option>
+                            <option value="SFO">San Francisco Bay Area</option>
+                            <option value="WAS">Washington, D.C.</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="sm:col-span-4">
+                <label for="date" class="block text-sm font-medium leading-6 text-gray-900">Date</label>
+                <div class="mt-2">
+                    <div
+                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                        <select id="date"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onchange="dateChanged(this)">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full md:pr-12 md:border-b-0 border-b border-gray-200">
+            <h2 id="regionTitle" class="text-3xl md:text-3xl font-medium title-font">Data Downloads for Boston</h2>
+        </div>
+        <div class="container flex flex-wrap px-5 py-5 mx-auto items-center">
+            <div class="w-full grid grid-cols-2 gap-x-6 pb-10 mt-10 border-b-2 border-gray-200">
+                <div class="pt-3 md:border-b-0 border-b border-gray-200">
+                    <h3 id="scoresTitle" class="text-xl font-medium title-font">Block Group Level Scores</h3>
+                    <p id="weekLabel" class="font-bold mt-1 text-gray-500">for the week of March 4, 2024</p>
+                    <p class="leading-relaxed mt-3">Block group scores for each block group defined in the study area
+                        are downloadable for three different time periods. The <a href="#dataDictionary">data
+                            dictionary</a> has information on the meaning of each column.</p>
+                </div>
+                <div class="md:w-1/2">
+                    <ul role="list" class="divide-y divide-gray-100">
+                        <li class="flex justify-between gap-x-6 py-5">
+                            <div class="flex min-w-0 gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">Wednesday Morning</p>
+                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">7am to 9am</p>
+                                </div>
+                            </div>
+                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                <a id="scoreLinkWEDAM" href="#"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Download</a>
+                            </div>
+                        </li>
+                        <li class="flex justify-between gap-x-6 py-5">
+                            <div class="flex min-w-0 gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">Wednesday Evening</p>
+                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">9pm to 11pm</p>
+                                </div>
+                            </div>
+                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                <a id="scoreLinkWEDPM" href="#"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Download</a>
+                            </div>
+                        </li>
+                        <li class="flex justify-between gap-x-6 py-5">
+                            <div class="flex min-w-0 gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">Saturday Morning</p>
+                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">10am to 12pm</p>
+                                </div>
+                            </div>
+                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                    <a id="scoreLinkSATAM" href="#"
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Download</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="w-full grid grid-cols-2 gap-x-6 pb-10 mt-20 border-b-2 border-gray-200">
+                <div class="pt-3 md:border-b-0 border-b border-gray-200">
+                    <h3 id="scoresTitle" class="text-xl font-medium title-font">Summary Scores</h3>
+                    <p id="weekLabel" class="font-bold mt-1 text-gray-500">for all dates, demographics, and regional
+                        definitions
+                    </p>
+                    <p class="leading-relaxed mt-3">Summary scores are
+                        population weighted averages across different population
+                        groups and different geographies. The <a href="#dataDictionary">data dictionary</a> has
+                        information on the meaning of each demographic code and urban area name.</p>
+                </div>
+                <div class="md:w-1/2">
+                    <ul role="list" class="divide-y divide-gray-100">
+                        <li class="flex justify-between gap-x-6 py-5">
+                            <div class="flex min-w-0 gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">Wednesday Morning</p>
+                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">7am to 9am</p>
+                                </div>
+                            </div>
+                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                <a id="summaryLinkWEDAM" href="#"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Download</a>
+                            </div>
+                        </li>
+                        <li class="flex justify-between gap-x-6 py-5">
+                            <div class="flex min-w-0 gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">Wednesday Evening</p>
+                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">9pm to 11pm</p>
+                                </div>
+                            </div>
+                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                <a id="summaryLinkWEDPM" href="#"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Download</a>
+                            </div>
+                        </li>
+                        <li class="flex justify-between gap-x-6 py-5">
+                            <div class="flex min-w-0 gap-x-4">
+                                <div class="min-w-0 flex-auto">
+                                    <p class="text-sm font-semibold leading-6 text-gray-900">Saturday Morning</p>
+                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">10am to 12pm</p>
+                                </div>
+                            </div>
+                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                    <a id="summaryLinkSATAM" href="#"
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Download</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="w-full grid grid-cols-2 gap-x-6 pb-10 mt-10 border-b-2 border-gray-200">
+                <div class="pt-3 md:border-b-0 border-b border-gray-200">
+                    <h3 id="scoresTitle" class="text-xl font-medium title-font">Other Data</h3>
+                    <p class="leading-relaxed mt-3">You can download the dots, geographic definitions, and other data
+                        here.</p>
+                    <div class="mt-7">
+                        <a id="summaryLink" href="#"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">[Links
+                            to be added soon]</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+
+                </div>
+            </div>
+        </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'map/js/styles.js' %}"></script>
+<script src="{% static 'map/js/data.js' %}"></script>
+{% endblock %}

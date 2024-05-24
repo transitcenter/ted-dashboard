@@ -22,6 +22,10 @@ def map(request):
     return render(request, "map/map.html")
 
 
+def data(request):
+    return render(request, "map/data.html")
+
+
 def references(request):
     academic_references = AcademicReference.objects.all().order_by("-year")
     industry_references = IndustryReference.objects.all().order_by("-date")
