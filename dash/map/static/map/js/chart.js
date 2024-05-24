@@ -19,9 +19,15 @@ var searchParams = new URLSearchParams(window.location.search)
 if (searchParams.has("region") & regions.includes(searchParams.get("region"))) {
     document.getElementById("region").value = searchParams.get("region");
 }
+
+if (searchParams.has("area")) {
+    document.getElementById("area").value = searchParams.get("area");
+}
+
 if (searchParams.has("period") & periods.includes(searchParams.get("period"))) {
     document.getElementById("period").value = searchParams.get("period");
 }
+
 if (searchParams.has("opportunity") & Object.keys(opportunityDetails).includes(searchParams.get("opportunity"))) {
     var opp = searchParams.get("opportunity")
     document.getElementById("opportunity").value = opp;
@@ -83,6 +89,7 @@ function updateChart() {
     console.log("Update Chart")
 
     var region = document.getElementById("region").value;
+    var area = document.getElementById("area").value;
     var period = document.getElementById("period").value;
     var opportunity = document.getElementById("opportunity").value;
     var tripOption = document.getElementById("tripOptions").value;
@@ -92,6 +99,7 @@ function updateChart() {
     if ('URLSearchParams' in window) {
         var searchParams = new URLSearchParams(window.location.search)
         searchParams.set("region", region);
+        searchParams.set("area", area);
         searchParams.set("period", period);
         searchParams.set("opportunity", opportunity);
         searchParams.set("tripOption", tripOption);
@@ -100,7 +108,7 @@ function updateChart() {
         var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
         history.pushState(null, '', newRelativePathQuery);
     }
-    // Let's load the proper CSV based on settings (just one right now)
+    // Let's load the proper CSV based on settings
     d3.csv("/static/map/data/summary/summary_" + region + "_" + period + ".csv")
         .then(function (data) {
             //TODO: dynamic keys
@@ -127,7 +135,8 @@ function updateChart() {
             var scores = []
             data.forEach(function (item, index) {
                 // TODO: Update to clean this up
-                if (demoList.includes(item.demographic)) {
+                console.log(item)
+                if (demoList.includes(item.demographic) & item.area == area) {
                     var obj = {};
                     obj["demographic"] = item.demographic;
                     if (autoRatioCheck == true) {
