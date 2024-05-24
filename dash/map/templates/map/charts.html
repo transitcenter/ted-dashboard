@@ -24,11 +24,11 @@
     <div class="flex h-screen overflow-hidden">
         <aside
             class="absolute left-0 top-0 z-50 flex h-full w-72 flex-col overflow-y-hidden bg-blue-50 duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 -translate-x-full">
-            <div class="flex flex-col items-center justify-between gap-2 px-6 py-5 lg:py-6">
+            <div class="flex flex-col items-center justify-between gap-2 px-5 mb-1 py-3 border-b-2 border-gray-200">
                 <h2 class="text-2xl font-bold text-gray-600">Chart Builder</h2>
                 <p class="text-center text-sm">Choose what data you would like to plot and select 'update'</p>
             </div>
-            <div class="flex flex-col justify-center gap-2 overflow-y-auto duration-300 ease-linear px-5">
+            <div class="flex flex-col justify-between gap-2 overflow-y-auto duration-300 ease-linear px-5 mt-2">
                 <div>
                     <label for="region"
                         class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Region</label>
@@ -170,7 +170,7 @@
                             class="ms-2 text-sm font-normal text-gray-900 dark:text-gray-300">Zero-Car
                             Households</label>
                     </div>
-                    <!-- <select multiple size="9" id="demographics"
+                    <!-- <select multipble size="9" id="demographics"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="B03002_001E" selected>Everyone</option>
                         <option value="B03002_004">Black People</option>
@@ -187,8 +187,8 @@
                     <button onclick="updateChart()"
                         class="mt-5 text-md inline-flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded text-md">Update</button>
                 </div>
-                <div class="flex justify-center pt-6">
-                    <p class="text-center text-sm">You can share this chart using the unique URL generated in your
+                <div class="flex justify-center pt-4">
+                    <p class="text-center text-sm mb-4">You can share this chart using the unique URL generated in your
                         browser's navigation bar.</p>
                 </div>
             </div>
