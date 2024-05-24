@@ -255,6 +255,11 @@ const todNames = {
     "SATAM": "Saturday Morning (10am-12pm)"
 }
 
+const areaNames = {
+    "urban": "Entire Urban Area",
+    "city": "Core Cities",
+}
+
 const popStyle = {
     'B03002_001E': {
         'label': 'Everyone',

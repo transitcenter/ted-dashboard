@@ -32,7 +32,6 @@ function opportunityChanged(opportunitySelect) {
     })
 
     if (cumulativeMeasures.includes(selectedOpporunity)) {
-        console.log("Cumulative measure")
         autoRatioCheck.removeAttribute('disabled')
         autoRatioLabel.classList.remove("text-gray-400");
         autoRatioLabel.classList.add("text-gray-900");

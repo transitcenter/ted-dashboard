@@ -86,7 +86,6 @@ opportunityChanged(document.getElementById("opportunity"))
 updateChart()
 
 function updateChart() {
-    console.log("Update Chart")
 
     var region = document.getElementById("region").value;
     var area = document.getElementById("area").value;
@@ -135,7 +134,6 @@ function updateChart() {
             var scores = []
             data.forEach(function (item, index) {
                 // TODO: Update to clean this up
-                console.log(item)
                 if (demoList.includes(item.demographic) & item.area == area) {
                     var obj = {};
                     obj["demographic"] = item.demographic;
@@ -149,11 +147,11 @@ function updateChart() {
                     scores.push(obj);
                 }
             })
-            multilinePlot(scores, region, period, opportunity, tripOption, autoRatioCheck, affordableTripsCheck);
+            multilinePlot(scores, region, area, period, opportunity, tripOption, autoRatioCheck, affordableTripsCheck);
         })
 }
 
-function multilinePlot(scores, region, period, opportunity, tripOption, autoRatio, affordable) {
+function multilinePlot(scores, region, area, period, opportunity, tripOption, autoRatio, affordable) {
 
     chartSVG.selectAll('*').remove();
 
@@ -217,30 +215,6 @@ function multilinePlot(scores, region, period, opportunity, tripOption, autoRati
         .attr('opacity', 0.7)
         .style('cursor', 'pointer')
         .style('stroke-width', '10px')
-
-    // var stickTexts = chartSVG.selectAll("stickLabel")
-    //     .data(dateList)
-    //     .enter()
-    //     .append("text")
-    //     .attr("class", 'stickText')
-    //     // .attr("x", d => x(d))
-    //     // .attr('y', -18)
-    //     .attr("transform", d => "translate(" + (x(d) + 5) + "," + (chartMargin.top - 5) + ") rotate(45)")
-    //     // .attr("dy", "-.75em")
-    //     // .attr('dx')
-    //     .text(d => d.toLocaleDateString("en-US", {month: "short", day: "numeric", year: "2-digit"}))
-    //     .attr('text-anchor', 'end')
-    //     .attr("dy", ".35em")
-    //     .attr("font-size", "0.7em")
-    //     .style('cursor', 'pointer')
-    //     .style('font-weight', function (d) {
-    //         if (d == barDate) {
-    //             return 'bold'
-    //         }
-    //         else {
-    //             return 'normal'
-    //         }
-    //     })
 
     var stickText = chartSVG.append("text")
         .attr("y", chartMargin.top)
@@ -320,7 +294,7 @@ function multilinePlot(scores, region, period, opportunity, tripOption, autoRati
         .attr('x', barChartWidth / 2)
         .attr('y', 50)
         // .attr("dy", "-1.55em")
-        .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period] + " | " + dataNote)
+        .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period] + " | " + areaNames[area] + " | " + dataNote)
         .attr('text-anchor', 'middle')
         .attr("class", 'text-sm')
 
@@ -457,7 +431,7 @@ function multilinePlot(scores, region, period, opportunity, tripOption, autoRati
             .attr('x', barChartWidth / 2)
             .attr('y', 50)
             // .attr("dy", "-1.55em")
-            .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period] + " | " + dataNote)
+            .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period] + " | " + areaNames[area] + " | " + dataNote)
             .attr('text-anchor', 'middle')
             .attr("class", 'text-sm')
 
