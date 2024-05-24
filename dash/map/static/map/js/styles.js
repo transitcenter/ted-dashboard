@@ -287,8 +287,8 @@ const popStyle = {
         'color': "#72b7b2"
     },
     'low_income': {
-        'label': "In Poverty",
-        'sentence': 'people in poverty',
+        'label': "Low Income",
+        'sentence': 'individuals in low income',
         'color': '#54a24b'
     },
     'B11003_016E': {
