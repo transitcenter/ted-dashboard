@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from map.models import AcademicReference, MediaReference, IndustryReference, DataStory
+from map.models import AcademicReference, MediaReference, IndustryReference, DataStory, Changelog
 
 
 def about(request):
@@ -7,7 +7,9 @@ def about(request):
 
 
 def changelog(request):
-    return render(request, "map/changelog.html")
+    changelog = Changelog.objects.all().order_by("-date")
+    context = {"changelogs": changelog}
+    return render(request, "map/changelog.html", context)
 
 
 def charts(request):

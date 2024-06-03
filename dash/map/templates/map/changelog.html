@@ -2,87 +2,149 @@
 {% block title %} What's New? {% endblock %}
 
 {% block content %}
-<main class="py-16 text-gray-600">
-    <section class=>
-        <div class="container flex flex-wrap px-5 py-24 mx-auto items-center">
+<main class=" text-gray-600 ">
+    <div class="py-10">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div
-                class="md:w-1/2 md:pr-12 md:py-8 md:border-r md:border-b-0 mb-10 md:mb-0 pb-10 border-b border-gray-200">
-                <h1 class="text-2xl md:text-4xl font-medium title-font mb-2 text-gray-900">What's New in TED 2?
-                </h1>
-                <p class="leading-relaxed text-base">We've made some major updates to the dashboard since its first
-                    launch in the spring of 2022. Here are the highlights.
-                </p>
+                class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                <div>
+                    <h2
+                        class="text-base font-semibold leading-7 text-indigo-600">
+                        June 2024</h2>
+                    <p
+                        class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Version
+                        2.0</p>
+                    <p class="mt-6 text-base leading-7 text-gray-600">The 2.0
+                        version of TED includes a number of major updates to the
+                        methdology, data analysis and storage, and website
+                        design. Here are some highlights:</p>
+                </div>
+                <dl
+                    class="col-span-2 grid grid-cols-1 gap-x-8 gap-y-10 text-base leading-7 text-gray-600 sm:grid-cols-2 lg:gap-y-16">
+                    <div class="relative pl-9">
+                        <dt class="font-semibold text-gray-900">
+                            <svg
+                                class="absolute left-0 top-1 h-5 w-5 text-indigo-500"
+                                viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            New Travel Times
+                        </dt>
+                        <dd class="mt-2">All travel times across all dates were
+                            recomputed using the powerful <a
+                                href="https://r5py.readthedocs.io/en/stable/">r5py</a>
+                            library built on the <a
+                                href="https://github.com/conveyal/r5">R5</a>
+                            engine.</dd>
+                    </div>
+                    <div class="relative pl-9">
+                        <dt class="font-semibold text-gray-900">
+                            <svg
+                                class="absolute left-0 top-1 h-5 w-5 text-indigo-500"
+                                viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            New Fares
+                        </dt>
+                        <dd class="mt-2">Fares were recomputed for all regions
+                            and updated using 2023 fares for select
+                            regions.</dd>
+                    </div>
+                    <div class="relative pl-9">
+                        <dt class="font-semibold text-gray-900">
+                            <svg
+                                class="absolute left-0 top-1 h-5 w-5 text-indigo-500"
+                                viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Regional Definition Updates
+                        </dt>
+                        <dd class="mt-2">Regional definitions were updated based
+                            on urbanized area extents, instead of entire
+                            Metropolitan Statistical Area definitons.</dd>
+                    </div>
+                    <div class="relative pl-9">
+                        <dt class="font-semibold text-gray-900">
+                            <svg
+                                class="absolute left-0 top-1 h-5 w-5 text-indigo-500"
+                                viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Tiled Maps
+                        </dt>
+                        <dd class="mt-2">Data maps now use vector tilesets,
+                            hosted on Mapbox. This speeds up both data retrieval
+                            and data updates.</dd>
+                    </div>
+                    <div class="relative pl-9">
+                        <dt class="font-semibold text-gray-900">
+                            <svg
+                                class="absolute left-0 top-1 h-5 w-5 text-indigo-500"
+                                viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            New Website Look
+                        </dt>
+                        <dd class="mt-2">The dashboard has a new look and feel,
+                            and includes some key backend structural to make updates
+                            easier.</dd>
+                    </div>
+                    <div class="relative pl-9">
+                        <dt class="font-semibold text-gray-900">
+                            <svg
+                                class="absolute left-0 top-1 h-5 w-5 text-indigo-500"
+                                viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Additional and Refined Measures
+                        </dt>
+                        <dd class="mt-2">90-minute cumulative travel time
+                            measures are added for access to jobs. Travel time
+                            access to early voting locations added.
+                            Time-period-specific transit service intensity
+                            measures added.</dd>
+                    </div>
+                </dl>
             </div>
         </div>
-    </section>
-    <section>
-        <div class="container px-5 py-24 mx-auto">
-            <div class="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col">
-                <div
-                    class="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="sm:w-16 sm:h-16 w-10 h-10" viewBox="0 0 24 24">
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                    </svg>
+    </div>
+    {% for changelog in changelogs %}
+    <div class="py-10">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8 py-10 border-t">
+            <div
+                class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                <div>
+                    <h2
+                        class="text-base font-semibold leading-7 text-indigo-600">
+                        {{ changelog.date }}</h2>
+                    <p
+                        class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Version
+                        {{ changelog.version }}</p>
                 </div>
-                <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                    <h2 class="text-gray-900 text-lg title-font font-medium mb-2">Additional Measures</h2>
-                    <p class="leading-relaxed text-base">We've added 90-minute travel time measures for access to
-                        jobs</p>
-                    <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
+                <div>
+                    <p class="leading-relaxed">{{ changelog.description }}</p>
                 </div>
             </div>
-            <div class="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col">
-                <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                    <h2 class="text-gray-900 text-lg title-font font-medium mb-2">The Catalyzer</h2>
-                    <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast
-                        vegan taxidermy. Gastropub indxgo juice poutine.</p>
-                    <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
-                </div>
-                <div
-                    class="sm:w-32 sm:order-none order-first sm:h-32 h-20 w-20 sm:ml-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="sm:w-16 sm:h-16 w-10 h-10" viewBox="0 0 24 24">
-                        <circle cx="6" cy="6" r="3"></circle>
-                        <circle cx="6" cy="18" r="3"></circle>
-                        <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-                    </svg>
-                </div>
-            </div>
-            <div class="flex items-center lg:w-3/5 mx-auto sm:flex-row flex-col">
-                <div
-                    class="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="sm:w-16 sm:h-16 w-10 h-10" viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                </div>
-                <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                    <h2 class="text-gray-900 text-lg title-font font-medium mb-2">The 400 Blows</h2>
-                    <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast
-                        vegan taxidermy. Gastropub indxgo juice poutine.</p>
-                    <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <button
-                class="flex mx-auto mt-20 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
         </div>
-    </section>
+    </div>
+    {% endfor %}
 </main>
 {% endblock %}

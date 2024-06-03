@@ -52,7 +52,7 @@ class MediaReference(models.Model):
 class Changelog(models.Model):
     date = models.DateField()
     version = models.CharField(max_length=20)
-    descriptiuon = models.TextField()
+    description = models.TextField()
 
     def __str__(self):
         return self.date.strftime("%Y-%m-%d") + " (" + self.version + ")"
