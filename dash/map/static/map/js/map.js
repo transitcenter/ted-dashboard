@@ -30,10 +30,11 @@ const map = new mapboxgl.Map({
     maxzoom: 10, //maximum zoom
     attributionControl: false
 });
-
+let version = document.querySelector('meta[name="version"]').content;
+console.log(version)
 // Add custom attribution controls
 map.addControl(new mapboxgl.AttributionControl({
-    customAttribution: "Proudly built by <a class='text-orange-kc' href='http://klumpentown.com'>klumpentown</a> | <a href='/changelog'>v2.0</a>"
+    customAttribution: "Proudly built by <a class='text-orange-kc' href='http://klumpentown.com'>klumpentown</a> | <a href='/changelog'>" + version + "</a>"
 }))
 
 // Create a popup, but don't add it to the map yet.
