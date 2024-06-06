@@ -2,7 +2,8 @@ const orangePurple = ["#67009e", "#d36d64", "#e89c4f", "#eef91a"]
 const purpleRed = ["#ce9ecc", "#da6bb2", "#e23189", "#c61159"]
 const viridis = ["#7ad151", "#22a884", "#2a788e", "#414487"].reverse()
 const magma = ["#3b0f70", "#8c2981", "#de4968", "#fe9f6d"]
-const nullColor = "#aaaaaa"
+const nullColor = "#dddddd"
+const unreachableColor = "#dddddd"
 
 const cumulativeMeasures = ["C000", "acres", "tsi"]
 
@@ -341,8 +342,13 @@ const travelTimeStyle = {
     "colors": orangePurple
 }
 
-const autoRatioStyle = {
-    "breaks": [0.1, 0.3, 0.5],
+const autoRatioTravelTimeStyle = {
+    "breaks": [1, 5, 10],
+    "colors": magma
+}
+
+const autoRatioCumulativeStyle = {
+    "breaks": [0.025, 0.05, 0.1],
     "colors": magma
 }
 
@@ -364,6 +370,6 @@ function styleNumbers(val) {
         return val.toFixed(0)
     }
     else {
-        return val.toFixed(2)
+        return val.toFixed(1)
     }
 }

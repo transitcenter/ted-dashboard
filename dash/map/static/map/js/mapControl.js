@@ -11,31 +11,49 @@ const affordableTripOptions = [
 
 const opportunityNames = {
     "C000": {
-        "legendTitle": "Access to Employment (jobs)"
+        "legendTitle": "Access to Employment",
+        "legendSubTitle": "Higher values are better",
+        "legendUnit": "jobs"
     },
     "acres": {
-        "legendTitle": "Access to Park Space (acres)"
+        "legendTitle": "Access to Park Space",
+        "legendSubTitle": "Higher values are better",
+        "legendUnit": "acres"
     },
     "hospitals": {
-        "legendTitle": "Access to Hospitals (minutes)"
+        "legendTitle": "Access to Hospitals",
+        "legendSubTitle": "Lower values are better",
+        "legendUnit": "minutes"
     },
     "urgent_care_facilities": {
-        "legendTitle": "Access to Urgent Care (minutes)"
+        "legendTitle": "Access to Urgent Care",
+        "legendSubTitle": "Lower values are better",
+        "legendUnit": "minutes"
     },
     "pharmacies": {
-        "legendTitle": "Access to Pharmacies (minutes)"
+        "legendTitle": "Access to Pharmacies",
+        "legendSubTitle": "Lower values are better",
+        "legendUnit": "minutes"
     },
     "education": {
-        "legendTitle": "Access to Education (minutes)"
+        "legendTitle": "Access to Education",
+        "legendSubTitle": "Lower values are better",
+        "legendUnit": "minutes"
     },
     "grocery": {
-        "legendTitle": "Access to Grocery Stores (minutes)"
+        "legendTitle": "Access to Grocery Stores",
+        "legendSubTitle": "Lower values are better",
+        "legendUnit": "minutes"
     },
     "early_voting": {
-        "legendTitle": "Access to Early Voting (minutes)"
+        "legendTitle": "Access to Early Voting",
+        "legendSubTitle": "Lower values are better",
+        "legendUnit": "minutes"
     },
     "tsi": {
-        "legendTitle": "Nearby Hourly Trips"
+        "legendTitle": "Nearby Hourly Trips",
+        "legendSubTitle": "Higher values are better",
+        "legendUnit": "trips/hour"
     }
 }
 
@@ -127,7 +145,25 @@ function restyleLegend(styles) {
 
     // Update title
     var legendTitle = document.getElementById("legendTitle")
+    var legendSubtitle = document.getElementById("legendSubTitle")
     legendTitle.innerHTML = opportunityNames[controlState["opportunity"]]["legendTitle"]
+
+    if (controlState["auto"] == true) {
+        if (cumulativeMeasures.includes(controlState["opportunity"])) {
+            legendSubtitle.innerHTML = "Total " + opportunityNames[controlState["opportunity"]]["legendUnit"] + " reachable as a % of auto. Higher values are better."
+        }
+        else {
+            legendSubtitle.innerHTML = "Travel time as a multiple of auto. Lower values are better."
+        }
+    }
+    else {
+        if (cumulativeMeasures.includes(controlState["opportunity"])) {
+            legendSubtitle.innerHTML = "Total " + opportunityNames[controlState["opportunity"]]["legendUnit"] + " reachable. Higher values are better."
+        }
+        else {
+            legendSubtitle.innerHTML = "Travel time in minutes. Lower values are better."
+        }
+    }
 
     legendSvg.selectAll("legendBoxes")
         .data(styles.colors)
@@ -148,8 +184,17 @@ function restyleLegend(styles) {
         .append("text")
         .attr("x", (d, i) => (i * (boxWidth + 5)) + boxWidth)
         .attr("y", legendMargin.top + 35)
-        .style('fill', 'black')
-        .text(d => styleNumbers(d))
+        .style('fill', "black")
+        .text(function (d) {
+            if ((controlState["auto"] == true) & cumulativeMeasures.includes(controlState["opportunity"])) {
+                return styleNumbers(100 * d) + "%";
+            }
+            else {
+                return styleNumbers(d);
+            }
+
+        }
+        )
         .style("text-anchor", "middle")
         .style('alignment-baseline', 'top')
 }
@@ -247,8 +292,11 @@ function restyleLayers() {
                 getExpression = ["/", ["get", columnName], 2]
             }
             else if (controlState["auto"] == true) {
-                styles = autoRatioStyle;
-                getExpression = ["/", ["get", columnName], ["get", columnName + "_auto"]]
+                styles = autoRatioCumulativeStyle;
+                getExpression = ["case",
+                    ["<=", ["get", columnName + "_auto"], 0], -1,
+                    ["/", ["get", columnName], ["get", columnName + "_auto"]]
+                ]
             }
             else {
                 styles = mapStyles[controlState["opportunity"] + "_" + controlState["option"]]
@@ -257,8 +305,11 @@ function restyleLayers() {
         }
         else {
             if (controlState["auto"] == true) {
-                styles = autoRatioStyle
-                getExpression = ["/", ["get", columnName + "_auto"], ["get", columnName]]
+                styles = autoRatioTravelTimeStyle
+                getExpression = ["case",
+                    ["<=", ["get", columnName + "_auto"], 0], -1,
+                    ["/", ["get", columnName], ["get", columnName + "_auto"]]
+                ]
             }
             else {
                 styles = travelTimeStyle
@@ -268,7 +319,8 @@ function restyleLayers() {
         }
 
         var fillColorExpression = [
-            "case", ["==", ["get", columnName], null], nullColor,
+            "case",
+            ["==", getExpression, -1], unreachableColor,
             [
                 'step',
                 getExpression,

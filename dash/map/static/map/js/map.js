@@ -31,7 +31,6 @@ const map = new mapboxgl.Map({
     attributionControl: false
 });
 let version = document.querySelector('meta[name="version"]').content;
-console.log(version)
 // Add custom attribution controls
 map.addControl(new mapboxgl.AttributionControl({
     customAttribution: "Proudly built by <a class='text-orange-kc' href='http://klumpentown.com'>klumpentown</a> | <a href='/changelog'>" + version + "</a>"
