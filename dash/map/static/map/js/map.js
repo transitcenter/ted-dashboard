@@ -28,6 +28,7 @@ const map = new mapboxgl.Map({
     center: [-109.4874429, 38.3426943], // starting position [lng, lat]
     zoom: 3.54, // starting zoom
     maxzoom: 10, //maximum zoom
+    hash: true,
     attributionControl: false
 });
 let version = document.querySelector('meta[name="version"]').content;
