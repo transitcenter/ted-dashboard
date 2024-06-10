@@ -26,9 +26,8 @@
             <div class="w-full mt-16">
                 <h2 class="title-font font-medium text-3xl text-gray-900 ">Who made the dashboard?</h2>
                 <p class="leading-relaxed mt-4">All versions of the of the TransitCenter Equity Dashboard were funded by
-                    TransitCenter. Version 1.0 of the dashboard was completed in May 2021 by <a class="text-blue-500"
-                        href="http://www.sustainablesystemsresearch.net/">Sustainable Systems
-                        Research, LLC</a>, SF2 Enterprises Inc, <a class="text-blue-500"
+                    TransitCenter. Version 1.0 of the dashboard was completed in May 2021 by Sustainable Systems
+                    Research, LLC, SF2 Enterprises Inc, <a class="text-blue-500"
                         href="https://www.uvm.edu/cems/trc">University of Vermont</a>, and <a class="text-blue-500"
                         href="https://www.klumpentown.com/">Klumpentown Consulting</a>. The project team included <a
                         class="text-blue-500" href="http://jamaps.github.io/">Jeff Allen</a>, Steven Farber, Alex
@@ -42,10 +41,11 @@
                     TransitCenter. Community partners in the seven US regions provided feedback and guidance on the
                     dashboard.
                 </p>
-                <p class="leading-relaxed mt-4">Version 2.0 was completed in
-                    2024 and was built by <a class="text-blue-500" href="https://www.klumpentown.com/">Klumpentown
-                        Consulting</a>. The project team included Willem Klumpenhouwer, Emily Janz, and Kai Herrero, in
-                    collaboration with Mary Buchanan at TransitCenter.</p>
+                <p class="leading-relaxed mt-4">Version 2.0 was completed in 2024 and was built by <a
+                        class="text-blue-500" href="https://www.klumpentown.com/">Klumpentown Consulting</a>. The
+                    project team included Willem Klumpenhouwer, Emily Janz, and Kai Herrero, in collaboration with Mary
+                    Buchanan at TransitCenter. Thanks to Chris Van Eyken, Hayley Richardson, Kapish Singla, and Maxwell
+                    Reinisch for their review of the website.</p>
             </div>
             <div id="citation" class="w-full mt-16">
                 <h2 class="title-font font-medium text-3xl text-gray-900 ">How do I cite this dashboard?</h2>
@@ -57,8 +57,7 @@
             </div>
 
             <div class="w-full mt-16">
-                <h2 class="title-font font-medium text-3xl text-gray-900 ">How is the information shown on the dashboard
-                    calculated?</h2>
+                <h2 class="title-font font-medium text-3xl text-gray-900 ">How is the dashboard data calculated?</h2>
                 <p class='leading-relaxed mt-4'>Below we provide a brief description of the methods used to create the
                     dashboard. A more detailed methodology is available here(PDF). Please contact
                     dashboard at transitcenter.org for more information.</p>
@@ -124,7 +123,7 @@
                     <li class="mt-3">Healthcare facilities including <a
                             href="https://hifld-geoplatform.opendata.arcgis.com/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0?geometry=91.417%2C-16.829%2C-122.333%2C72.120">hospitals</a>,
                         <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/urgent-care-facilities">urgent
-                            care facilities</a>, and <a href="https://rxopen.org/">pharmacies</a>, and
+                            care facilities</a>, and <a href="http://rxopen.org/">pharmacies</a>, and
                     </li>
                     <li class="mt-3"><a
                             href="https://www.google.com/url?q=https://drive.google.com/file/d/1MrlN-atPw4h8NyP1HoI8V1XAYbBmybud/view?usp%3Dsharing&sa=D&source=docs&ust=1716312826135627&usg=AOvVaw3eEwzPGlPYcLqhwkddXS6t">Early
@@ -202,7 +201,7 @@
                         - regardless
                         of race, gender, identity, culture, income, or ability - which can only be achieved by
                         recognizing and repairing past transportation access gaps.</li>
-                    <li class="mt-3">We defined a <b>low-cost transit trip</b> as a one-way trip with total fares less
+                    <li class="mt-3">We defined an <b>affordable trip</b> as a one-way trip with total fares less
                         than $5 (in
                         New York City, Boston, Washington DC, and San Francisco) or less than $4 (in Philadelphia,
                         Chicago, and Los Angeles). If the fastest trip to access a job is more than the budget, then the
@@ -261,6 +260,18 @@
                         built-up
                         area with a population of 50,000 or more that comprises one or more central place(s) and the
                         adjacent densely settled surrounding area. </li>
+                    <li class="mt-3">Access by transit for a <b>Saturday morning</b> is based on transit schedules from
+                        10am-12pm on Saturday during the week of data analysis.</li>
+                    <li class="mt-3">Access by transit for a <b>weekday morning</b> is based on transit schedules from
+                        7am-9am on Wednesday during the week of data analysis.</li>
+                    <li class="mt-3">Access by transit for a <b>weekday evening</b> is based on transit schedules from
+                        9pm-11pm on Wednesday during the week of data analysis.</li>
+                    <li class="mt-3"><b>Compare to auto</b> measures the ratio of transit access to auto access. For
+                        access to jobs and access to parks compared to auto, values are shown as a decimal (percent).
+                        Higher values are better in this case, a value of 1 would mean an equal number of jobs/park
+                        acres reachable by transit and driving in the same time frame. For travel time to other
+                        destinations, values are shown as multiples, and lower values are better. For example, a value
+                        of 2 indicates that travel time to a hospital is twice (2x) as long as the car travel time.</li>
                 </ul>
                 </p>
             </div>
@@ -279,7 +290,7 @@
                             <th class="p-3" colspan="2">Parameter 2</th>
                             <th class="p-3" colspan="2">Parameter 3</th>
                             <th class="p-3" colspan="2">Auto Ratio</th>
-                            <th class="p-3" colspan="2">Fare Capped</th>
+                            <th class="p-3" colspan="2">Affordable</th>
                         </tr>
                         <tr>
                             <td class="p-3"><i>Description</i></td>
@@ -300,22 +311,6 @@
                             <td class="p-3">Cumulative</td>
                             <td class="p-3">Jobs</td>
                             <td class="p-3"><code>C000_P</code></td>
-                            <td class="p-3">30 min</td>
-                            <td class="p-3"><code>c30</code></td>
-                            <td class="p-3">45 minutes</td>
-                            <td class="p-3"><code>c45</code></td>
-                            <td class="p-3">60 minutes</td>
-                            <td class="p-3"><code>c60</code></td>
-                            <td class="p-3"><code>autoY</code></td>
-                            <td class="p-3"><code>autoN</code></td>
-                            <td class="p-3"><code>fareY</code></td>
-                            <td class="p-3"><code>fareN</code></td>
-                        </tr>
-                        <tr>
-                            <td class="p-3">Low-Income Jobs</td>
-                            <td class="p-3">Cumulative</td>
-                            <td class="p-3">Jobs</td>
-                            <td class="p-3"><code>CE01_P</code></td>
                             <td class="p-3">30 min</td>
                             <td class="p-3"><code>c30</code></td>
                             <td class="p-3">45 minutes</td>
@@ -462,25 +457,31 @@
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Massachusetts Bay Transportation Authority (MBTA)</td>
-                            <td class="px-3 py-2">Bus Routes: 170, 325, 326, 351, 352, 354, 426, 428, 434, 450, 501,
-                                502, 503,
-                                504, 505, 553, 554, 556, 558, 741, 742, 743</td>
+                            <td class="px-3 py-2">
+                                Bus Routes: 170, 325, 326, 351, 352, 354, 426, 428, 434, 450, 501, 502, 503, 504, 505,
+                                553, 554, 556, 558, 741, 742, 743
+                                <br>
+                                Commuter Rail: All
+                            </td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Massport</td>
-                            <td class="px-3 py-2">Bus Routes: 11704. 11705, 11706, 11707</td>
+                            <td class="px-3 py-2">Bus Routes: Braintree, Framingham, Peabody, and Woburn</td>
                         </tr>
                         <tr>
-                            <td class="px-3 py-2">Merrimack Valley Regional Transit Authority (MRVTA)</td>
+                            <td class="px-3 py-2">Merrimack Valley Regional Transit Authority (MVRTA)</td>
                             <td class="px-3 py-2">Bus Routes: 10735, 10736, 70738</td>
                         </tr>
                         <tr>
+                            <li class="mt-3">Access by transit for a <b>weekday evening</b> is based on transit
+                                schedules from
+                                9pm-11pm on Wednesday during the week of data analysis.</li>
                             <td class="px-3 py-2">MetroWest Regional Transit Authority (MWRTA)</td>
                             <td class="px-3 py-2">None</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Montachusett Regional Transit Authority (MART)</td>
-                            <td class="px-3 py-2">Bus Routes: 3510, 4729</td>
+                            <td class="px-3 py-2">Bus Routes: Boston Shuttle and Worcester Shuttle</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Plymouth and Brockton Street Railway Co.
@@ -525,7 +526,7 @@
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Pace Bus</td>
-                            <td class="px-3 py-2">Bus Routes: 755-317, 850-317, 851-317, 855-317</td>
+                            <td class="px-3 py-2">Bus Routes: 755, 850, 851, 855</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2">South Shore Line</td>
@@ -565,7 +566,7 @@
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Big Blue Bus</td>
-                            <td class="px-3 py-2">Bus Routes: 3265</td>
+                            <td class="px-3 py-2">None</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Commerce Municipal Bus Lines</td>
@@ -589,8 +590,7 @@
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Foothill Transit</td>
-                            <td class="px-3 py-2">Bus Routes: 490-155, 493-155, 495-155, 498-155, 499-155, 699-155,
-                                707-155</td>
+                            <td class="px-3 py-2">Bus Routes: 490, 493, 495, 498, 499, 699, 707</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Get Around Town Express</td>
@@ -617,17 +617,16 @@
                             <td class="px-3 py-2">None</td>
                         </tr>
                         <tr>
+                            <td class="px-3 py-2">LA Metro Bus</td>
+                            <td class="px-3 py-2">Bus Routes: 442, 460, 487, 489, 501, 550, 577, and 910</td>
+                        </tr>
+                        <tr>
                             <td class="px-3 py-2">Lawndale Beat</td>
                             <td class="px-3 py-2">None</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Long Beach Transit (LBT)</td>
                             <td class="px-3 py-2">None</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">Los Angeles County Metropolitan Transportation Authority</td>
-                            <td class="px-3 py-2">Bus Routes: 442-13135, 460-13135, 487-13135, 489-13135, 501-13135,
-                                550-13135, 577-13135, 910-13135</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Los Angeles Department of Transportation (LADOT, DASH, Commuter
@@ -714,7 +713,7 @@
                                 <br>
                                 Long Island Railroad: All Rail
                                 <br>
-                                Metro North Railroad/Shore Line East/Hudson Rai Link: All Rail
+                                Metro North Railroad/Shore Line East/Hudson Rail Link: All Rail
                                 <br>
                             </td>
                         </tr>
@@ -732,7 +731,7 @@
                             <td class="px-3 py-2">All Ferries</td>
                         </tr>
                         <tr>
-                            <td class="px-3 py-2">Port Authority JFK Airtrain</td>
+                            <td class="px-3 py-2">Port Authority AirTrain JFK</td>
                             <td class="px-3 py-2">All Rail</td>
                         </tr>
                         <tr>
@@ -741,12 +740,12 @@
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Roosevelt Island Operating Corporation Tramway (RIOC Tramway)</td>
-                            <td class="px-3 py-2">Bus Routes: 490-155, 493-155, 495-155, 498-155, 499-155, 699-155,
+                            <td class="px-3 py-2">Bus Routes: 490, 493, 495, 498, 499, 699,
                                 707-155</td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2">Westchester County Bee-Line System (WCDOT)</td>
-                            <td class="px-3 py-2">Bus Routes: 18013</td>
+                            <td class="px-3 py-2">Bus Routes: MxM4C</td>
                         </tr>
                     </tbody>
                 </table>
@@ -762,7 +761,11 @@
                     <tbody>
                         <tr>
                             <td class="px-3 py-2">Southeastern Pennsylvania Transportation Authority (SEPTA)</td>
-                            <td class="px-3 py-2">All Rail</td>
+                            <td class="px-3 py-2">
+                                Bus: None<br>
+                                Metro: None<br>
+                                Regional Rail: All
+                            </td>
                         </tr>
                         <tr>
                             <td class="px-3 py-2">PATCO Speedline</td>
@@ -859,7 +862,7 @@
                         </tr>
                         <tr>
                             <td class="px-3 py-2">WestCAT</td>
-                            <td class="px-3 py-2">Bus Routes: 2676</td>
+                            <td class="px-3 py-2">Bus Routes: LYNX Transbay</td>
                         </tr>
                     </tbody>
                 </table>
