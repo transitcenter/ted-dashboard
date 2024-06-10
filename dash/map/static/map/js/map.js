@@ -11,7 +11,7 @@ for (var i = 0; i < dateList.length; i++) {
     var el = document.createElement("option");
     el.textContent = opt[1];
     el.value = opt[0];
-    if (opt[0] == defaultDate) {
+    if (opt[0] == controlState['date']) {
         el.selected = true;
     }
     else {
@@ -100,7 +100,8 @@ map.on('load', () => {
         // });
     });
 
-    changeDataSource(defaultDate, defaultTOD)
+    changeDataSource(controlState['date'], controlState['tod'])
+    changeDotSource(controlState['dots'])
 
     // When a click event occurs on a feature in the places layer, open a popup at the
     // location of the feature, with description HTML from its properties.

@@ -4,6 +4,7 @@ const viridis = ["#7ad151", "#22a884", "#2a788e", "#414487"].reverse()
 const magma = ["#3b0f70", "#8c2981", "#de4968", "#fe9f6d"]
 const nullColor = "#dddddd"
 const unreachableColor = "#dddddd"
+const dotsColor = "#333333"
 
 const cumulativeMeasures = ["C000", "acres", "tsi"]
 
@@ -308,9 +309,6 @@ const popStyle = {
         'color': '#ff9da6'
     }
 }
-
-const defaultDate = "20240304"
-const defaultTOD = "WEDAM"
 
 const dateList = [
     ['20240304', 'March 4, 2024'],

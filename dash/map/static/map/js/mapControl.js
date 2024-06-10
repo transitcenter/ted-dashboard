@@ -58,13 +58,14 @@ const opportunityNames = {
 }
 
 let controlState = {
-    "date": "20230926",
+    "date": "20240304",
     "tod": "WEDAM",
     "opportunity": "C000",
     "option": "c45",
     "affordable": "all",
     "auto": false,
     "initalContextSet": false,
+    "dots": "none",
     "showTransitLines": false
 }
 
@@ -86,6 +87,10 @@ function clearLegend() {
 
 function dateChanged(selectedDate) {
     changeDataSource(selectedDate.value, controlState["tod"])
+}
+
+function dotsChanged(selectedDots) {
+    changeDotSource(selectedDots.value)
 }
 
 function opportunityChanged(selectedOpportunity) {
@@ -263,6 +268,39 @@ function changeDataSource(sourceDate, sourceTOD) {
     controlState["date"] = sourceDate
     controlState["tod"] = sourceTOD
     restyleLayers()
+}
+
+function changeDotSource(dotKey) {
+    // TODO: Adjust to allow more regions once data uploaded.
+    ["BOS"].forEach(function (region, idx) {
+        if (controlState["dots"] != "none") {
+            map.removeLayer(region + "Dots")
+            map.removeSource(region + "DotSource")
+        }
+        if (dotKey != "none") {
+            map.addSource(region + 'DotSource', {
+                type: 'vector',
+                url: 'mapbox://wklumpen.' + region + "-" + dotKey + "-dots-tiles"
+            });
+            map.addLayer(
+                {
+                    'id': region + 'Dots',
+                    'type': 'circle',
+                    'source': region + 'DotSource',
+                    'minzoom': 10,
+                    // 'maxzoom': 10,
+                    'source-layer': region + "-" + dotKey + "-dots",
+                    "paint": {
+                        "circle-color": dotsColor,
+                        "circle-radius": 2,
+                        "circle-opacity": 0.7,
+                    }
+                },
+                'road-label-simple' // Add layer below labels
+            );
+        }
+    })
+    controlState["dots"] = dotKey
 }
 
 function restyleLayers() {

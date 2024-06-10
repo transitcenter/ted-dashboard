@@ -148,13 +148,20 @@
           </label>
         </div>
         <div>
-          <label for="period" class="block mb-2 text-xs font-medium text-gray-900 dark:text-white">Demographics</label>
-          <select id="period"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>No Demographic</option>
-            <option value="poverty">1 dot = 50 people in poverty</option>g
-            <option value="black">1 dot = 20 Black people</option>
-            <option value="zero_car">1 dot = 25 Zero-car households</option>
+          <label for="dots" class="block mb-2 text-xs font-medium text-gray-900 dark:text-white">Demographics</label>
+          <select id="dots"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            onchange="dotsChanged(this)">
+            <option value="none" selected>No Demographic Overlay</option>
+            <option value="B03002_001E">1 dot = 100 People</option>
+            <option value="B03002_006E">1 dot = 100 Asian people</option>
+            <option value="B03002_004E">1 dot = 100 Black people</option>
+            <option value="B03002_003E">1 dot = 100 White people</option>
+            <option value="B03002_012E">1 dot = 100 Hispanic or Latino people</option>
+            <option value="B11003_016E">1 dot = 50 Single mothers</option>
+            <option value="age_65p">1 dot = 100 Seniors (65+)</option>
+            <option value="low_income">1 dot = 100 Low-income people</option>
+            <option value="zero_car_hhld">1 dot = 100 Zero-car households</option>
           </select>
         </div>
         <div>
