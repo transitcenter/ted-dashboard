@@ -78,6 +78,18 @@ function autoCompareChanged(autoCompareCheckbox) {
 
 function affordableTripsChanged(affordableTripsSelect) {
     controlState["affordable"] = affordableTripsSelect.value
+
+    var autoCompareCheckbox = document.getElementById("auto")
+    if (controlState["affordable"] == "all") {
+        autoCompareCheckbox.disabled = false;
+    }
+    else {
+        autoCompareCheckbox.checked = false;
+        autoCompareCheckbox.disabled = true;
+    }
+
+
+    controlState["auto"] = false;
     restyleLayers()
 }
 
@@ -207,18 +219,16 @@ function restyleLegend(styles) {
 function showTransitLinesChanged(checkedOption) {
     controlState["showTransitLines"] = checkedOption.checked
     if (checkedOption.checked == true) {
-        // Hide all
+        // Show all
         regionKeys.forEach(function (region, idx) {
-            map.setLayoutProperty(region + "-transit"),
-                "visibility",
-                "visible"
+            map.setLayoutProperty(region + "Transit", "visibility", "visible");
+            // Move them to top
+            map.moveLayer(region + "Layer", region + "Transit")
         })
     }
     else {
         regionKeys.forEach(function (region, idx) {
-            map.setLayoutProperty(region + "-transit"),
-                "visibility",
-                "none"
+            map.setLayoutProperty(region + "Transit", "visibility", "none");
         })
     }
 
@@ -247,7 +257,7 @@ function changeDataSource(sourceDate, sourceTOD) {
             type: 'vector',
             url: 'mapbox://wklumpen.' + region + "-" + sourceDate + "-" + sourceTOD + "-tiles"
         });
-        styles = mapStyles['tsi']
+
         map.addLayer(
             {
                 'id': region + 'Layer',

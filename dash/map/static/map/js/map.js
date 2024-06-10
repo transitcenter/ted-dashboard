@@ -24,7 +24,7 @@ for (var i = 0; i < dateList.length; i++) {
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-    style: 'mapbox://styles/mapbox/light-v11', // style URL
+    style: 'mapbox://styles/wklumpen/clx9baqyg00aj01mw8dp045mv', // style URL
     center: [-109.4874429, 38.3426943], // starting position [lng, lat]
     zoom: 3.54, // starting zoom
     maxzoom: 10, //maximum zoom
@@ -77,27 +77,28 @@ map.on('load', () => {
     });
 
     regionKeys.forEach(function (region, idx) {
-        // map.addSource(region + '-transit', {
-        //     // This GeoJSON contains features that include an "icon"
-        //     // property. The value of the "icon" property corresponds
-        //     // to an image in the Mapbox Streets style's sprite.
-        //     'type': 'geojson',
-        //     'data': 'mapbox://wklumpen.2t8nsu0h'
-        // });
+        map.addSource(region + 'TransitSource', {
+            type: 'vector',
+            url: 'mapbox://wklumpen.' + region + "-transit-tiles"
+        });
 
-        // map.addLayer({
-        //     'id': region + 'transit',
-        //     'type': 'line',
-        //     'source': region + '-transit',
-        //     'layout': {
-        //         'line-join': 'round',
-        //         'line-cap': 'round'
-        //     },
-        //     'paint': {
-        //         'line-color': '#888',
-        //         'line-width': 8
-        //     }
-        // });
+        map.addLayer(
+            {
+                'id': region + 'Transit',
+                'type': 'line',
+                'source': region + 'TransitSource',
+                'minzoom': 10,
+                // 'maxzoom': 10,
+                'source-layer': region + "-transit",
+                "paint": {
+                    "line-color": transitColor,
+                    "line-width": 2,
+                    "line-opacity": 0.5,
+                }
+            },
+            'road-label-simple' // Add layer below labels
+        );
+        map.setLayoutProperty(region + "Transit", "visibility", "none")
     });
 
     changeDataSource(controlState['date'], controlState['tod'])

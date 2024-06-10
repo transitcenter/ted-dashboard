@@ -5,6 +5,7 @@ const magma = ["#3b0f70", "#8c2981", "#de4968", "#fe9f6d"]
 const nullColor = "#dddddd"
 const unreachableColor = "#dddddd"
 const dotsColor = "#333333"
+const transitColor = "#000000"
 
 const cumulativeMeasures = ["C000", "acres", "tsi"]
 
