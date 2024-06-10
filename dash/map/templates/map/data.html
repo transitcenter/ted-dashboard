@@ -117,7 +117,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="w-full grid grid-cols-2 gap-x-6 pb-10 mt-20 border-b-2 border-gray-200">
+            <div class="w-full grid grid-cols-2 gap-x-6 pb-10 mt-10 border-b-2 border-gray-200">
                 <div class="pt-3 md:border-b-0 border-b border-gray-200">
                     <h3 id="scoresTitle" class="text-xl font-medium title-font">Summary Scores</h3>
                     <p id="weekLabel" class="font-bold mt-1 text-gray-500">for all dates, demographics, and regional
@@ -171,7 +171,20 @@
                     </ul>
                 </div>
             </div>
-            <div class="w-full grid grid-cols-2 gap-x-6 pb-10 mt-20 border-b-2 border-gray-200">
+            <div class="w-full grid grid-cols-2 gap-x-6 pb-10 mt-10 border-b-2 border-gray-200">
+                <div class="pt-3 md:border-b-0 border-b border-gray-200">
+                    <h3 id="scoresTitle" class="text-xl font-medium title-font">Transit Layer</h3>
+                    <p class="leading-relaxed mt-3">The transit layer contains a representative set of rapid or major
+                        transit routes. It is not comprehensive, and used for visualization only.</p>
+                    <div class="mt-6">
+                        <a id="transitLink" href="#"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                            download>Download Transit Layer</a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="w-full grid grid-cols-2 gap-x-6 pb-10 mt-10 border-b-2 border-gray-200">
                 <div class="pt-3 md:border-b-0 border-b border-gray-200">
                     <h3 id="scoresTitle" class="text-xl font-medium title-font">Demographic Dots</h3>
                     <!-- <p id="dotsLabel" class="font-bold mt-1 text-gray-500">for all demographics
@@ -179,7 +192,7 @@
                     <p class="leading-relaxed mt-3">The dots overlay on the map was created by randomly generating a
                         number of dots within a given block group that correspond to the population or household count
                         in that block group for a given demographic. They are not representative of where people live,
-                        but are useful for visualizaion purpose.</p>
+                        but are useful for visualizaion purposes.</p>
 
                     <p class="leading-relaxed mt-3">The <a href="#dataDictionary">data dictionary</a> has information on
                         the meaning of each demographic code and urban area name.</p>

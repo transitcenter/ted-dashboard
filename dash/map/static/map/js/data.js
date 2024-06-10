@@ -35,6 +35,8 @@ function regionChanged(regionSelect) {
     document.getElementById("summaryLinkWEDPM").href = WEDPM_summary;
     document.getElementById("summaryLinkSATAM").href = SATAM_summary;
 
+    document.getElementById("transitLink").href = "/static/map/data/transit/" + region + "_transit.geojson";
+
     updateScoreLinks(region, date)
     updateDotsLinks(region)
 }
