@@ -64,8 +64,8 @@
       </div>
     </div>
     <div id="options"
-      class="w-1/5 max-w-screen-md max-h-[90%] absolute left-0 ml-3 mt-3 bg-white rounded-xl border-2 text-sm z-30 overflow-y-auto">
-      <div class="p-3 grid gap-y-3">
+      class="w-1/4 md:w-1/3 xl:w-1/5 max-w-screen-md max-h-[90%] lg:max-h-[90%] absolute left-0 ml-3 mt-3 bg-white rounded-xl border-2 text-sm z-30 overflow-y-auto">
+      <div class="p-3 grid gap-y-1.5">
         <div class="grid-cols-1">
           <div>
             <a href="/">
@@ -81,21 +81,20 @@
         </div>
         <div class="max-w-screen-md border-t pt-2">
           <h2 class="font-bold">Customize This Map</h2>
-          <p class="text-xs">Explore spatial patterns of access to opportunity in each region.
-            Adjust the settings to select the metric to display on the map.</p>
-          <p id="context" class="italic text-xs pt-2">Click or zoom to a city to see data.</p>
+          <p class="text-xs">Explore patterns of access to opportunity by choosing different metrics.</p>
+          <!-- <p id="context" class="italic text-xs pt-1">Click or zoom to a city to see data.</p> -->
         </div>
         <div class="max-w-screen-md">
           <label for="date" class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Date</label>
           <select id="date" , onchange="dateChanged(this)"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           </select>
         </div>
         <div>
           <label for="opportunity"
             class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Opportunity</label>
           <select id="opportunity" onchange="opportunityChanged(this)"
-            class="bg-gray-50 border border-gray-2.300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            class="bg-gray-50 border border-gray-2.300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="C000" selected>Jobs</option>
             <option value="acres">Park Space</option>
             <option value="hospitals">Hospitals</option>
@@ -108,19 +107,19 @@
           </select>
         </div>
         <div>
-          <label for="period" class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Time Period</label>
+          <label for="period" class="block mb-0.5 text-xs font-medium text-gray-900 dark:text-white">Time Period</label>
           <select id="period" onchange="periodChanged(this)"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="WEDAM" selected>Weekday Morning</option>
             <option value="WEDPM">Weekday Night</option>
             <option value="SATAM">Saturday Morning</option>
           </select>
         </div>
         <div>
-          <label for="tripOptions" class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Trip
+          <label for="tripOptions" class="block mb-0.5 text-xs font-medium text-gray-900 dark:text-white">Trip
             Options</label>
           <select id="tripOptions" onchange="tripOptionChanged(this)"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="c30">30 minutes</option>
             <option value="c45" selected>45 minutes</option>
             <option value="c60">60 minutes</option>
@@ -128,10 +127,10 @@
           </select>
         </div>
         <div>
-          <label for="affordableTrips" class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Affordable
+          <label for="affordableTrips" class="block mb-0.5 text-xs font-medium text-gray-900 dark:text-white">Affordable
             Trips</label>
           <select id="affordableTrips" onchange="affordableTripsChanged(this)"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="all">All Trips</option>
             <option value="2020">Affordable (2020)</option>
             <option value="2023">Affordable (2023 where available)</option>
@@ -147,10 +146,10 @@
               Access</span>
           </label>
         </div>
-        <div>
-          <label for="dots" class="block mb-2 text-xs font-medium text-gray-900 dark:text-white">Demographics</label>
+        <div class="border-t border-t-dashed pt-2">
+          <label for="dots" class="block mb-0.5 text-xs font-medium text-gray-900 dark:text-white">Demographics</label>
           <select id="dots"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             onchange="dotsChanged(this)">
             <option value="none" selected>No Demographic Overlay</option>
             <option value="B03002_001E">1 dot = 100 People</option>
@@ -164,7 +163,7 @@
             <option value="zero_car_hhld">1 dot = 100 Zero-car households</option>
           </select>
         </div>
-        <div>
+        <div class="mt-2">
           <label class="relative inline-flex cursor-pointer">
             <input type="checkbox" value="" class="sr-only peer" onchange="showTransitLinesChanged(this)">
             <div
@@ -173,6 +172,7 @@
             <span class="ms-3 text-xs font-medium text-gray-900 dark:text-gray-300 ">Show Transit Lines</span>
           </label>
         </div>
+
         <div class="pt-3 border-t border-t-dashed grid-cols-1 justify-center text-center">
           <div class="w-full justify-center"><b id="legendTitle">Access to Jobs</b></div>
           <div id="legendSubTitle" class="w-full justify-center text-xs capitalize"></div>

@@ -282,7 +282,7 @@ function changeDataSource(sourceDate, sourceTOD) {
 
 function changeDotSource(dotKey) {
     // TODO: Adjust to allow more regions once data uploaded.
-    ["BOS"].forEach(function (region, idx) {
+    regionKeys.forEach(function (region, idx) {
         if (controlState["dots"] != "none") {
             map.removeLayer(region + "Dots")
             map.removeSource(region + "DotSource")
