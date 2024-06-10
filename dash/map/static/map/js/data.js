@@ -1,6 +1,6 @@
 // Populate date selector
 var dateSelect = document.getElementById("date")
-
+const defaultDate = "20240305"
 for (var i = 0; i < dateList.length; i++) {
     var opt = dateList[i];
     var el = document.createElement("option");
@@ -36,6 +36,7 @@ function regionChanged(regionSelect) {
     document.getElementById("summaryLinkSATAM").href = SATAM_summary;
 
     updateScoreLinks(region, date)
+    updateDotsLinks(region)
 }
 
 function dateChanged(dateSelect) {
@@ -53,4 +54,10 @@ function updateScoreLinks(region, date) {
     document.getElementById("scoreLinkWEDAM").href = WEDAM_score;
     document.getElementById("scoreLinkWEDPM").href = WEDPM_score;
     document.getElementById("scoreLinkSATAM").href = SATAM_score;
+}
+
+function updateDotsLinks(region) {
+    Object.keys(popStyle).forEach(element => {
+        document.getElementById("dotsLink" + element).href = "/static/map/data/dots/" + region + "_" + element + ".geojson";
+    });
 }
