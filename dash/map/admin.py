@@ -5,6 +5,7 @@ from map.models import (
     IndustryReference,
     DataStory,
     Changelog,
+    Alert,
 )
 
 
@@ -29,8 +30,13 @@ class ChangelogAdmin(admin.ModelAdmin):
     pass
 
 
+class AlertAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(DataStory, DataStoryAdmin)
 admin.site.register(AcademicReference, AcademicReferenceAdmin)
 admin.site.register(IndustryReference, IndustryReferenceAdmin)
 admin.site.register(MediaReference, MediaReferenceAdmin)
 admin.site.register(Changelog, ChangelogAdmin)
+admin.site.register(Alert, AlertAdmin)

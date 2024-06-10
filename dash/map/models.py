@@ -49,6 +49,16 @@ class MediaReference(models.Model):
         return self.title
 
 
+class Alert(models.Model):
+    title = models.CharField(max_length=400)
+    description = models.TextField()
+    date = models.DateField()
+    active = models.BooleanField()
+
+    def __str__(self):
+        return self.title + f" ({self.active})"
+
+
 class Changelog(models.Model):
     date = models.DateField()
     version = models.CharField(max_length=20)
