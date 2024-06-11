@@ -100,9 +100,9 @@ map.on('load', () => {
         );
         map.setLayoutProperty(region + "Transit", "visibility", "none")
     });
+    initializeControlStateFromParams()
 
-    changeDataSource(controlState['date'], controlState['tod'])
-    changeDotSource(controlState['dots'])
+
 
     // When a click event occurs on a feature in the places layer, open a popup at the
     // location of the feature, with description HTML from its properties.

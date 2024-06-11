@@ -1,5 +1,6 @@
 // const regionKeys = ["WAS", "CHI", "LA", "SFO", "NYC"]
 const regionKeys = ["BOS", "CHI", "LA", "NYC", "PHL", "SFO", "WAS"]
+const periods = ["WEDAM", "WEDPM", "SATAM"]
 
 const fares2023 = ["BOS", "SFO", "WAS"]
 
@@ -71,6 +72,114 @@ let controlState = {
 
 var legendMargin = {top: 5, right: 10, bottom: 10, left: 10}
 
+function updateURLParamsFromControlState() {
+    if ('URLSearchParams' in window) {
+        var hash = window.location.hash;
+        var searchParams = new URLSearchParams(window.location.search)
+        searchParams.set("date", controlState["date"]);
+        searchParams.set("period", controlState["tod"]);
+        searchParams.set("opportunity", controlState["opportunity"]);
+        searchParams.set("tripOption", controlState["option"]);
+        searchParams.set("autoRatio", controlState["auto"]);
+        searchParams.set("affordableTrips", controlState["affordable"]);
+        searchParams.set("dots", controlState["dots"]);
+        searchParams.set("transitLines", controlState["showTransitLines"])
+        var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+        history.pushState(null, '', newRelativePathQuery);
+        window.location.hash = hash;
+    }
+}
+
+function initializeControlStateFromParams() {
+    var searchParams = new URLSearchParams(window.location.search)
+
+    // First we just update the control state
+    var justDates = dateList.map(function (x) {
+        return x[0];
+    });
+    if (searchParams.has("date") & justDates.includes(searchParams.get("date"))) {
+        controlState["date"] = searchParams.get("date")
+    }
+
+    if (searchParams.has("period") & periods.includes(searchParams.get("period"))) {
+        controlState["tod"] = searchParams.get("period")
+    }
+
+    if (searchParams.has("opportunity") & Object.keys(opportunityNames).includes(searchParams.get("opportunity"))) {
+        controlState["opportunity"] = searchParams.get("opportunity");
+    }
+
+    var validTripOptions = measureParameters[controlState["opportunity"]].map(function (x) {
+        return x["key"]
+    })
+    if (searchParams.has("tripOption") & validTripOptions.includes(searchParams.get("tripOption"))) {
+        controlState["option"] = searchParams.get("tripOption")
+    }
+
+    // Reconcile the logic in the following order
+    // If a cumulative opportunity is not set
+    if (searchParams.has("affordableTrips") & ["2020", "2023"].includes(searchParams.get("affordableTrips")) & cumulativeMeasures.includes(controlState["opportunity"])) {
+        controlState["affordable"] = searchParams.get("affordableTrips")
+    }
+
+    if (searchParams.has("autoRatio") & (searchParams.get("autoRatio") == "true") & (controlState["affordable"] == "all")) {
+        controlState["auto"] = true;
+    }
+
+    var dateSelect = document.getElementById("date")
+    dateSelect.disabled = true;
+    dateSelect.value = controlState["date"];
+    dateSelect.disabled = false;
+
+    var periodSelect = document.getElementById("period")
+    periodSelect.disabled = true;
+    periodSelect.value = controlState["tod"];
+    periodSelect.disabled = false;
+
+    var opportunitySelect = document.getElementById("opportunity")
+    opportunitySelect.disabled = true;
+    opportunitySelect.value = controlState["opportunity"];
+    opportunitySelect.disabled = false;
+
+    var tripOptionSelect = document.getElementById("tripOptions")
+    tripOptionSelect.disabled = true;
+    tripOptionSelect.value = controlState["option"];
+    tripOptionSelect.disabled = false;
+
+    var affordableTripSelect = document.getElementById("affordableTrips")
+    affordableTripSelect.disabled = true;
+    affordableTripSelect.value = controlState["affordable"]
+    affordableTripSelect.disabled = false;
+
+    var autoRatioCheck = document.getElementById("auto")
+    autoRatioCheck.disabled = true;
+    autoRatioCheck.checked = controlState["auto"];
+    autoRatioCheck.disabled = false;
+
+    changeDataSource(controlState['date'], controlState['tod'])
+
+    if (searchParams.has("dots") & (Object.keys(popStyle).includes(searchParams.get("dots")))) {
+        var dotSelect = document.getElementById("dots");
+        dotSelect.disabled = true;
+        dotSelect.value = searchParams.get("dots");
+        dotSelect.disabled = false;
+        changeDotSource(searchParams.get("dots"));
+    }
+    else {
+        changeDotSource("none");
+    }
+
+
+    if (searchParams.has("transitLines") & (searchParams.get("transitLines") == "true")) {
+        controlState["showTransitLines"] = true;
+        var transitLineCheck = document.getElementById("transitLines");
+        transitLineCheck.disabled = true;
+        transitLineCheck.checked = controlState["showTransitLines"];
+        transitLineCheck.disabled = false;
+    }
+    showTransitLinesChanged(document.getElementById('transitLines'));
+}
+
 function autoCompareChanged(autoCompareCheckbox) {
     controlState["auto"] = autoCompareCheckbox.checked
     restyleLayers()
@@ -87,8 +196,6 @@ function affordableTripsChanged(affordableTripsSelect) {
         autoCompareCheckbox.checked = false;
         autoCompareCheckbox.disabled = true;
     }
-
-
     controlState["auto"] = false;
     restyleLayers()
 }
@@ -231,7 +338,7 @@ function showTransitLinesChanged(checkedOption) {
             map.setLayoutProperty(region + "Transit", "visibility", "none");
         })
     }
-
+    updateURLParamsFromControlState()
 }
 
 function tripOptionChanged(selectedOption) {
@@ -308,12 +415,15 @@ function changeDotSource(dotKey) {
                 },
                 'road-label-simple' // Add layer below labels
             );
+            map.moveLayer(region + "Layer", region + "Dots");
         }
     })
     controlState["dots"] = dotKey
+    updateURLParamsFromControlState()
 }
 
 function restyleLayers() {
+    let styles = null;
     regionKeys.forEach(function (region, idx) {
         // Let's start with a simple style guide
         var columnName = null;
@@ -332,7 +442,7 @@ function restyleLayers() {
         else {
             columnName = controlState["opportunity"] + "_" + controlState["option"]
         }
-        var styles = null;
+
         var getExpression = null;
         if (cumulativeMeasures.includes(controlState["opportunity"])) {
             if (controlState["opportunity"] == "tsi") {
@@ -383,7 +493,7 @@ function restyleLayers() {
 
         layerName = region + "Layer"
         map.setPaintProperty(layerName, "fill-color", fillColorExpression);
-
-        restyleLegend(styles);
     });
+    restyleLegend(styles);
+    updateURLParamsFromControlState()
 }
