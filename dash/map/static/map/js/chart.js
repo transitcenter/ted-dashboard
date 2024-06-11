@@ -1,5 +1,5 @@
-let chartMargin = {top: 80, right: 10, bottom: 50, left: 100}
-let barChartMargin = {top: 70, right: 20, bottom: 0, left: 20}
+let chartMargin = {top: 90, right: 10, bottom: 50, left: 70}
+let barChartMargin = {top: 90, right: 20, bottom: -40, left: 20}
 
 let chartWidth = d3.select("#chartContainer").node().getBoundingClientRect().width
 let chartHeight = d3.select("#chartContainer").node().getBoundingClientRect().height
@@ -138,7 +138,12 @@ function updateChart() {
                     var obj = {};
                     obj["demographic"] = item.demographic;
                     if (autoRatioCheck == true) {
-                        obj["value"] = (+item[scoreKey]) / ((+item[scoreKey + "_auto"]));
+                        if (cumulativeMeasures.includes(opportunity)) {
+                            obj["value"] = 100 * (+item[scoreKey]) / ((+item[scoreKey + "_auto"]));
+                        }
+                        else {
+                            obj["value"] = (+item[scoreKey]) / ((+item[scoreKey + "_auto"]));
+                        }
                     }
                     else {
                         obj["value"] = (+item[scoreKey])
@@ -258,45 +263,80 @@ function multilinePlot(scores, region, area, period, opportunity, tripOption, au
 
     var ylabel = opportunityDetails[opportunity]["ylabel"]
     if (affordable == true) {
-        ylabel += " (affordable)"
+        ylabel += " [affordable trips]"
     }
+    var seriesTitleText = ""
+
     if (autoRatio == true) {
-        ylabel = ylabel + " (transt/auto)"
+        if (cumulativeMeasures.includes(opportunity)) {
+            console.log(scores)
+            ylabel = ylabel + " [transit as a % of auto]"
+        }
+        else {
+            ylabel = ylabel + " [transit as a multiple of auto]"
+        }
+
+        seriesTitleText = "Tranist vs Auto average " + opportunityDetails[opportunity]["title"] + " in " + regionDetails[region]["name"]
+    }
+    else {
+        seriesTitleText = "Average " + opportunityDetails[opportunity]["title"] + " in " + regionDetails[region]["name"]
     }
 
     var dataNote = null;
     if (cumulativeMeasures.includes(opportunity) | (opportunity == "tsi")) {
-        dataNote = "Higher values are better"
+
+        if (autoRatio == true) {
+            dataNote = "Higher values are better. Interpret as transit reaching X% of jobs compared to a car."
+        }
+        else {
+            dataNote = "Higher values are better."
+        }
     }
     else {
-        dataNote = "Lower values are better"
+        if (autoRatio == true) {
+            dataNote = "Lower values are better. Interpret as transit taking X times as long as a car."
+        }
+        else {
+            dataNote = "Lower values are better."
+        }
+
     }
     // Time series y-axis label
-    chartSVG.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 10)
-        .attr("x", 0 - chartMargin.top - (chartBoxHeight / 2))
-        .attr("dy", "1em")
-        .style("text-anchor", "middle")
-        .text(ylabel);
+    // chartSVG.append("text")
+    //     .attr("transform", "rotate(-90)")
+    //     .attr("y", 10)
+    //     .attr("x", 0 - chartMargin.top - (chartBoxHeight / 2))
+    //     .attr("dy", "1em")
+    //     .style("text-anchor", "middle")
+    //     .text(ylabel);
 
-    // Time series y-axis label
+    // Time series y-axis label (title)
     chartSVG.append("text")
         .attr("y", 10)
         .attr("x", chartWidth / 2)
         .attr("dy", "1em")
         .style("text-anchor", "middle")
-        .attr("class", "text-md font-bold")
-        .text("Average " + opportunityDetails[opportunity]["title"] + " in " + regionDetails[region]["name"]);
+        .attr("class", "text-lg font-bold")
+        .text(seriesTitleText);
 
+    var seriesSubtitleFirstRow = ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period] + " | " + areaNames[area]
+    // Subtitle first row
     chartSVG.append('text')
         .attr('class', 'barDateSubtitle')
         .attr('x', barChartWidth / 2)
         .attr('y', 50)
-        // .attr("dy", "-1.55em")
-        .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period] + " | " + areaNames[area] + " | " + dataNote)
+        .text(seriesSubtitleFirstRow)
         .attr('text-anchor', 'middle')
         .attr("class", 'text-sm')
+
+    // Subtitle second row
+    chartSVG.append('text')
+        .attr('class', 'barDateSubtitle')
+        .attr('x', barChartWidth / 2)
+        .attr('y', 70)
+        .text(dataNote)
+        .attr('text-anchor', 'middle')
+        .attr("class", 'text-xs')
 
     // Time series y-axis
     chartSVG.append("g")
@@ -317,8 +357,6 @@ function multilinePlot(scores, region, area, period, opportunity, tripOption, au
 
     sticks.on('click', function (e, d) {
         updateBars(d);
-        // Make this stick bold now
-
     })
 
     sticks.on('mouseover', function (e, d) {
@@ -414,28 +452,53 @@ function multilinePlot(scores, region, area, period, opportunity, tripOption, au
             .attr("x", d => barX(popStyle[d.demographic].label) + (barX.bandwidth() / 2))
             .attr("y", d => barY(d.value))
             .attr("dy", "-0.5em")
-            .text(d => styleNumbers(d.value))
+            .text(function (d) {
+                if ((autoRatio == true) & (cumulativeMeasures.includes(opportunity))) {
+                    return styleNumbers(d.value) + "%";
+                }
+                else {
+                    return styleNumbers(d.value);
+                }
+            })
             .attr('text-anchor', 'middle')
+
+        var barTitleText = ""
+
+        if (autoRatio == true) {
+            barTitleText = "Transit vs. Auto Average " + opportunityDetails[opportunity]["title"] + " in " + regionDetails[region]["name"] + " for the Week of " + barDate.toDateString()
+        }
+        else {
+            barTitleText = "Average " + opportunityDetails[opportunity]["title"] + " in " + regionDetails[region]["name"] + " for the Week of " + barDate.toDateString()
+        }
 
         barChartSVG.append('text')
             .attr('class', 'barDateTitle')
             .attr('x', barChartWidth / 2)
             .attr('y', 30)
             // .attr("dy", "-1.55em")
-            .text("Average " + opportunityDetails[opportunity]["title"] + " in " + regionDetails[region]["name"] + " for the Week of " + barDate.toDateString())
+            .text(barTitleText)
             .attr('text-anchor', 'middle')
             .attr("class", "text-md font-bold")
 
+        // Subtitle first row
         barChartSVG.append('text')
             .attr('class', 'barDateSubtitle')
             .attr('x', barChartWidth / 2)
             .attr('y', 50)
             // .attr("dy", "-1.55em")
-            .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period] + " | " + areaNames[area] + " | " + dataNote)
+            .text(ylabel + " | " + tripOptionNames[tripOption] + " | " + todNames[period] + " | " + areaNames[area])
             .attr('text-anchor', 'middle')
             .attr("class", 'text-sm')
 
-
+        // Subtitle second row
+        barChartSVG.append('text')
+            .attr('class', 'barDateSubtitle')
+            .attr('x', barChartWidth / 2)
+            .attr('y', 70)
+            // .attr("dy", "-1.55em")
+            .text(dataNote)
+            .attr('text-anchor', 'middle')
+            .attr("class", 'text-xs')
 
         // chartSVG.selectAll(".stickText")
         //     .transition()
