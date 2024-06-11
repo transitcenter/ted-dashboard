@@ -1966,6 +1966,18 @@ a {
     width: 33.333333%;
   }
 
+  .md\:w-3\/4 {
+    width: 75%;
+  }
+
+  .md\:w-2\/3 {
+    width: 66.666667%;
+  }
+
+  .md\:w-3\/5 {
+    width: 60%;
+  }
+
   .md\:border-b-0 {
     border-bottom-width: 0px;
   }
