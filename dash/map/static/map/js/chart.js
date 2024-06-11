@@ -175,6 +175,7 @@ function multilinePlot(scores, region, area, period, opportunity, tripOption, au
         .domain([0, d3.max(scores, d => d.value)])
         .range([chartBoxHeight + chartMargin.top, chartMargin.top])
 
+
     var line = d3.line()
         .x(d => x(d.date))
         .y(d => y(d.value))
@@ -339,9 +340,17 @@ function multilinePlot(scores, region, area, period, opportunity, tripOption, au
         .attr("class", 'text-xs')
 
     // Time series y-axis
-    chartSVG.append("g")
-        .attr("transform", "translate(" + chartMargin.left + ", 0)")
-        .call(d3.axisLeft(y).ticks(5));
+    if ((autoRatio == true) & cumulativeMeasures.includes(opportunity)) {
+        chartSVG.append("g")
+            .attr("transform", "translate(" + chartMargin.left + ", 0)")
+            .call(d3.axisLeft(y).ticks(5).tickFormat(d => d + "%"));
+    }
+    else {
+        chartSVG.append("g")
+            .attr("transform", "translate(" + chartMargin.left + ", 0)")
+            .call(d3.axisLeft(y).ticks(5));
+    }
+
 
     // Time series x-axis
     if (chartBoxWidth < 900) {
