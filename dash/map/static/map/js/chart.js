@@ -277,7 +277,7 @@ function multilinePlot(scores, region, area, period, opportunity, tripOption, au
             ylabel = ylabel + " [transit as a multiple of auto]"
         }
 
-        seriesTitleText = "Tranist vs Auto average " + opportunityDetails[opportunity]["title"] + " in " + regionDetails[region]["name"]
+        seriesTitleText = "Transit vs Auto average " + opportunityDetails[opportunity]["title"] + " in " + regionDetails[region]["name"]
     }
     else {
         seriesTitleText = "Average " + opportunityDetails[opportunity]["title"] + " in " + regionDetails[region]["name"]
