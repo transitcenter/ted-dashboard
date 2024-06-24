@@ -21,7 +21,7 @@
   <!-- <link rel="stylesheet" href="{% static 'map/css/materialize.min.css' %}"> -->
 </head>
 
-<body class="min-h-screen bg-slate-50 dark:bg-black dark:text-white bg-repeat">
+<body class="min-h-screen bg-slate-50 bg-repeat">
   <main>
     <div class="absolute right-0 bottom-5 z-50">
       <div class="p-2">
@@ -85,16 +85,15 @@
           <!-- <p id="context" class="italic text-xs pt-1">Click or zoom to a city to see data.</p> -->
         </div>
         <div class="max-w-screen-md">
-          <label for="date" class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Date</label>
+          <label for="date" class="block mb-1 text-xs font-medium text-gray-900 ">Date</label>
           <select id="date" , onchange="dateChanged(this)"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
           </select>
         </div>
         <div>
-          <label for="opportunity"
-            class="block mb-1 text-xs font-medium text-gray-900 dark:text-white">Opportunity</label>
+          <label for="opportunity" class="block mb-1 text-xs font-medium text-gray-900 ">Opportunity</label>
           <select id="opportunity" onchange="opportunityChanged(this)"
-            class="bg-gray-50 border border-gray-2.300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            class="bg-gray-50 border border-gray-2.300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
             <option value="C000" selected>Jobs</option>
             <option value="acres">Park Space</option>
             <option value="hospitals">Hospitals</option>
@@ -107,19 +106,19 @@
           </select>
         </div>
         <div>
-          <label for="period" class="block mb-0.5 text-xs font-medium text-gray-900 dark:text-white">Time Period</label>
+          <label for="period" class="block mb-0.5 text-xs font-medium text-gray-900">Time Period</label>
           <select id="period" onchange="periodChanged(this)"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2  ">
             <option value="WEDAM" selected>Weekday Morning</option>
             <option value="WEDPM">Weekday Night</option>
             <option value="SATAM">Saturday Morning</option>
           </select>
         </div>
         <div>
-          <label for="tripOptions" class="block mb-0.5 text-xs font-medium text-gray-900 dark:text-white">Trip
+          <label for="tripOptions" class="block mb-0.5 text-xs font-medium text-gray-900">Trip
             Options</label>
           <select id="tripOptions" onchange="tripOptionChanged(this)"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2  ">
             <option value="c30">30 minutes</option>
             <option value="c45" selected>45 minutes</option>
             <option value="c60">60 minutes</option>
@@ -127,10 +126,10 @@
           </select>
         </div>
         <div>
-          <label for="affordableTrips" class="block mb-0.5 text-xs font-medium text-gray-900 dark:text-white">Affordable
+          <label for="affordableTrips" class="block mb-0.5 text-xs font-medium text-gray-900 ">Affordable
             Trips</label>
           <select id="affordableTrips" onchange="affordableTripsChanged(this)"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2  ">
             <option value="all">All Trips</option>
             <option value="2020">Affordable (2020)</option>
             <option value="2023">Affordable (2023 where available)</option>
@@ -140,16 +139,16 @@
           <label for="auto" class="relative inline-flex items-center cursor-pointer">
             <input id="auto" type="checkbox" value="" class="sr-only peer" onchange="autoCompareChanged(this)">
             <div
-              class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+              class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
             </div>
-            <span class="ms-3 text-xs font-medium text-gray-900 dark:text-gray-300">Ratio of Transit to Auto
+            <span class="ms-3 text-xs font-medium text-gray-900">Ratio of Transit to Auto
               Access</span>
           </label>
         </div>
         <div class="border-t border-t-dashed pt-2">
-          <label for="dots" class="block mb-0.5 text-xs font-medium text-gray-900 dark:text-white">Demographics</label>
+          <label for="dots" class="block mb-0.5 text-xs font-medium text-gray-900">Demographics</label>
           <select id="dots"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2  "
             onchange="dotsChanged(this)">
             <option value="none" selected>No Demographic Overlay</option>
             <option value="B03002_001E">1 dot = 100 People</option>
@@ -168,9 +167,9 @@
             <input id="transitLines" type="checkbox" value="" class="sr-only peer"
               onchange="showTransitLinesChanged(this)">
             <div
-              class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+              class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
             </div>
-            <span class="ms-3 text-xs font-medium text-gray-900 dark:text-gray-300 ">Show Transit Lines</span>
+            <span class="ms-3 text-xs font-medium text-gray-900 ">Show Transit Lines</span>
           </label>
         </div>
 
