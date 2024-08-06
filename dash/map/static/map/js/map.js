@@ -192,10 +192,10 @@ function flyToClicked(button) {
 function setRegionalContext(region) {
     // var contextText = document.getElementById("context")
     // var optionsDiv = document.getElementById("options")
-    // if (region == "start") {
-    //     contextText.innerHTML = "Choose a city marker or zoom into a city to see data."
-    // }
-    // else {
-    //     contextText.innerHTML = "Now viewing data for " + regionDetails[region]["name"] + "."
-    // }
+    if (region != "start") {
+        chartA = document.getElementById("charts-url");
+        var chartURL = new URL(chartA.href)
+        chartURL.searchParams.set("region", region)
+        chartA.href = chartURL.href;
+    }
 }

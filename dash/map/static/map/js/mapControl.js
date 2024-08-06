@@ -83,11 +83,23 @@ function updateURLParamsFromControlState() {
         searchParams.set("autoRatio", controlState["auto"]);
         searchParams.set("affordableTrips", controlState["affordable"]);
         searchParams.set("dots", controlState["dots"]);
-        searchParams.set("transitLines", controlState["showTransitLines"])
+        searchParams.set("transitLines", controlState["showTransitLines"]);
         var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
         history.pushState(null, '', newRelativePathQuery);
         window.location.hash = hash;
     }
+    // Now update charts link accordingly also
+    var chartURL = new URL("/charts", document.location)
+    chartURL.searchParams.append("date", controlState["date"]);
+    chartURL.searchParams.append("period", controlState["tod"]);
+    chartURL.searchParams.append("opportunity", controlState["opportunity"]);
+    chartURL.searchParams.append("tripOption", controlState["option"]);
+    chartURL.searchParams.append("autoRatio", controlState["auto"]);
+    chartURL.searchParams.append("affordableTrips", controlState["affordable"]);
+    chartURL.searchParams.append("dots", controlState["dots"]);
+    chartURL.searchParams.append("transitLines", controlState["showTransitLines"]);
+    chartA = document.getElementById("charts-url");
+    chartA.href = chartURL.href;
 }
 
 function initializeControlStateFromParams() {
