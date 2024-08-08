@@ -124,8 +124,41 @@ function initializeControlStateFromParams() {
     var validTripOptions = measureParameters[controlState["opportunity"]].map(function (x) {
         return x["key"]
     })
+
+    // repopulate the dropdown
+    var tripOptionSelect = document.getElementById("tripOptions")
+    // Remove what's there
+    while (tripOptionSelect.options.length > 0) {
+        tripOptionSelect.remove(0)
+    }
+    // Repopulate using the right opportunity
+    if (controlState["opportunity"] != "tsi") {
+        measureParameters[controlState["opportunity"]].forEach(function (option, index) {
+            var opt = document.createElement("option");
+            opt.value = option["key"];
+            opt.text = option["name"];
+            opt.selected = option["default"];
+            if (option["default"] == true) {
+                controlState["option"] = option["key"];
+            }
+            tripOptionSelect.add(opt);
+            tripOptionSelect.disabled = false;
+        })
+    }
+    else {
+        tripOptionSelect.disabled = true;
+        tripOptionSelect.add(new Option("Hourly Trips"));
+        tripOptionSelect.options[0].value = "tsi";
+    }
+
     if (searchParams.has("tripOption") & validTripOptions.includes(searchParams.get("tripOption"))) {
-        controlState["option"] = searchParams.get("tripOption")
+        controlState["option"] = searchParams.get("tripOption");
+        console.log(controlState["option"])
+        for (var i = 0; i < tripOptionSelect.options.length; i++) {
+            if (tripOptionSelect.options[i].value == controlState["option"]) {
+                tripOptionSelect.options[i].selected = true;
+            }
+        }
     }
 
     // Reconcile the logic in the following order
@@ -227,25 +260,36 @@ function dotsChanged(selectedDots) {
 function opportunityChanged(selectedOpportunity) {
     controlState["opportunity"] = selectedOpportunity.value
     // Repopulate the options
-    tripOptionSelect = document.getElementById("tripOptions")
+    var tripOptionSelect = document.getElementById("tripOptions")
     // Remove what's there
     while (tripOptionSelect.options.length > 0) {
         tripOptionSelect.remove(0)
     }
     // Repopulate using the right opportunity
-    measureParameters[selectedOpportunity.value].forEach(function (option, index) {
-        var opt = document.createElement("option");
-        opt.value = option["key"];
-        opt.text = option["name"];
-        opt.selected = option["default"];
-        if (option["default"] == true) {
-            controlState["option"] = option["key"];
-        }
-        tripOptionSelect.add(opt);
-    })
+    if (selectedOpportunity != "tsi") {
+        measureParameters[selectedOpportunity.value].forEach(function (option, index) {
+            var opt = document.createElement("option");
+            opt.value = option["key"];
+            opt.text = option["name"];
+            opt.selected = option["default"];
+            if (option["default"] == true) {
+                controlState["option"] = option["key"];
+            }
+            tripOptionSelect.add(opt);
+            tripOptionSelect.disabled = false;
+        })
+    }
+    else {
+        tripOptionSelect.disabled = true;
+        tripOptionSelect.add(new Option("Hourly Trips"));
+    }
 
-    // Change Fare Options
+
+    // Change Fare and auto ratio Options
     var affordableTripsSelect = document.getElementById("affordableTrips");
+    var autoRatioCheck = document.getElementById("auto");
+    autoRatioCheck.disabled = false;
+
     while (affordableTripsSelect.options.length > 0) {
         affordableTripsSelect.remove(0)
     }
@@ -261,6 +305,11 @@ function opportunityChanged(selectedOpportunity) {
         })
         affordableTripsSelect.selectedOption = "all";
 
+    }
+    else if (controlState["opportunity"] == "tsi") {
+        affordableTripsSelect.disabled = true;
+        autoRatioCheck.disabled = true;
+        affordableTripsSelect.add(new Option("Option Not Available"));
     }
     else {
 
@@ -457,11 +506,7 @@ function restyleLayers() {
 
         var getExpression = null;
         if (cumulativeMeasures.includes(controlState["opportunity"])) {
-            if (controlState["opportunity"] == "tsi") {
-                styles = mapStyles["tsi"];
-                getExpression = ["/", ["get", columnName], 2]
-            }
-            else if (controlState["auto"] == true) {
+            if (controlState["auto"] == true) {
                 styles = autoRatioCumulativeStyle;
                 getExpression = ["case",
                     ["<=", ["get", columnName + "_auto"], 0], -1,
@@ -472,6 +517,10 @@ function restyleLayers() {
                 styles = mapStyles[controlState["opportunity"] + "_" + controlState["option"]]
                 getExpression = ["get", columnName]
             }
+        }
+        else if (controlState["opportunity"] == "tsi") {
+            styles = mapStyles["tsi"];
+            getExpression = ["/", ["get", columnName], 2]
         }
         else {
             if (controlState["auto"] == true) {

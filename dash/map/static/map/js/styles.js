@@ -7,7 +7,7 @@ const unreachableColor = "#dddddd"
 const dotsColor = "#333333"
 const transitColor = "#000000"
 
-const cumulativeMeasures = ["C000", "acres", "tsi"]
+const cumulativeMeasures = ["C000", "acres"]
 
 const regionDetails = {
     "BOS": {
@@ -93,7 +93,7 @@ const opportunityDetails = {
 
 const mapStyles = {
     "tsi": {
-        "breaks": [10, 40, 100],
+        "breaks": [10, 50, 100],
         "colors": purpleRed
     },
     "C000_c30": {
