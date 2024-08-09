@@ -108,7 +108,8 @@ function updateChart() {
         history.pushState(null, '', newRelativePathQuery);
     }
     // Let's load the proper CSV based on settings
-    d3.csv("/static/map/data/summary/summary_" + region + "_" + period + ".csv")
+    let r = (Math.random() + 1).toString(36).substring(7);
+    d3.csv("/static/map/data/summary/summary_" + region + "_" + period + ".csv?" + r)
         .then(function (data) {
             //TODO: dynamic keys
             var scoreKey = null;
