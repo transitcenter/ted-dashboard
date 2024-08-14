@@ -8,6 +8,8 @@ const fareYears = {
     "WAS": "f_2023"
 }
 
+const fare2023 = ["BOS", "SFO", "WAS"]
+
 const regions = ["BOS", "CHI", "LA", "PHL", "NYC", "SFO", "WAS"]
 const periods = ["WEDAM", "WEDPM", "SATAM"]
 

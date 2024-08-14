@@ -134,10 +134,10 @@ function updateChart() {
             // TODO: Filter the dates and demographics
             var scores = []
             data.forEach(function (item, index) {
-                // TODO: Update to clean this up
                 if (demoList.includes(item.demographic) & item.area == area) {
                     var obj = {};
                     obj["demographic"] = item.demographic;
+                    obj["date"] = new Date(item.date);
                     if (autoRatioCheck == true) {
                         if (cumulativeMeasures.includes(opportunity)) {
                             obj["value"] = 100 * (+item[scoreKey]) / ((+item[scoreKey + "_auto"]));
@@ -147,9 +147,15 @@ function updateChart() {
                         }
                     }
                     else {
-                        obj["value"] = (+item[scoreKey])
+                        if ((affordableTripsCheck == true) & fare2023.includes(region) & (obj["date"].getFullYear() < 2023)) {
+                            var newScoreKey = scoreKey.replace("2023", "2020")
+                            obj["value"] = (+item[newScoreKey])
+                        }
+                        else {
+                            obj["value"] = (+item[scoreKey])
+                        }
+
                     }
-                    obj["date"] = new Date(item.date);
                     scores.push(obj);
                 }
             })
