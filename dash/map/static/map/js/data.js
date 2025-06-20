@@ -1,6 +1,6 @@
 // Populate date selector
 var dateSelect = document.getElementById("date")
-const defaultDate = "20240305"
+const defaultDate = "20250324"
 for (var i = 0; i < dateList.length; i++) {
     var opt = dateList[i];
     var el = document.createElement("option");
