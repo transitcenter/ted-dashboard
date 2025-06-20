@@ -59,7 +59,7 @@ const opportunityNames = {
 }
 
 let controlState = {
-    "date": "20240304",
+    "date": "20250324",
     "tod": "WEDAM",
     "opportunity": "C000",
     "option": "c45",
